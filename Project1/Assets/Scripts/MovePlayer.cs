@@ -17,12 +17,12 @@ public class MovePlayer : MonoBehaviour
 
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            transform.Translate(-Vector3.forward * speed * Time.deltaTime);
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
 
         else if (Input.GetKey(KeyCode.DownArrow))
         {
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            transform.Translate(-Vector3.forward * speed * Time.deltaTime);
         }
 
         if (Input.GetKey(KeyCode.LeftArrow))
