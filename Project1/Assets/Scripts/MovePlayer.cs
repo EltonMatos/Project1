@@ -3,36 +3,47 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MovePlayer : MonoBehaviour
-{
-    public float speed = 30f;
-    public float turnSpeed = 90f;
-   
+{    
+    private float turnSpeed = 90f;
+    public float aceleration = 0f;
+    public float force = 0f;
+
+
+    public WheelCollider[] wheelsCar;
+    private float buttonGui = 0f;
+
+    public AudioClip somCar;
+    public AudioSource audioCar;
+
+    private Rigidbody rb;
+    private float veloKMH;
+
+    public void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        audioCar.clip = somCar;
+    }
+
     void Update()
     {
-        Move();
+        buttonGui = Input.GetAxis("Horizontal");
+        aceleration = Input.GetAxis("Vertical");
     }
 
-    void Move()
-    {        
-
-        if (Input.GetKey(KeyCode.UpArrow))
+    private void FixedUpdate()
+    {
+        for(int i = 0; i < wheelsCar.Length; i++)
         {
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            wheelsCar[i].steerAngle = buttonGui * 15f;
+            wheelsCar[i].motorTorque = 1f;
         }
 
-        else if (Input.GetKey(KeyCode.DownArrow))
-        {
-            transform.Translate(-Vector3.forward * speed * Time.deltaTime);
-        }
+        rb.AddForce(transform.forward * force * aceleration);
 
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            transform.Rotate(Vector3.up, -turnSpeed * Time.deltaTime);
-        }
-
-        else if (Input.GetKey(KeyCode.RightArrow))
-        {
-            transform.Rotate(-Vector3.up, -turnSpeed * Time.deltaTime);
-        }
+        //add som na aceleração do carro
+        veloKMH = rb.velocity.magnitude * 3.6f;
+        audioCar.pitch = 0.6f + veloKMH / 60f;
     }
+
+       
 }
