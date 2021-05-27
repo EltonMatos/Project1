@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MovePlayer : MonoBehaviour
-{    
-    private float turnSpeed = 90f;
+{  
     public float aceleration = 0f;
-    public float force = 0f;
+    public Vector3 forceFinal;
+    public float forceStop;
+    public float maxTorque;
 
 
     public WheelCollider[] wheelsCar;
@@ -16,11 +17,25 @@ public class MovePlayer : MonoBehaviour
     public AudioSource audioCar;
 
     private Rigidbody rb;
-    private float veloKMH;
+
+    public AnimationCurve curveWheel;
+
+    private float veloKMH, rpm;
+
+    public float[] raceChenges;
+    private int changeCurrent = 0;
+
+    public float maxRPM;
+    public float minRPM;
+
+    public float somPitch;
+
+    public Transform massCenter;
 
     public void Start()
     {
         rb = GetComponent<Rigidbody>();
+        //rb.centerOfMass = massCenter.position;
         audioCar.clip = somCar;
     }
 
@@ -32,18 +47,55 @@ public class MovePlayer : MonoBehaviour
 
     private void FixedUpdate()
     {
-        for(int i = 0; i < wheelsCar.Length; i++)
+        //guiar o carro
+        for (int i = 0; i < wheelsCar.Length; i++)
         {
-            wheelsCar[i].steerAngle = buttonGui * 15f;
+            wheelsCar[i].steerAngle = buttonGui * curveWheel.Evaluate(veloKMH);
             wheelsCar[i].motorTorque = 1f;
         }
 
-        rb.AddForce(transform.forward * force * aceleration);
+        //velocidade em RPM
+        veloKMH = rb.velocity.magnitude * 3.6f;
+        rpm = veloKMH * raceChenges[changeCurrent] * 15f;
+
+        if(rpm > maxRPM)
+        {
+            changeCurrent++;
+            if(changeCurrent == raceChenges.Length)
+            {
+                changeCurrent--;
+            }
+        }
+        if(rpm < minRPM)
+        {
+            changeCurrent--;
+            if (changeCurrent < 0)
+            {
+                changeCurrent = 0;
+            }
+        }
+
+        //Força
+        if(aceleration < -0.5f)
+        {
+            rb.AddForce(-transform.forward * forceStop);
+            aceleration = 0;
+        }
+
+        forceFinal = transform.forward * (maxTorque / (changeCurrent + 1) + maxTorque/1.85f) * aceleration;
+        rb.AddForce(forceFinal);
 
         //add som na aceleração do carro
-        veloKMH = rb.velocity.magnitude * 3.6f;
-        audioCar.pitch = 0.6f + veloKMH / 60f;
+        audioCar.pitch = rpm / somPitch;
     }
 
-       
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(20, 20, 128, 32), rpm + "RPM");
+        GUI.Label(new Rect(20, 40, 128, 32), (changeCurrent+1).ToString());
+        GUI.Label(new Rect(20, 60, 128, 32), veloKMH + "KMH");
+        GUI.Label(new Rect(20, 80, 128, 32), forceFinal.magnitude.ToString());
+    }
+
+
 }
