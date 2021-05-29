@@ -14,13 +14,16 @@ public class MovePlayer : MonoBehaviour
     private float buttonGui = 0f;
 
     public AudioClip somCar;
+
     public AudioSource audioCar;
+    public AudioSource audioSkid;
 
     private Rigidbody rb;
 
     public AnimationCurve curveWheel;
 
     private float veloKMH, rpm;
+    public float instabilityHang;
 
     public float[] raceChenges;
     private int changeCurrent = 0;
@@ -58,6 +61,11 @@ public class MovePlayer : MonoBehaviour
         veloKMH = rb.velocity.magnitude * 3.6f;
         rpm = veloKMH * raceChenges[changeCurrent] * 15f;
 
+        /*if(veloKMH > 140f)
+        {            
+            aceleration = 0;
+        }*/
+
         if(rpm > maxRPM)
         {
             changeCurrent++;
@@ -76,17 +84,25 @@ public class MovePlayer : MonoBehaviour
         }
 
         //Força
-        if(aceleration < -0.5f)
+        if(aceleration < -0.4f)
         {
             rb.AddForce(-transform.forward * forceStop);
+            rb.AddTorque((transform.up * instabilityHang * veloKMH / 45f) * buttonGui);
             aceleration = 0;
         }
 
-        forceFinal = transform.forward * (maxTorque / (changeCurrent + 1) + maxTorque/1.85f) * aceleration;
+        forceFinal = transform.forward * (maxTorque / (changeCurrent + 1) + maxTorque/1.25f) * aceleration;
         rb.AddForce(forceFinal);
 
         //add som na aceleração do carro
         audioCar.pitch = rpm / somPitch;
+
+        if(veloKMH >= 30f)
+        {
+            float angulo = Vector3.Angle(transform.forward, rb.velocity);
+            float valorFinal = (angulo / 10f) - 0.3f;
+            audioSkid.volume = Mathf.Clamp(valorFinal, 0f, 1f);
+        }        
     }
 
     private void OnGUI()
