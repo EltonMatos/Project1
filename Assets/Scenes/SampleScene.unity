@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 3511341}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Grass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,8 +148,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3511339}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 40.214226, y: -20.055992, z: 58.962875}
-  m_LocalScale: {x: 5.3170085, y: 1, z: 42.232895}
+  m_LocalPosition: {x: 33.62, y: -19.999, z: 50.48}
+  m_LocalScale: {x: 15.009287, y: 1, z: 57.570583}
   m_Children: []
   m_Father: {fileID: 256980596}
   m_RootOrder: 0
@@ -225,6 +225,10 @@ PrefabInstance:
     - target: {fileID: 120332, guid: 62efdafbbf70e89468285f91436f1220, type: 3}
       propertyPath: m_Name
       value: SR_Env_Concrete_Track_Straight_03 (76)
+      objectReference: {fileID: 0}
+    - target: {fileID: 120332, guid: 62efdafbbf70e89468285f91436f1220, type: 3}
+      propertyPath: m_TagString
+      value: Roads
       objectReference: {fileID: 0}
     - target: {fileID: 445904, guid: 62efdafbbf70e89468285f91436f1220, type: 3}
       propertyPath: m_RootOrder
@@ -319,6 +323,10 @@ PrefabInstance:
     - target: {fileID: 120332, guid: 62efdafbbf70e89468285f91436f1220, type: 3}
       propertyPath: m_Name
       value: SR_Env_Concrete_Track_Straight_03
+      objectReference: {fileID: 0}
+    - target: {fileID: 120332, guid: 62efdafbbf70e89468285f91436f1220, type: 3}
+      propertyPath: m_TagString
+      value: Roads
       objectReference: {fileID: 0}
     - target: {fileID: 445904, guid: 62efdafbbf70e89468285f91436f1220, type: 3}
       propertyPath: m_RootOrder
@@ -545,6 +553,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SR_Env_Concrete_Track_Straight_Skids_End
       objectReference: {fileID: 0}
+    - target: {fileID: 147770, guid: e1019ed9eb08623409332041d49a3036, type: 3}
+      propertyPath: m_TagString
+      value: Roads
+      objectReference: {fileID: 0}
     - target: {fileID: 404214, guid: e1019ed9eb08623409332041d49a3036, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -650,6 +662,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SR_Env_Concrete_Track_CornerTight_04 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 187652, guid: a0a8141f87add3f4aa0051d28cffce32, type: 3}
+      propertyPath: m_TagString
+      value: Roads
+      objectReference: {fileID: 0}
     - target: {fileID: 428622, guid: a0a8141f87add3f4aa0051d28cffce32, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -732,6 +748,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SR_Env_Concrete_Track_StartingLine
       objectReference: {fileID: 0}
+    - target: {fileID: 149134, guid: 20020e603587977458644fccd63c16ef, type: 3}
+      propertyPath: m_TagString
+      value: Roads
+      objectReference: {fileID: 0}
     - target: {fileID: 488372, guid: 20020e603587977458644fccd63c16ef, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -813,6 +833,10 @@ PrefabInstance:
     - target: {fileID: 120332, guid: 62efdafbbf70e89468285f91436f1220, type: 3}
       propertyPath: m_Name
       value: SR_Env_Concrete_Track_Straight_03 (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 120332, guid: 62efdafbbf70e89468285f91436f1220, type: 3}
+      propertyPath: m_TagString
+      value: Roads
       objectReference: {fileID: 0}
     - target: {fileID: 445904, guid: 62efdafbbf70e89468285f91436f1220, type: 3}
       propertyPath: m_RootOrder
@@ -1144,6 +1168,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SR_Env_Concrete_Track_Straight_03 (34)
       objectReference: {fileID: 0}
+    - target: {fileID: 120332, guid: 62efdafbbf70e89468285f91436f1220, type: 3}
+      propertyPath: m_TagString
+      value: Roads
+      objectReference: {fileID: 0}
     - target: {fileID: 445904, guid: 62efdafbbf70e89468285f91436f1220, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -1229,6 +1257,10 @@ PrefabInstance:
     - target: {fileID: 187652, guid: a0a8141f87add3f4aa0051d28cffce32, type: 3}
       propertyPath: m_Name
       value: SR_Env_Concrete_Track_CornerTight_04 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 187652, guid: a0a8141f87add3f4aa0051d28cffce32, type: 3}
+      propertyPath: m_TagString
+      value: Roads
       objectReference: {fileID: 0}
     - target: {fileID: 428622, guid: a0a8141f87add3f4aa0051d28cffce32, type: 3}
       propertyPath: m_RootOrder
@@ -1376,6 +1408,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1227457298}
   m_PrefabAsset: {fileID: 0}
+--- !u!146 &1243334560 stripped
+WheelCollider:
+  m_CorrespondingSourceObject: {fileID: 678209754935919659, guid: dd994fa10d1961948bb60d8052f9d348,
+    type: 3}
+  m_PrefabInstance: {fileID: 3356322521505149899}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1258190946 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 147770, guid: e1019ed9eb08623409332041d49a3036,
@@ -1411,6 +1449,10 @@ PrefabInstance:
     - target: {fileID: 147770, guid: e1019ed9eb08623409332041d49a3036, type: 3}
       propertyPath: m_Name
       value: SR_Env_Concrete_Track_Straight_Skids_End (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 147770, guid: e1019ed9eb08623409332041d49a3036, type: 3}
+      propertyPath: m_TagString
+      value: Roads
       objectReference: {fileID: 0}
     - target: {fileID: 404214, guid: e1019ed9eb08623409332041d49a3036, type: 3}
       propertyPath: m_RootOrder
@@ -1487,6 +1529,10 @@ PrefabInstance:
     - target: {fileID: 187652, guid: a0a8141f87add3f4aa0051d28cffce32, type: 3}
       propertyPath: m_Name
       value: SR_Env_Concrete_Track_CornerTight_04
+      objectReference: {fileID: 0}
+    - target: {fileID: 187652, guid: a0a8141f87add3f4aa0051d28cffce32, type: 3}
+      propertyPath: m_TagString
+      value: Roads
       objectReference: {fileID: 0}
     - target: {fileID: 428622, guid: a0a8141f87add3f4aa0051d28cffce32, type: 3}
       propertyPath: m_RootOrder
@@ -1569,6 +1615,10 @@ PrefabInstance:
     - target: {fileID: 187652, guid: a0a8141f87add3f4aa0051d28cffce32, type: 3}
       propertyPath: m_Name
       value: SR_Env_Concrete_Track_CornerTight_04 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 187652, guid: a0a8141f87add3f4aa0051d28cffce32, type: 3}
+      propertyPath: m_TagString
+      value: Roads
       objectReference: {fileID: 0}
     - target: {fileID: 428622, guid: a0a8141f87add3f4aa0051d28cffce32, type: 3}
       propertyPath: m_RootOrder
@@ -1746,6 +1796,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SR_Env_Concrete_Track_Straight_03 (78)
       objectReference: {fileID: 0}
+    - target: {fileID: 120332, guid: 62efdafbbf70e89468285f91436f1220, type: 3}
+      propertyPath: m_TagString
+      value: Roads
+      objectReference: {fileID: 0}
     - target: {fileID: 445904, guid: 62efdafbbf70e89468285f91436f1220, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -1891,14 +1945,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 443418334, guid: dd994fa10d1961948bb60d8052f9d348, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.41
-      objectReference: {fileID: 0}
-    - target: {fileID: 443418334, guid: dd994fa10d1961948bb60d8052f9d348, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -3.46
-      objectReference: {fileID: 0}
     - target: {fileID: 3356322521417783705, guid: dd994fa10d1961948bb60d8052f9d348,
         type: 3}
       propertyPath: m_RootOrder
@@ -1959,5 +2005,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3356322521505149897, guid: dd994fa10d1961948bb60d8052f9d348,
+        type: 3}
+      propertyPath: wheelsCar.Array.data[0]
+      value: 
+      objectReference: {fileID: 1243334560}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd994fa10d1961948bb60d8052f9d348, type: 3}

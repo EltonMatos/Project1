@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MovePlayer : MonoBehaviour
 {
+    WheelManager[] wheelGuide;
+
     public float aceleration = 0f;
     public Vector3 forceFinal;
     public float forceStop;
@@ -11,9 +13,11 @@ public class MovePlayer : MonoBehaviour
 
 
     public WheelCollider[] wheelsCar;
-    private float buttonGui = 0f;
+    private float driveCar = 0f;
 
     public AudioClip somCar;
+    public AudioClip somKid;
+    public AudioClip somKidGrass;
 
     public AudioSource audioCar;
     public AudioSource audioSkid;
@@ -40,11 +44,18 @@ public class MovePlayer : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         //rb.centerOfMass = massCenter.position;
         audioCar.clip = somCar;
+
+        wheelGuide = new WheelManager[wheelsCar.Length];
+
+        for(int i = 0; i < wheelsCar.Length; i++)
+        {
+            wheelGuide[i] = wheelsCar[i].GetComponent<WheelManager>();
+        }
     }
 
     void Update()
     {
-        buttonGui = Input.GetAxis("Horizontal");
+        driveCar = Input.GetAxis("Horizontal");
         aceleration = Input.GetAxis("Vertical");
     }
 
@@ -53,8 +64,27 @@ public class MovePlayer : MonoBehaviour
         //guiar o carro
         for (int i = 0; i < wheelsCar.Length; i++)
         {
-            wheelsCar[i].steerAngle = buttonGui * curveWheel.Evaluate(veloKMH);
+            wheelsCar[i].steerAngle = driveCar * curveWheel.Evaluate(veloKMH);
             wheelsCar[i].motorTorque = 1f;
+
+            if(wheelGuide[i].wheelCurrent != 0)
+            {                
+                rb.AddTorque((transform.up * (instabilityHang/2f) * veloKMH / 45f) * driveCar);                
+                /*if(audioSkid.clip != somKidGrass)
+                {
+                    audioSkid.clip = somKidGrass;
+                    audioSkid.Play();
+                }*/
+            }
+            else
+            {
+                if (audioSkid.clip != somKid)
+                {
+                    audioSkid.clip = somKid;
+                    audioSkid.Play();
+                }
+            }
+
         }
 
         //velocidade em RPM
@@ -87,7 +117,7 @@ public class MovePlayer : MonoBehaviour
         if (aceleration < -0.4f)
         {
             rb.AddForce(-transform.forward * forceStop);
-            rb.AddTorque((transform.up * instabilityHang * veloKMH / 45f) * buttonGui);
+            rb.AddTorque((transform.up * instabilityHang * veloKMH / 45f) * driveCar);
             aceleration = 0;
         }
 
@@ -97,6 +127,7 @@ public class MovePlayer : MonoBehaviour
         //add som na aceleração do carro
         audioCar.pitch = rpm / somPitch;
 
+        //som da derrapagem
         if (veloKMH >= 30f)
         {
             float angulo = Vector3.Angle(transform.forward, rb.velocity);
