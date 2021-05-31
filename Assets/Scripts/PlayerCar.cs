@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovePlayer : MonoBehaviour
+public class PlayerCar : MonoBehaviour
 {
     WheelManager[] wheelGuide;
 
@@ -39,6 +39,8 @@ public class MovePlayer : MonoBehaviour
 
     public Transform massCenter;
 
+    private int laps;
+
     public void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -57,6 +59,12 @@ public class MovePlayer : MonoBehaviour
     {
         driveCar = Input.GetAxis("Horizontal");
         aceleration = Input.GetAxis("Vertical");
+    }
+
+    public void AddLaps()
+    {
+        laps++;
+        Debug.Log("Volta atual: " + laps);
     }
 
     private void FixedUpdate()

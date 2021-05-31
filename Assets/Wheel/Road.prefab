@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3354603196074752520}
   - component: {fileID: 2037583677910867640}
   m_Layer: 0
-  m_Name: SR_Veh_StockCar_Wheel_FL (1)
+  m_Name: Road
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,5 +108,5 @@ WheelCollider:
     m_ExtremumValue: 1.6
     m_AsymptoteSlip: 0.35
     m_AsymptoteValue: 1.1
-    m_Stiffness: 0.9
+    m_Stiffness: 1.8
   m_Enabled: 1

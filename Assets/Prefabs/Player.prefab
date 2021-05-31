@@ -55,13 +55,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.23143247, y: -0.668161, z: 0.23143247, w: 0.668161}
-  m_LocalPosition: {x: 45, y: 29.2, z: 4.8600006}
+  m_LocalRotation: {x: 0.23084208, y: -0, z: -0, w: 0.9729913}
+  m_LocalPosition: {x: 0.1, y: 4.15, z: -5.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3356322521417783705}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 38.209003, y: -90.00001, z: 0}
+  m_LocalEulerAnglesHint: {x: 26.693, y: 0, z: 0}
 --- !u!20 &963194227
 Camera:
   m_ObjectHideFlags: 0
@@ -270,7 +270,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!82 &3083568260293046341
 AudioSource:
@@ -481,10 +481,11 @@ MonoBehaviour:
   forceStop: 6000
   maxTorque: 5000
   wheelsCar:
-  - {fileID: 0}
+  - {fileID: 678209754935919659}
   - {fileID: 3356322520633415411}
   somCar: {fileID: 8300000, guid: 31c6cfd30b8b7d840ac9924ef9f5d6c9, type: 3}
   somKid: {fileID: 8300000, guid: f92a9fc0773ca8c439ad1febbf8741cb, type: 3}
+  somKidGrass: {fileID: 0}
   audioCar: {fileID: 3083568260293046341}
   audioSkid: {fileID: 5656873642221802415}
   curveWheel:
@@ -500,28 +501,10 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 15.846998
-      value: 31.752323
-      inSlope: -0.1360154
-      outSlope: -0.1360154
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 34.656456
-      value: 26.645254
-      inSlope: -0.2750791
-      outSlope: -0.2750791
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 58.270615
-      value: 20.966345
-      inSlope: -0.2657449
-      outSlope: -0.2657449
+      time: 120.98819
+      value: 13.649738
+      inSlope: -0.46143162
+      outSlope: -0.46143162
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
@@ -658,7 +641,7 @@ WheelCollider:
     m_ExtremumValue: 1.6
     m_AsymptoteSlip: 0.35
     m_AsymptoteValue: 1.1
-    m_Stiffness: 0.9
+    m_Stiffness: 1.8
   m_Enabled: 1
 --- !u!114 &5512050490628426297
 MonoBehaviour:
@@ -785,7 +768,7 @@ WheelCollider:
     m_ExtremumValue: 1.6
     m_AsymptoteSlip: 0.35
     m_AsymptoteValue: 1.1
-    m_Stiffness: 0.9
+    m_Stiffness: 1.8
   m_Enabled: 1
 --- !u!114 &1510285769891848514
 MonoBehaviour:
@@ -912,7 +895,7 @@ WheelCollider:
     m_ExtremumValue: 1.6
     m_AsymptoteSlip: 0.35
     m_AsymptoteValue: 1.1
-    m_Stiffness: 0.9
+    m_Stiffness: 1.8
   m_Enabled: 1
 --- !u!114 &7397417700908537582
 MonoBehaviour:
@@ -1039,7 +1022,7 @@ WheelCollider:
     m_ExtremumValue: 1.6
     m_AsymptoteSlip: 0.35
     m_AsymptoteValue: 1.1
-    m_Stiffness: 0.9
+    m_Stiffness: 1.8
   m_Enabled: 1
 --- !u!114 &166139745939099209
 MonoBehaviour:
