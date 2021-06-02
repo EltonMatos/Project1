@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Meta : MonoBehaviour
 {
-    public Checkpoint[] checkpoints;
+    public Checkpoint[] checkpoints;    
 
     private void Awake()
     {
@@ -14,8 +14,9 @@ public class Meta : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         PlayerCar x = other.transform.root.GetComponent<PlayerCar>();
-
-        foreach(Checkpoint ch in checkpoints)
+        GameManager.instance.checkLap = true;
+        GameManager.instance.checkOldLap = true;
+        foreach (Checkpoint ch in checkpoints)
         {
             if (!ch.ReadyCar())
             {
@@ -26,11 +27,13 @@ public class Meta : MonoBehaviour
         }
         x.AddLaps();
         ResetCheckpoints();
+        //GameManager.instance.checkLap = false;
     }
 
     void ResetCheckpoints()
     {
-        foreach(Checkpoint check in checkpoints)
+        GameManager.instance.timer = 0;
+        foreach (Checkpoint check in checkpoints)
         {
             check.car = null;
         }

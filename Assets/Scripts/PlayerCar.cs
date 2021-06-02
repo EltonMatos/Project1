@@ -39,7 +39,9 @@ public class PlayerCar : MonoBehaviour
 
     public Transform massCenter;
 
+    private int guiLaps = 20;
     private int laps;
+    
 
     public void Start()
     {
@@ -150,6 +152,20 @@ public class PlayerCar : MonoBehaviour
         GUI.Label(new Rect(20, 40, 128, 32), (changeCurrent + 1).ToString());
         GUI.Label(new Rect(20, 60, 128, 32), veloKMH + "KMH");
         GUI.Label(new Rect(20, 80, 128, 32), forceFinal.magnitude.ToString());
+
+        GUI.Label(new Rect(20, 100, 128, 32), "Timer: " + GameManager.instance.returnTime().ToString());
+
+        /*if (GameManager.instance.checkLap && GameManager.instance.checkOldLap)
+        {
+            for (int i = 0; i < GameManager.instance.lapsMax; i++)
+            {
+                if (GameManager.instance.checkOldLap)
+                {                    
+                    GUI.Label(new Rect(20, 80 + guiLaps, 128, 32), "Timer: " + GameManager.instance.returnTime());
+                    guiLaps += 20;
+                }               
+            }            
+        }*/        
     }
 
 
