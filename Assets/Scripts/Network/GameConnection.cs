@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 using Photon.Pun;
 using Photon.Realtime;
@@ -8,8 +6,6 @@ using UnityEngine.UI;
 
 public class GameConnection : MonoBehaviourPunCallbacks
 {
-    private int _totalPlayers = 0;
-    
     private void Awake()
     {
         Debug.Log("Connecting to server...");
@@ -46,8 +42,9 @@ public class GameConnection : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("You joined test room with the username: " + PhotonNetwork.LocalPlayer.NickName);
-        Transform positionCar1 = GameManager.Instance.carPositions[_totalPlayers];
-        PhotonNetwork.Instantiate("Player", positionCar1.position, positionCar1.rotation);
+        //TODO get a better way of doing this, to manage the players coming from menu
+        Transform carPosition = GameManager.Instance.carPositions[PhotonNetwork.PlayerListOthers.Length];
+        PhotonNetwork.Instantiate("Player", carPosition.position, carPosition.rotation);
     }
 
     public override void OnLeftRoom()
@@ -69,11 +66,5 @@ public class GameConnection : MonoBehaviourPunCallbacks
     public override void OnErrorInfo(ErrorInfo errorInfo)
     {
         Debug.Log("Something went wrong: " + errorInfo.Info);
-    }
-
-    [PunRPC]
-    void NewPlayerJoined()
-    {
-        _totalPlayers += 1;
     }
 }
