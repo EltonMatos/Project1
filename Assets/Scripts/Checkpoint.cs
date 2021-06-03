@@ -12,7 +12,7 @@ public class Checkpoint : MonoBehaviour
         {
             car = other.transform.root.gameObject;
             //TODO removing this to have it implemented correctly
-            //PlayerCar.Instance.fuelCar -= 10;
+            //PlayerCar.Instance.fuelCar -= 10;            
         }
     }
 

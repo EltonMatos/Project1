@@ -9,7 +9,8 @@ public enum StatusCar
     Drive,
     PitStop,
     Broken,
-    FinishedRace
+    FinishedRace,
+    Stop
 }
 
 public class PlayerCar : MonoBehaviour
@@ -41,8 +42,6 @@ public class PlayerCar : MonoBehaviour
     public float maxTorque;
 
     public float somPitch;
-
-    public Transform massCenter;
     
     private int laps;
 
@@ -57,11 +56,14 @@ public class PlayerCar : MonoBehaviour
 
     public AnimationCurve curveWheel;
 
+    private bool pitStop;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         //rb.centerOfMass = massCenter.position;
         audioCar.clip = somCar;
+        pitStop = false;
 
         wheelGuide = new WheelManager[wheelsCar.Length];
         fuelCar = 100;
@@ -116,6 +118,15 @@ public class PlayerCar : MonoBehaviour
 
         }
 
+        if (veloKMH > 1 && pitStop == false)
+        {
+            statusPlayer = StatusCar.Drive;
+        }
+        if (veloKMH <= 1 && statusPlayer != StatusCar.Broken)
+        {
+            statusPlayer = StatusCar.Stop;
+        }
+
         //velocidade em RPM
         veloKMH = rb.velocity.magnitude * 3.6f;
         rpm = veloKMH * raceChenges[changeCurrent] * 15f;        
@@ -160,6 +171,21 @@ public class PlayerCar : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("PitStopEntrance"))
+        {
+            pitStop = true;
+            statusPlayer = StatusCar.PitStop;
+        }
+
+        if (other.gameObject.CompareTag("PitStopExit"))
+        {
+            pitStop = false;
+            statusPlayer = StatusCar.Drive;
+        }
+    }
+
     private void OnGUI()
     {
         GUI.Label(new Rect(20, 20, 128, 32), rpm + "RPM");
@@ -167,10 +193,11 @@ public class PlayerCar : MonoBehaviour
         GUI.Label(new Rect(20, 60, 128, 32), veloKMH + "KMH");
         GUI.Label(new Rect(20, 80, 128, 32), forceFinal.magnitude.ToString());
 
-        GUI.Label(new Rect(20, 120, 128, 32), "Fuel: " + fuelCar);
-        GUI.Label(new Rect(20, 100, 128, 32), "Timer: " + GameManager.Instance.ReturnTime().ToString()); 
+        GUI.Label(new Rect(20, 100, 128, 32), "Fuel: " + fuelCar);
+        GUI.Label(new Rect(20, 120, 128, 32), "Timer: " + GameManager.Instance.ReturnTime().ToString()); 
        
     }
+
 
 
 }
