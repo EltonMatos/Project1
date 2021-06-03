@@ -7,9 +7,7 @@ public class UiManager : MonoBehaviour
 {
     public static UiManager instance;
 
-    public Slider fuelBar;
-
-    public PlayerCar player;
+    public Slider fuelBar;    
 
     private void Awake()
     {
@@ -31,10 +29,10 @@ public class UiManager : MonoBehaviour
 
     private void FuelControl()
     {
-        fuelBar.value = player.fuelCar;
+        fuelBar.value = PlayerCar.instance.fuelCar;
         if (fuelBar.value <= 0)
         {
-            player.statusPlayer = StatusCar.Broken;            
+            PlayerCar.instance.statusPlayer = StatusCar.Broken;            
         }        
     }
 }

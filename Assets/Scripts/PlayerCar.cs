@@ -138,10 +138,10 @@ public class PlayerCar : MonoBehaviour
         }
 
         //Força
-        if (aceleration < -0.4f)
+        if (aceleration < -0.2f)
         {
             rb.AddForce(-transform.forward * forceStop);
-            rb.AddTorque((transform.up * instabilityHang * veloKMH / 45f) * driveCar);
+            rb.AddTorque((transform.up * instabilityHang * veloKMH / 60f) * driveCar);
             aceleration = 0;
         }
 
@@ -152,7 +152,7 @@ public class PlayerCar : MonoBehaviour
         audioCar.pitch = rpm / somPitch;
 
         //som da derrapagem
-        if (veloKMH >= 30f)
+        if (veloKMH >= 20f)
         {
             float angulo = Vector3.Angle(transform.forward, rb.velocity);
             float valorFinal = (angulo / 10f) - 0.3f;
