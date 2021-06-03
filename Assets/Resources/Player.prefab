@@ -98,6 +98,8 @@ GameObject:
   - component: {fileID: 3083568260293046341}
   - component: {fileID: 5656873642221802415}
   - component: {fileID: 3356322521505149897}
+  - component: {fileID: 3724872719061583636}
+  - component: {fileID: 6633683337589362060}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -392,8 +394,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 512ba6c7aab555145974b1f61d278608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  photonView: {fileID: 3724872719061583636}
   statusPlayer: 0
-  aceleration: 0
+  acceleration: 0
   forceFinal: {x: 0, y: 0, z: 0}
   wheelsCar:
   - {fileID: 678209754935919659}
@@ -450,6 +453,45 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3724872719061583636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3356322521418067153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 1
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 6633683337589362060}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &6633683337589362060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3356322521418067153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &3356322521418098991
 GameObject:
   m_ObjectHideFlags: 0

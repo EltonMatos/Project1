@@ -8,11 +8,11 @@ using UnityEngine.UI;
 
 public class GameConnection : MonoBehaviourPunCallbacks
 {
-    public Text chatLog;
-
+    private int _totalPlayers = 0;
+    
     private void Awake()
     {
-        chatLog.text += "\nConnecting to server...";
+        Debug.Log("Connecting to server...");
         //TODO get nickname from user
         PhotonNetwork.LocalPlayer.NickName = "Fernando_" + Random.Range(1, 100);
         PhotonNetwork.ConnectUsingSettings();
@@ -20,53 +20,60 @@ public class GameConnection : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        chatLog.text += "\nConnected to server!";
+        Debug.Log("Connected to server!");
 
         if (!PhotonNetwork.InLobby)
         {
-            chatLog.text += "\nEntering lobby...";
+            Debug.Log("Entering lobby...");
             PhotonNetwork.JoinLobby();
         }
     }
 
     public override void OnJoinedLobby()
     {
-        chatLog.text += "\nConnected to lobby...";
+        Debug.Log("Connected to lobby...");
 
-        chatLog.text += "\nJoining test room...";
+        Debug.Log("Joining test room...");
         //TODO get room name from screen
         PhotonNetwork.JoinOrCreateRoom("test", new RoomOptions { MaxPlayers = 4 }, TypedLobby.Default);
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        chatLog.text += "\nFailed to connect to lobby. Code: " + returnCode + ", message: " + message;
+        Debug.Log("Failed to connect to lobby. Code: " + returnCode + ", message: " + message);
     }
 
     public override void OnJoinedRoom()
     {
-        chatLog.text += "\nYou joined test room with the username: " + PhotonNetwork.LocalPlayer.NickName;
-        //TODO instanciate player
+        Debug.Log("You joined test room with the username: " + PhotonNetwork.LocalPlayer.NickName);
+        Transform positionCar1 = GameManager.Instance.carPositions[_totalPlayers];
+        PhotonNetwork.Instantiate("Player", positionCar1.position, positionCar1.rotation);
     }
-    
+
     public override void OnLeftRoom()
     {
-        chatLog.text += "\nYou left the test room.";
+        Debug.Log("You left the test room.");
         //TODO destroy player object
     }
 
     public override void OnPlayerEnteredRoom(Player player)
     {
-        chatLog.text += "\nPlayer " + player.NickName + " joined the test room!";
+        Debug.Log("Player " + player.NickName + " joined the test room!");
     }
 
     public override void OnPlayerLeftRoom(Player player)
     {
-        chatLog.text += "\nPlayer " + player.NickName + " left the test room.";
+        Debug.Log("Player " + player.NickName + " left the test room.");
     }
 
     public override void OnErrorInfo(ErrorInfo errorInfo)
     {
-        chatLog.text += "\nSomething went wrong: " + errorInfo.Info;
+        Debug.Log("Something went wrong: " + errorInfo.Info);
+    }
+
+    [PunRPC]
+    void NewPlayerJoined()
+    {
+        _totalPlayers += 1;
     }
 }

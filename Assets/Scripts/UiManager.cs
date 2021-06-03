@@ -5,34 +5,34 @@ using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
-    public static UiManager instance;
+    public static UiManager Instance;
 
     public Slider fuelBar;    
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 
-
-    void Start()
+    private void Start()
     {
         fuelBar.minValue = 0;
         fuelBar.value = fuelBar.minValue;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        FuelControl();
-    }
+    //private void Update()
+    //{
+        //TODO removing call to fuel control until it is implemented correctly
+        //FuelControl();
+    //}
 
-    private void FuelControl()
-    {
-        fuelBar.value = PlayerCar.instance.fuelCar;
-        if (fuelBar.value <= 0)
-        {
-            PlayerCar.instance.statusPlayer = StatusCar.Broken;            
-        }        
-    }
+    //get fuel in the correct way
+    // private void FuelControl()
+    // {
+    //     fuelBar.value = PlayerCar.Instance.fuelCar;
+    //     if (fuelBar.value <= 0)
+    //     {
+    //         PlayerCar.Instance.statusPlayer = StatusCar.Broken;            
+    //     }        
+    // }
 }

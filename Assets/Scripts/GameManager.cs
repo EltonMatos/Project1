@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManager Instance;
 
     private bool isRunning = true;
         
@@ -19,31 +19,31 @@ public class GameManager : MonoBehaviour
     public Camera mainCamera, cameraOne, cameraTwo;
 
     public GameObject playerCar;
-    public Transform posCar1, posCar2, posCar3, posCar4, posCar5, posCar6;
+    public Transform[] carPositions;
 
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         checkLap = false;
         checkOldLap = false;        
         lapsMax = 3;
         completedLaps = -1;        
-        CreateCar();
+        //CreateCar();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        cronoMark();
+        UpdateStopwatch();
     }
 
-    void cronoMark()
+    private void UpdateStopwatch()
     {
         if (isRunning && checkLap)
         {
@@ -59,12 +59,12 @@ public class GameManager : MonoBehaviour
         }        
     }
 
-    public float returnTime()
+    public float ReturnTime()
     {
         return timePlayer;
     }
 
-    public void typeCamera()
+    public void TypeCamera()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -72,11 +72,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void CreateCar()
-    {
-        GameObject pl = Instantiate(playerCar, posCar1.position, Quaternion.identity) as GameObject;
-        pl.transform.Rotate(new Vector3(0, 180, 0),180f);
-    }
+    //TODO this can be removed, it will be created at the network manager
+    // private void CreateCar()
+    // {
+    //     GameObject pl = Instantiate(playerCar, posCar1.position, Quaternion.identity) as GameObject;
+    //     pl.transform.Rotate(new Vector3(0, 180, 0),180f);
+    // }
 
     public void FinishRace()
     {

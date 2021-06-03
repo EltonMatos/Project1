@@ -11,7 +11,8 @@ public class Checkpoint : MonoBehaviour
         if (other.transform.root.GetComponent<PlayerCar>())
         {
             car = other.transform.root.gameObject;
-            PlayerCar.instance.fuelCar -= 10;
+            //TODO removing this to have it implemented correctly
+            //PlayerCar.Instance.fuelCar -= 10;
         }
     }
 

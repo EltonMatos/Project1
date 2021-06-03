@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 
@@ -13,13 +14,13 @@ public enum StatusCar
 
 public class PlayerCar : MonoBehaviour
 {
-    public static PlayerCar instance;
-
+    public PhotonView photonView;
+    
     WheelManager[] wheelGuide;
 
     public StatusCar statusPlayer;
 
-    public float aceleration = 0f;
+    public float acceleration = 0f;
     public Vector3 forceFinal;
 
     public WheelCollider[] wheelsCar;
@@ -56,11 +57,7 @@ public class PlayerCar : MonoBehaviour
 
     public AnimationCurve curveWheel;
 
-    private void Awake()
-    {
-        instance = this;
-    }
-    public void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody>();
         //rb.centerOfMass = massCenter.position;
@@ -75,10 +72,13 @@ public class PlayerCar : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
-        driveCar = Input.GetAxis("Horizontal");
-        aceleration = Input.GetAxis("Vertical");
+        if (photonView.IsMine)
+        {
+            driveCar = Input.GetAxis("Horizontal");
+            acceleration = Input.GetAxis("Vertical");
+        }
     }
 
     public void AddLaps()
@@ -138,14 +138,14 @@ public class PlayerCar : MonoBehaviour
         }
 
         //Força
-        if (aceleration < -0.2f)
+        if (acceleration < -0.2f)
         {
             rb.AddForce(-transform.forward * forceStop);
             rb.AddTorque((transform.up * instabilityHang * veloKMH / 60f) * driveCar);
-            aceleration = 0;
+            acceleration = 0;
         }
 
-        forceFinal = transform.forward * (maxTorque / (changeCurrent + 1) + maxTorque / 1.25f) * aceleration;
+        forceFinal = transform.forward * (maxTorque / (changeCurrent + 1) + maxTorque / 1.25f) * acceleration;
         rb.AddForce(forceFinal);
 
         //add som na aceleração do carro
@@ -168,7 +168,7 @@ public class PlayerCar : MonoBehaviour
         GUI.Label(new Rect(20, 80, 128, 32), forceFinal.magnitude.ToString());
 
         GUI.Label(new Rect(20, 120, 128, 32), "Fuel: " + fuelCar);
-        GUI.Label(new Rect(20, 100, 128, 32), "Timer: " + GameManager.instance.returnTime().ToString()); 
+        GUI.Label(new Rect(20, 100, 128, 32), "Timer: " + GameManager.Instance.ReturnTime().ToString()); 
        
     }
 

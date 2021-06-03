@@ -14,9 +14,9 @@ public class Meta : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         PlayerCar x = other.transform.root.GetComponent<PlayerCar>();
-        GameManager.instance.checkLap = true;
-        GameManager.instance.checkOldLap = true;
-        GameManager.instance.completedLaps++;
+        GameManager.Instance.checkLap = true;
+        GameManager.Instance.checkOldLap = true;
+        GameManager.Instance.completedLaps++;
         foreach (Checkpoint ch in checkpoints)
         {
             if (!ch.ReadyCar())
@@ -32,7 +32,7 @@ public class Meta : MonoBehaviour
 
     void ResetCheckpoints()
     {
-        GameManager.instance.timer = 0;
+        GameManager.Instance.timer = 0;
         foreach (Checkpoint check in checkpoints)
         {
             check.car = null;
