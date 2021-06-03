@@ -16,6 +16,7 @@ public class Meta : MonoBehaviour
         PlayerCar x = other.transform.root.GetComponent<PlayerCar>();
         GameManager.instance.checkLap = true;
         GameManager.instance.checkOldLap = true;
+        GameManager.instance.completedLaps++;
         foreach (Checkpoint ch in checkpoints)
         {
             if (!ch.ReadyCar())
@@ -25,9 +26,8 @@ public class Meta : MonoBehaviour
                 return;
             }
         }
-        x.AddLaps();
-        ResetCheckpoints();
-        //GameManager.instance.checkLap = false;
+        x.AddLaps();        
+        ResetCheckpoints();        
     }
 
     void ResetCheckpoints()

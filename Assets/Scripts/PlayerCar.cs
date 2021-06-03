@@ -2,29 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum StatusCar
+{
+    Drive,
+    PitStop,
+    Broken,
+    FinishedRace
+}
+
 public class PlayerCar : MonoBehaviour
 {
+    public static PlayerCar instance;
+
     WheelManager[] wheelGuide;
+
+    public StatusCar statusPlayer;
 
     public float aceleration = 0f;
     public Vector3 forceFinal;
-    public float forceStop;
-    public float maxTorque;
-
 
     public WheelCollider[] wheelsCar;
-    private float driveCar = 0f;
+    private float driveCar = 0f;    
 
-    public AudioClip somCar;
-    public AudioClip somKid;
-    public AudioClip somKidGrass;
-
-    public AudioSource audioCar;
-    public AudioSource audioSkid;
-
-    private Rigidbody rb;
-
-    public AnimationCurve curveWheel;
+    private Rigidbody rb;    
 
     private float veloKMH, rpm;
     public float instabilityHang;
@@ -35,14 +36,30 @@ public class PlayerCar : MonoBehaviour
     public float maxRPM;
     public float minRPM;
 
+    public float forceStop;
+    public float maxTorque;
+
     public float somPitch;
 
     public Transform massCenter;
-
-    private int guiLaps = 20;
-    private int laps;
     
+    private int laps;
 
+    public float fuelCar;
+
+    public AudioClip somCar;
+    public AudioClip somKid;
+    public AudioClip somKidGrass;
+
+    public AudioSource audioCar;
+    public AudioSource audioSkid;
+
+    public AnimationCurve curveWheel;
+
+    private void Awake()
+    {
+        instance = this;
+    }
     public void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -50,6 +67,7 @@ public class PlayerCar : MonoBehaviour
         audioCar.clip = somCar;
 
         wheelGuide = new WheelManager[wheelsCar.Length];
+        fuelCar = 100;
 
         for(int i = 0; i < wheelsCar.Length; i++)
         {
@@ -77,7 +95,8 @@ public class PlayerCar : MonoBehaviour
             wheelsCar[i].steerAngle = driveCar * curveWheel.Evaluate(veloKMH);
             wheelsCar[i].motorTorque = 1f;
 
-            if(wheelGuide[i].wheelCurrent != 0)
+            //carro sai da estrada
+            if (wheelGuide[i].wheelCurrent != 0)
             {                
                 rb.AddTorque((transform.up * (instabilityHang/2f) * veloKMH / 45f) * driveCar);                
                 /*if(audioSkid.clip != somKidGrass)
@@ -99,12 +118,7 @@ public class PlayerCar : MonoBehaviour
 
         //velocidade em RPM
         veloKMH = rb.velocity.magnitude * 3.6f;
-        rpm = veloKMH * raceChenges[changeCurrent] * 15f;
-
-        /*if(veloKMH > 140f)
-        {            
-            aceleration = 0;
-        }*/
+        rpm = veloKMH * raceChenges[changeCurrent] * 15f;        
 
         if (rpm > maxRPM)
         {
@@ -153,19 +167,9 @@ public class PlayerCar : MonoBehaviour
         GUI.Label(new Rect(20, 60, 128, 32), veloKMH + "KMH");
         GUI.Label(new Rect(20, 80, 128, 32), forceFinal.magnitude.ToString());
 
-        GUI.Label(new Rect(20, 100, 128, 32), "Timer: " + GameManager.instance.returnTime().ToString());
-
-        /*if (GameManager.instance.checkLap && GameManager.instance.checkOldLap)
-        {
-            for (int i = 0; i < GameManager.instance.lapsMax; i++)
-            {
-                if (GameManager.instance.checkOldLap)
-                {                    
-                    GUI.Label(new Rect(20, 80 + guiLaps, 128, 32), "Timer: " + GameManager.instance.returnTime());
-                    guiLaps += 20;
-                }               
-            }            
-        }*/        
+        GUI.Label(new Rect(20, 120, 128, 32), "Fuel: " + fuelCar);
+        GUI.Label(new Rect(20, 100, 128, 32), "Timer: " + GameManager.instance.returnTime().ToString()); 
+       
     }
 
 
