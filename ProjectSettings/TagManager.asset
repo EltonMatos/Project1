@@ -8,6 +8,7 @@ TagManager:
   - Grass
   - PitStopEntrance
   - PitStopExit
+  - Wall
   layers:
   - Default
   - TransparentFX

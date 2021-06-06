@@ -408,13 +408,13 @@ MonoBehaviour:
   - 5.2
   - 4
   - 2.85
-  maxRPM: 5000
+  maxRPM: 4000
   minRPM: 2000
   forceStop: 8000
-  maxTorque: 6000
+  maxTorque: 7000
   somPitch: 2000
-  massCenter: {fileID: 443418334}
   fuelCar: 0
+  damagedCar: 0
   somCar: {fileID: 8300000, guid: 31c6cfd30b8b7d840ac9924ef9f5d6c9, type: 3}
   somKid: {fileID: 8300000, guid: f92a9fc0773ca8c439ad1febbf8741cb, type: 3}
   somKidGrass: {fileID: 0}

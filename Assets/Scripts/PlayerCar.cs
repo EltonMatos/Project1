@@ -6,11 +6,11 @@ using UnityEngine;
 
 public enum StatusCar
 {
+    Stop,
     Drive,
     PitStop,
     Broken,
-    FinishedRace,
-    Stop
+    FinishedRace,    
 }
 
 public class PlayerCar : MonoBehaviour
@@ -46,6 +46,7 @@ public class PlayerCar : MonoBehaviour
     private int laps;
 
     public float fuelCar;
+    public float damagedCar;
 
     public AudioClip somCar;
     public AudioClip somKid;
@@ -67,6 +68,7 @@ public class PlayerCar : MonoBehaviour
 
         wheelGuide = new WheelManager[wheelsCar.Length];
         fuelCar = 100;
+        damagedCar = 0;
 
         for(int i = 0; i < wheelsCar.Length; i++)
         {
@@ -81,6 +83,8 @@ public class PlayerCar : MonoBehaviour
             driveCar = Input.GetAxis("Horizontal");
             acceleration = Input.GetAxis("Vertical");
         }
+
+        StatusDamagedCar();
     }
 
     public void AddLaps()
@@ -91,7 +95,7 @@ public class PlayerCar : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //guiar o carro
+        //guiar o carro        
         for (int i = 0; i < wheelsCar.Length; i++)
         {
             wheelsCar[i].steerAngle = driveCar * curveWheel.Evaluate(veloKMH);
@@ -99,8 +103,8 @@ public class PlayerCar : MonoBehaviour
 
             //carro sai da estrada
             if (wheelGuide[i].wheelCurrent != 0)
-            {                
-                rb.AddTorque((transform.up * (instabilityHang/2f) * veloKMH / 45f) * driveCar);                
+            {
+                rb.AddTorque((transform.up * (instabilityHang / 2f) * veloKMH / 45f) * driveCar);
                 /*if(audioSkid.clip != somKidGrass)
                 {
                     audioSkid.clip = somKidGrass;
@@ -115,8 +119,8 @@ public class PlayerCar : MonoBehaviour
                     audioSkid.Play();
                 }
             }
-
         }
+
 
         if (veloKMH > 1 && pitStop == false)
         {
@@ -129,7 +133,7 @@ public class PlayerCar : MonoBehaviour
 
         //velocidade em RPM
         veloKMH = rb.velocity.magnitude * 3.6f;
-        rpm = veloKMH * raceChenges[changeCurrent] * 15f;        
+        rpm = veloKMH * raceChenges[changeCurrent] * 15f;
 
         if (rpm > maxRPM)
         {
@@ -169,6 +173,23 @@ public class PlayerCar : MonoBehaviour
             float valorFinal = (angulo / 10f) - 0.3f;
             audioSkid.volume = Mathf.Clamp(valorFinal, 0f, 1f);
         }
+        
+    }
+
+    private void StatusDamagedCar()
+    {
+        if(damagedCar >= 30)
+        {
+
+        }
+        if(damagedCar >= 40)
+        {
+
+        }
+        if(damagedCar >= 20)
+        {
+            statusPlayer = StatusCar.Broken;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -186,6 +207,18 @@ public class PlayerCar : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            damagedCar += 5;
+        }
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            damagedCar += 3;
+        }
+    }
+
     private void OnGUI()
     {
         GUI.Label(new Rect(20, 20, 128, 32), rpm + "RPM");
@@ -194,7 +227,9 @@ public class PlayerCar : MonoBehaviour
         GUI.Label(new Rect(20, 80, 128, 32), forceFinal.magnitude.ToString());
 
         GUI.Label(new Rect(20, 100, 128, 32), "Fuel: " + fuelCar);
-        GUI.Label(new Rect(20, 120, 128, 32), "Timer: " + GameManager.Instance.ReturnTime().ToString()); 
+        GUI.Label(new Rect(20, 120, 128, 32), "Damaged: " + damagedCar);
+        GUI.Label(new Rect(20, 140, 128, 32), "StatusCar: " + statusPlayer);
+        GUI.Label(new Rect(20, 160, 128, 32), "Timer: " + GameManager.Instance.ReturnTime().ToString()); 
        
     }
 

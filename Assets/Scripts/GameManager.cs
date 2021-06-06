@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public Camera mainCamera, cameraOne, cameraTwo;
 
     public GameObject playerCar;
-    public Transform[] carPositions;
+    public Transform[] carPositions;   
 
 
     private void Awake()
@@ -73,11 +73,11 @@ public class GameManager : MonoBehaviour
     }
 
     //TODO this can be removed, it will be created at the network manager
-    // private void CreateCar()
-    // {
-    //     GameObject pl = Instantiate(playerCar, posCar1.position, Quaternion.identity) as GameObject;
-    //     pl.transform.Rotate(new Vector3(0, 180, 0),180f);
-    // }
+    //private void CreateCar()
+    //{
+    //    GameObject pl = Instantiate(playerCar, posCar1.position, Quaternion.identity) as GameObject;
+    //    pl.transform.Rotate(new Vector3(0, 180, 0), 180f);
+    //}
 
     public void FinishRace()
     {
