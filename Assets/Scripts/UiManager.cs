@@ -7,7 +7,10 @@ public class UiManager : MonoBehaviour
 {
     public static UiManager Instance;
 
-    public Slider fuelBar;    
+    public Slider fuelBar;
+    public float sliderBarValue;
+
+    public Text statusCar;
 
     private void Awake()
     {
@@ -20,19 +23,24 @@ public class UiManager : MonoBehaviour
         fuelBar.value = fuelBar.minValue;
     }
 
-    //private void Update()
-    //{
+    private void Update()
+    {
         //TODO removing call to fuel control until it is implemented correctly
-        //FuelControl();
-    //}
+        FuelControl();
+    }
 
     //get fuel in the correct way
-    // private void FuelControl()
-    // {
-    //     fuelBar.value = PlayerCar.Instance.fuelCar;
-    //     if (fuelBar.value <= 0)
-    //     {
-    //         PlayerCar.Instance.statusPlayer = StatusCar.Broken;            
-    //     }        
-    // }
+    private void FuelControl()
+    {
+        fuelBar.value = sliderBarValue;
+        if (fuelBar.value <= 0)
+        {
+            //PlayerCar.Instance.statusPlayer = StatusCar.Broken;
+        }
+    }
+
+    private void StatusCar()
+    {
+
+    }
 }

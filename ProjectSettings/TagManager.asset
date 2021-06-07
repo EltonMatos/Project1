@@ -9,6 +9,8 @@ TagManager:
   - PitStopEntrance
   - PitStopExit
   - Wall
+  - Checkpoint
+  - PitStop
   layers:
   - Default
   - TransparentFX
