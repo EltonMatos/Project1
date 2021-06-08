@@ -10,24 +10,29 @@ public enum StatusCar
     Drive,
     PitStop,
     Broken,
-    FinishedRace,    
+    FinishedRace,
+    LockedCar,
 }
 
 public class PlayerCar : MonoBehaviour
 {
     public PhotonView photonView;
-    
+
     WheelManager[] wheelGuide;
 
     public StatusCar statusPlayer;
+
+    public int idCar;
+    private int idPs;
+    public Transform posCarPitStop;
 
     private float acceleration = 0f;
     private float driveCar = 0f;
 
     public Vector3 forceFinal;
-    public WheelCollider[] wheelsCar;        
+    public WheelCollider[] wheelsCar;
 
-    private Rigidbody rb;    
+    private Rigidbody rb;
 
     private float veloKMH, rpm;
     public float instabilityHang;
@@ -42,7 +47,7 @@ public class PlayerCar : MonoBehaviour
     public float maxTorque;
 
     public float somPitch;
-    
+
     private int laps;
     private float[] TimeLaps;
     //private int posLabel = 20;
@@ -72,7 +77,7 @@ public class PlayerCar : MonoBehaviour
         fuelCar = 100;
         damagedCar = 0;
 
-        for(int i = 0; i < wheelsCar.Length; i++)
+        for (int i = 0; i < wheelsCar.Length; i++)
         {
             wheelGuide[i] = wheelsCar[i].GetComponent<WheelManager>();
         }
@@ -87,11 +92,11 @@ public class PlayerCar : MonoBehaviour
         }
 
         UpdateStatusCar();
-        StatusDamagedCar();        
+        StatusDamagedCar();
     }
 
     public void AddLaps()
-    {        
+    {
         /*for (int i = 0; i < GameManager.Instance.lapsMax; i++)
         {
             GUI.Label(new Rect(40, posLabel, 128, 32), laps + ": " +  "Timer: " + GameManager.Instance.ReturnTime().ToString());
@@ -104,22 +109,23 @@ public class PlayerCar : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(statusPlayer != StatusCar.PitStop) DriveCar();
-        if(statusPlayer == StatusCar.PitStop || statusPlayer == StatusCar.Broken) SlowDownCar();
+        if (statusPlayer != StatusCar.PitStop) DriveCar();
+        if (statusPlayer == StatusCar.PitStop || statusPlayer == StatusCar.Broken) SlowDownCar();
+        if (statusPlayer == StatusCar.LockedCar) StopCar();
 
-        if (veloKMH > 1 && pitStop == false)
+        /*if (veloKMH > 1 && pitStop == false)
         {
             statusPlayer = StatusCar.Drive;
         }
         if (veloKMH <= 1 && statusPlayer != StatusCar.Broken)
         {
             statusPlayer = StatusCar.Stop;
-        }
+        }*/
 
     }
 
     private void DriveCar()
-    {
+    {        
         //guiar o carro        
         for (int i = 0; i < wheelsCar.Length; i++)
         {
@@ -188,29 +194,45 @@ public class PlayerCar : MonoBehaviour
             float valorFinal = (angulo / 10f) - 0.3f;
             audioSkid.volume = Mathf.Clamp(valorFinal, 0f, 1f);
         }
+        
     }
 
     private void SlowDownCar()
     {
+        if (statusPlayer != StatusCar.LockedCar)
+        {
+            for (int i = 0; i < wheelsCar.Length; i++)
+            {
+                wheelsCar[i].steerAngle = driveCar * curveWheel.Evaluate(veloKMH);
+                wheelsCar[i].motorTorque = 1f;
+            }
+            veloKMH = 30f;
+            rpm = 2000;
+
+            if (acceleration < -0.2f)
+            {
+                rb.AddForce(-transform.forward * forceStop);
+                rb.AddTorque((transform.up * instabilityHang * veloKMH / 60f) * driveCar);
+                acceleration = 0;
+            }
+
+            forceFinal = transform.forward * (2000 / (changeCurrent + 1) + 2000 / 1.25f) * acceleration;
+            rb.AddForce(forceFinal);
+
+            audioCar.pitch = rpm / somPitch;
+        }
+    }
+
+    private void StopCar()
+    {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
         for (int i = 0; i < wheelsCar.Length; i++)
         {
-            wheelsCar[i].steerAngle = driveCar * curveWheel.Evaluate(veloKMH);
-            wheelsCar[i].motorTorque = 1f;
+            wheelsCar[i].steerAngle = 0f;
+            wheelsCar[i].motorTorque = 0f;
         }
-        veloKMH = 30f;
-        rpm = 2000;
-
-        if (acceleration < -0.2f)
-        {
-            rb.AddForce(-transform.forward * forceStop);
-            rb.AddTorque((transform.up * instabilityHang * veloKMH / 60f) * driveCar);
-            acceleration = 0;
-        }
-
-        forceFinal = transform.forward * (2000 / (changeCurrent + 1) + 2000 / 1.25f) * acceleration;
-        rb.AddForce(forceFinal);
-
-        audioCar.pitch = rpm / somPitch;
+        StartCoroutine(timePitStop());
     }
 
     private void UpdateStatusCar()
@@ -235,13 +257,29 @@ public class PlayerCar : MonoBehaviour
         }
     }
 
-    private void PitStopCar()
+    IEnumerator timePitStop()
     {
-        //rb.AddForce(-transform.forward * forceStop);
-        if (statusPlayer == StatusCar.PitStop && statusPlayer == StatusCar.Stop)
+        if(fuelCar == 100 && damagedCar <= 0) statusPlayer = StatusCar.Drive;
+        yield return new WaitForSeconds(3);
+        if (statusPlayer == StatusCar.LockedCar)
         {
-            fuelCar = 100;
-            damagedCar = 0;
+            if (fuelCar < 100)
+            {                
+                fuelCar += 5;
+            }
+            if (damagedCar > 0)
+            {                
+                damagedCar -= 5;
+            }
+        }        
+    }
+
+    private void PitStopCar()
+    {       
+        if (idCar == idPs && statusPlayer == StatusCar.PitStop)
+        {
+            transform.position = posCarPitStop.position;
+            statusPlayer = StatusCar.LockedCar;
         }
     }
 
@@ -254,8 +292,9 @@ public class PlayerCar : MonoBehaviour
         }        
         if (other.gameObject.CompareTag("PitStop"))
         {
-            PitStopCar();
-            statusPlayer = StatusCar.Stop;
+            idPs = other.GetComponentInChildren<PitStop>().idPitStop;
+            Debug.Log("idPs: " + idPs);
+            PitStopCar();            
         }
         if (other.gameObject.CompareTag("Checkpoint"))
         {

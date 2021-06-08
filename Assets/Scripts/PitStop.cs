@@ -5,6 +5,8 @@ using UnityEngine;
 public class PitStop : MonoBehaviour
 {
     public Transform posCarPitStop;
+
+    public int idPitStop;
     
     
     void Update()
@@ -15,8 +17,8 @@ public class PitStop : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
-        {
-            other.gameObject.transform.position = posCarPitStop.position;            
+        {            
+            
         }
     }
 }

@@ -132,6 +132,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: hedge_mesh (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: a6c9b23e54b445f49b6249c416d43bf6, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a6c9b23e54b445f49b6249c416d43bf6, type: 3}
       propertyPath: m_RootOrder
       value: 26
@@ -237,7 +241,7 @@ Transform:
   m_LocalScale: {x: 18.674297, y: 2.5824332, z: 1}
   m_Children: []
   m_Father: {fileID: 583232270}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &6815473
 BoxCollider:
@@ -361,6 +365,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SR_Prop_Barrier_Concrete_02 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 102142, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 413498, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
       propertyPath: m_RootOrder
       value: 18
@@ -452,7 +460,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &39534362
 Transform:
   m_ObjectHideFlags: 0
@@ -479,7 +487,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c6c7892205e1e740b2b35236bb4138e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuelBar: {fileID: 0}
+  fuelBar: {fileID: 2069427257}
+  sliderBarValue: 0
+  statusCar: {fileID: 62558212}
 --- !u!1001 &45690327
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -490,6 +500,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: a6c9b23e54b445f49b6249c416d43bf6, type: 3}
       propertyPath: m_Name
       value: hedge_mesh (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: a6c9b23e54b445f49b6249c416d43bf6, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a6c9b23e54b445f49b6249c416d43bf6, type: 3}
       propertyPath: m_RootOrder
@@ -598,7 +612,6 @@ Transform:
   - {fileID: 1576587104}
   - {fileID: 363704386}
   - {fileID: 1021569887}
-  - {fileID: 459162824}
   - {fileID: 583232270}
   - {fileID: 453007091}
   - {fileID: 145411804}
@@ -883,6 +896,10 @@ PrefabInstance:
     - target: {fileID: 102142, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
       propertyPath: m_Name
       value: SR_Prop_Barrier_Concrete_02 (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 102142, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 413498, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
       propertyPath: m_RootOrder
@@ -1202,7 +1219,7 @@ Transform:
   - {fileID: 1327611961}
   - {fileID: 1996667172}
   m_Father: {fileID: 47832886}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &158828581
 GameObject:
@@ -1250,7 +1267,7 @@ Transform:
   - {fileID: 548649595}
   - {fileID: 1182641503}
   m_Father: {fileID: 47832886}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &189441563
 PrefabInstance:
@@ -1349,6 +1366,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: a6c9b23e54b445f49b6249c416d43bf6, type: 3}
       propertyPath: m_Name
       value: hedge_mesh (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: a6c9b23e54b445f49b6249c416d43bf6, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a6c9b23e54b445f49b6249c416d43bf6, type: 3}
       propertyPath: m_RootOrder
@@ -1613,6 +1634,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SR_Prop_Barrier_Concrete_02 (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 102142, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 413498, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
       propertyPath: m_RootOrder
       value: 29
@@ -1863,6 +1888,10 @@ PrefabInstance:
     - target: {fileID: 102142, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
       propertyPath: m_Name
       value: SR_Prop_Barrier_Concrete_02 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 102142, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 413498, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
       propertyPath: m_RootOrder
@@ -2139,7 +2168,7 @@ Transform:
   m_LocalScale: {x: 24.63488, y: 1, z: 38.93918}
   m_Children: []
   m_Father: {fileID: 47832886}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &453007092
 MeshCollider:
@@ -2207,27 +2236,27 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 47832886}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3356322521417783705, guid: dd994fa10d1961948bb60d8052f9d348,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3356322521417783705, guid: dd994fa10d1961948bb60d8052f9d348,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 37
+      value: 29.1
       objectReference: {fileID: 0}
     - target: {fileID: 3356322521417783705, guid: dd994fa10d1961948bb60d8052f9d348,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -20.7
+      value: -0.5178032
       objectReference: {fileID: 0}
     - target: {fileID: 3356322521417783705, guid: dd994fa10d1961948bb60d8052f9d348,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 62
+      value: 107.7
       objectReference: {fileID: 0}
     - target: {fileID: 3356322521417783705, guid: dd994fa10d1961948bb60d8052f9d348,
         type: 3}
@@ -2237,7 +2266,7 @@ PrefabInstance:
     - target: {fileID: 3356322521417783705, guid: dd994fa10d1961948bb60d8052f9d348,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3356322521417783705, guid: dd994fa10d1961948bb60d8052f9d348,
         type: 3}
@@ -2247,7 +2276,7 @@ PrefabInstance:
     - target: {fileID: 3356322521417783705, guid: dd994fa10d1961948bb60d8052f9d348,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3356322521417783705, guid: dd994fa10d1961948bb60d8052f9d348,
         type: 3}
@@ -2269,6 +2298,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3356322521505149897, guid: dd994fa10d1961948bb60d8052f9d348,
+        type: 3}
+      propertyPath: idCar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3356322521505149897, guid: dd994fa10d1961948bb60d8052f9d348,
+        type: 3}
+      propertyPath: posCarPitStop
+      value: 
+      objectReference: {fileID: 903983141}
     - target: {fileID: 3724872719061583636, guid: dd994fa10d1961948bb60d8052f9d348,
         type: 3}
       propertyPath: sceneViewId
@@ -2276,12 +2315,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd994fa10d1961948bb60d8052f9d348, type: 3}
---- !u!4 &459162824 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3356322521417783705, guid: dd994fa10d1961948bb60d8052f9d348,
-    type: 3}
-  m_PrefabInstance: {fileID: 459162823}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &469900282
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2470,6 +2503,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SR_Prop_Barrier_Concrete_02 (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 102142, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 413498, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
       propertyPath: m_RootOrder
       value: 31
@@ -2643,7 +2680,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 0, z: 10}
   m_Center: {x: -5, y: 0.00000020861626, z: -5}
---- !u!1 &519521868
+--- !u!1 &542148991
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2651,37 +2688,67 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 519521872}
-  - component: {fileID: 519521871}
-  - component: {fileID: 519521870}
-  - component: {fileID: 519521869}
+  - component: {fileID: 542148992}
+  - component: {fileID: 542148996}
+  - component: {fileID: 542148995}
+  - component: {fileID: 542148994}
+  - component: {fileID: 542148993}
   m_Layer: 0
-  m_Name: PitStopCar1
-  m_TagString: Untagged
+  m_Name: PitStopCar2
+  m_TagString: PitStop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &519521869
+--- !u!4 &542148992
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 542148991}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 55.83, y: -19.482197, z: 50}
+  m_LocalScale: {x: 4.055889, y: 0.1, z: 10.928797}
+  m_Children:
+  - {fileID: 1394226788}
+  m_Father: {fileID: 583232270}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &542148993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 542148991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d8f31c040a1fd41a55cc78fc1b634b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posCarPitStop: {fileID: 1394226788}
+  idPitStop: 2
+--- !u!65 &542148994
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519521868}
+  m_GameObject: {fileID: 542148991}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &519521870
+--- !u!23 &542148995
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519521868}
+  m_GameObject: {fileID: 542148991}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -2714,28 +2781,14 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &519521871
+--- !u!33 &542148996
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519521868}
+  m_GameObject: {fileID: 542148991}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &519521872
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519521868}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 45.8, y: 0.7, z: 73.019}
-  m_LocalScale: {x: 4.055889, y: 0.1, z: 10.928797}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &548649594
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3112,10 +3165,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1217873190}
+  - {fileID: 542148992}
   - {fileID: 6815472}
   - {fileID: 841171752}
   m_Father: {fileID: 47832886}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &597991549
 PrefabInstance:
@@ -3301,6 +3355,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: hedge_mesh (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: a6c9b23e54b445f49b6249c416d43bf6, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a6c9b23e54b445f49b6249c416d43bf6, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -3437,7 +3495,7 @@ Transform:
   - {fileID: 514592800}
   - {fileID: 65778201}
   m_Father: {fileID: 47832886}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &655951194
 PrefabInstance:
@@ -4050,6 +4108,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SR_Prop_Barrier_Concrete_02
       objectReference: {fileID: 0}
+    - target: {fileID: 102142, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 413498, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -4155,7 +4217,7 @@ Transform:
   m_LocalScale: {x: 18.674297, y: 2.5824332, z: 1}
   m_Children: []
   m_Father: {fileID: 583232270}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &841171753
 BoxCollider:
@@ -4242,7 +4304,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &855301618
 PrefabInstance:
@@ -4593,6 +4655,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 898569713}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &903983140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 903983141}
+  m_Layer: 0
+  m_Name: PositionCar
+  m_TagString: Untagged
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &903983141
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903983140}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.15039875, y: 5.221977, z: 0}
+  m_LocalScale: {x: 0.24655508, y: 10, z: 0.091501385}
+  m_Children: []
+  m_Father: {fileID: 1217873190}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &986728635
 GameObject:
   m_ObjectHideFlags: 0
@@ -5660,9 +5752,10 @@ GameObject:
   - component: {fileID: 1217873193}
   - component: {fileID: 1217873192}
   - component: {fileID: 1217873191}
+  - component: {fileID: 1217873194}
   m_Layer: 0
   m_Name: PitStopCar1
-  m_TagString: Untagged
+  m_TagString: PitStop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5675,9 +5768,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1217873189}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 55.188854, y: -19.482197, z: 27.93943}
+  m_LocalPosition: {x: 55.83, y: -19.482197, z: 36.72}
   m_LocalScale: {x: 4.055889, y: 0.1, z: 10.928797}
-  m_Children: []
+  m_Children:
+  - {fileID: 903983141}
   m_Father: {fileID: 583232270}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5741,6 +5835,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1217873189}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1217873194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217873189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d8f31c040a1fd41a55cc78fc1b634b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posCarPitStop: {fileID: 903983141}
+  idPitStop: 0
 --- !u!1 &1218114262
 GameObject:
   m_ObjectHideFlags: 0
@@ -5830,6 +5938,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SR_Prop_Barrier_Concrete_02 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 102142, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 413498, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
       propertyPath: m_RootOrder
       value: 21
@@ -5916,6 +6028,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SR_Prop_Barrier_Concrete_02 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 102142, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 413498, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
       propertyPath: m_RootOrder
       value: 20
@@ -6001,6 +6117,10 @@ PrefabInstance:
     - target: {fileID: 102142, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
       propertyPath: m_Name
       value: SR_Prop_Barrier_Concrete_02 (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 102142, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 413498, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
       propertyPath: m_RootOrder
@@ -6361,6 +6481,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SR_Bld_Stands
       objectReference: {fileID: 0}
+    - target: {fileID: 128210, guid: b503952c01db86342b9b21b8c070bd7e, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 467572, guid: b503952c01db86342b9b21b8c070bd7e, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -6628,6 +6752,36 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 20.000008, y: 5.9905355e-15, z: 20.02764}
   m_Center: {x: 0, y: -4.3947119e-16, z: 10.013797}
+--- !u!1 &1394226787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1394226788}
+  m_Layer: 0
+  m_Name: PositionCar
+  m_TagString: Untagged
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1394226788
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1394226787}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.15039875, y: 5.221977, z: -0.03}
+  m_LocalScale: {x: 0.24655508, y: 10, z: 0.091501385}
+  m_Children: []
+  m_Father: {fileID: 542148992}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1404064586
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6772,7 +6926,7 @@ Transform:
   - {fileID: 61248135}
   - {fileID: 518083293}
   m_Father: {fileID: 47832886}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1420664876
 PrefabInstance:
@@ -7457,6 +7611,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SR_Prop_Barrier_Concrete_02 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 102142, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 413498, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
       propertyPath: m_RootOrder
       value: 24
@@ -7543,6 +7701,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SR_Prop_Barrier_Concrete_02 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 102142, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 413498, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
       propertyPath: m_RootOrder
       value: 19
@@ -7628,6 +7790,10 @@ PrefabInstance:
     - target: {fileID: 102142, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
       propertyPath: m_Name
       value: SR_Prop_Barrier_Concrete_02 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 102142, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 413498, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
       propertyPath: m_RootOrder
@@ -8195,6 +8361,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SR_Prop_Barrier_Concrete_02 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 102142, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 413498, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
       propertyPath: m_RootOrder
       value: 22
@@ -8556,6 +8726,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: hedge_mesh
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: a6c9b23e54b445f49b6249c416d43bf6, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a6c9b23e54b445f49b6249c416d43bf6, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -8731,6 +8905,10 @@ PrefabInstance:
     - target: {fileID: 128210, guid: b503952c01db86342b9b21b8c070bd7e, type: 3}
       propertyPath: m_Name
       value: SR_Bld_Stands (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128210, guid: b503952c01db86342b9b21b8c070bd7e, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 467572, guid: b503952c01db86342b9b21b8c070bd7e, type: 3}
       propertyPath: m_RootOrder
@@ -9010,6 +9188,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SR_Bld_Pitstop_Large
       objectReference: {fileID: 0}
+    - target: {fileID: 192480, guid: bb49c69e24b87cd4494366d40cc4b1ba, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 465690, guid: bb49c69e24b87cd4494366d40cc4b1ba, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -9084,6 +9266,10 @@ PrefabInstance:
     - target: {fileID: 102142, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
       propertyPath: m_Name
       value: SR_Prop_Barrier_Concrete_02 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 102142, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 413498, guid: 96385cbeb1adc64419c3c2550731dbfb, type: 3}
       propertyPath: m_RootOrder
