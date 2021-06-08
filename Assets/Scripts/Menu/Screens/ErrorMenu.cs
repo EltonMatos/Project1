@@ -12,7 +12,7 @@ namespace Menu.Screens
 
         private void OnEnable()
         {
-            ErrorInfo error = Launcher.Instance.PhotonErrorInfo;
+            ErrorInfo error = GameConnection.Instance.PhotonErrorInfo;
             if (error == null) return;
             
             errorText.text +=  "\n" + error.Info;

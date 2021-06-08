@@ -14,5 +14,10 @@ namespace Menu.Screens
         {
             nicknameText.text = PhotonNetwork.NickName;
         }
+
+        public void CreateOrJoinRoom(TMP_InputField roomInput)
+        {
+            GameConnection.Instance.CreateOrJoinRoom(roomInput.text);
+        }
     }
 }

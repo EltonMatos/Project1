@@ -1,70 +1,83 @@
-﻿using UnityEngine;
-
+﻿using System;
+using Menu;
+using Menu.Screens;
 using Photon.Pun;
 using Photon.Realtime;
-using UnityEngine.UI;
+using TMPro;
 
-public class GameConnection : MonoBehaviourPunCallbacks
+namespace Network
 {
-    private void Awake()
+    public class GameConnection : MonoBehaviourPunCallbacks
     {
-        Debug.Log("Connecting to server...");
-        //TODO get nickname from user
-        PhotonNetwork.LocalPlayer.NickName = "Fernando_" + Random.Range(1, 100);
-        PhotonNetwork.ConnectUsingSettings();
-    }
+        public static GameConnection Instance;
 
-    public override void OnConnectedToMaster()
-    {
-        Debug.Log("Connected to server!");
+        public ErrorInfo PhotonErrorInfo;
 
-        if (!PhotonNetwork.InLobby)
+        public Action<Player> OnPhotonPlayerJoinedRoom;
+        public Action OnPhotonMasterClientSwitched;
+
+        private void Awake()
         {
-            Debug.Log("Entering lobby...");
+            Instance = this;
+        }
+
+        /* Functional methods */
+        public void ConnectToLobby(string nicknameName)
+        {
+            if (string.IsNullOrEmpty(nicknameName)) return;
+            
+            PhotonNetwork.LocalPlayer.NickName = nicknameName;
+            PhotonNetwork.ConnectUsingSettings();
+            MenuManager.Instance.OpenMenu("Loading");
+        }
+        
+        public void CreateOrJoinRoom(string roomName)
+        {
+            if (string.IsNullOrEmpty(roomName)) return;
+
+            PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions { MaxPlayers = 4 }, TypedLobby.Default);
+            MenuManager.Instance.OpenMenu("Loading");
+        }
+
+        /* Callback methods */
+        public override void OnConnectedToMaster()
+        {
+            print("Connected to master");
+            PhotonNetwork.AutomaticallySyncScene = true;
             PhotonNetwork.JoinLobby();
         }
-    }
 
-    public override void OnJoinedLobby()
-    {
-        Debug.Log("Connected to lobby...");
+        public override void OnMasterClientSwitched(Player newMasterClient)
+        {
+            OnPhotonMasterClientSwitched?.Invoke();
+        }
 
-        Debug.Log("Joining test room...");
-        //TODO get room name from screen
-        PhotonNetwork.JoinOrCreateRoom("test", new RoomOptions { MaxPlayers = 4 }, TypedLobby.Default);
-    }
+        public override void OnJoinedLobby()
+        {
+            print("Connected to lobby");
+            MenuManager.Instance.OpenMenu("Lobby");
+        }
+        
+        public override void OnJoinedRoom()
+        {
+            print("You joined " + PhotonNetwork.CurrentRoom.Name + " room with the username: " + PhotonNetwork.LocalPlayer.NickName);
+            MenuManager.Instance.OpenMenu("Room");
+        }
 
-    public override void OnJoinRoomFailed(short returnCode, string message)
-    {
-        Debug.Log("Failed to connect to lobby. Code: " + returnCode + ", message: " + message);
-    }
+        public override void OnPlayerEnteredRoom(Player newPlayer)
+        {
+            OnPhotonPlayerJoinedRoom?.Invoke(newPlayer);
+        }
 
-    public override void OnJoinedRoom()
-    {
-        Debug.Log("You joined test room with the username: " + PhotonNetwork.LocalPlayer.NickName);
-        //TODO get a better way of doing this, to manage the players coming from menu
-        Transform carPosition = GameManager.Instance.carPositions[PhotonNetwork.PlayerListOthers.Length];
-        PhotonNetwork.Instantiate("Player", carPosition.position, carPosition.rotation);
-    }
+        public override void OnLeftRoom()
+        {
+            MenuManager.Instance.OpenMenu("Lobby");
+        }
 
-    public override void OnLeftRoom()
-    {
-        Debug.Log("You left the test room.");
-        //TODO destroy player object
-    }
-
-    public override void OnPlayerEnteredRoom(Player player)
-    {
-        Debug.Log("Player " + player.NickName + " joined the test room!");
-    }
-
-    public override void OnPlayerLeftRoom(Player player)
-    {
-        Debug.Log("Player " + player.NickName + " left the test room.");
-    }
-
-    public override void OnErrorInfo(ErrorInfo errorInfo)
-    {
-        Debug.Log("Something went wrong: " + errorInfo.Info);
+        public override void OnErrorInfo(ErrorInfo errorInfo)
+        {
+            PhotonErrorInfo = errorInfo;
+            MenuManager.Instance.OpenMenu("Error");
+        }
     }
 }

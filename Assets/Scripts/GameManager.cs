@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    private bool isRunning = true;
+    private bool _isRunning = true;
         
     public float timer = 0;
     public bool checkLap;
@@ -27,17 +28,21 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
-    // Start is called before the first frame update
     private void Start()
     {
         checkLap = false;
         checkOldLap = false;        
         lapsMax = 3;
         completedLaps = -1;        
-        //CreateCar();
+        
+        CreateCar();
     }
 
-    // Update is called once per frame
+    private void CreateCar()
+    {
+        //instantiate cars
+    }
+
     private void Update()
     {
         UpdateStopwatch();
@@ -45,7 +50,7 @@ public class GameManager : MonoBehaviour
 
     private void UpdateStopwatch()
     {
-        if (isRunning && checkLap)
+        if (_isRunning && checkLap)
         {
             timer += Time.deltaTime;            
             timePlayer = Mathf.Round(timer);
@@ -71,13 +76,6 @@ public class GameManager : MonoBehaviour
             //Camera.main = cameraTwo;
         }
     }
-
-    //TODO this can be removed, it will be created at the network manager
-    //private void CreateCar()
-    //{
-    //    GameObject pl = Instantiate(playerCar, posCar1.position, Quaternion.identity) as GameObject;
-    //    pl.transform.Rotate(new Vector3(0, 180, 0), 180f);
-    //}
 
     public void FinishRace()
     {
