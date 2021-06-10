@@ -6,19 +6,9 @@ public class PitStop : MonoBehaviour
 {
     public Transform posCarPitStop;
 
-    public int idPitStop;
+    public int idPitStop; 
     
-    
-    void Update()
-    {
-        
-    }
+   
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {            
-            
-        }
-    }
+    
 }

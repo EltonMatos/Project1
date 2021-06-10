@@ -7,20 +7,13 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    private bool _isRunning = true;
-        
-    public float timer = 0;
-    public bool checkLap;
-    public bool checkOldLap;
-    public float timePlayer;
-    
     public int lapsMax;
-    public int completedLaps;
 
     public Camera mainCamera, cameraOne, cameraTwo;
 
-    public GameObject playerCar;
-    public Transform[] carPositions;   
+    public GameObject[] playerCar;
+    private PlayerCar player;
+    //public Transform[] carPositions;   
 
 
     private void Awake()
@@ -30,43 +23,18 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        checkLap = false;
-        checkOldLap = false;        
-        lapsMax = 3;
-        completedLaps = -1;        
-        
-        CreateCar();
-    }
-
-    private void CreateCar()
-    {
-        //instantiate cars
-    }
+        player = GetComponent<PlayerCar>();
+        lapsMax = 2;  
+    }    
 
     private void Update()
     {
-        UpdateStopwatch();
-    }
+        //PositionCarRace();
+    }   
 
-    private void UpdateStopwatch()
+    public void AddCarRacer()
     {
-        if (_isRunning && checkLap)
-        {
-            timer += Time.deltaTime;            
-            timePlayer = Mathf.Round(timer);
-
-            /*if (checkLap)
-            {
-                isRunning = false;
-                checkLap = false;
-                timePlayer = "0";                
-            }*/
-        }        
-    }
-
-    public float ReturnTime()
-    {
-        return timePlayer;
+        //adicionar players na corrida
     }
 
     public void TypeCamera()
@@ -77,12 +45,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void FinishRace()
+    public void PositionCarRace()
     {
-        if(completedLaps > lapsMax)
+        for (int i = 0; i < playerCar.Length; i++)
         {
-            print("Corrida terminou");
+            Debug.Log("Position: " + i+1 + " Car number: " + player.idCar);
         }
     }
+
+    
 }
  

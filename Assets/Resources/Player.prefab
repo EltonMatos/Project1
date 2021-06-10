@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 3356322521505149896}
   - component: {fileID: 3083568260293046341}
   - component: {fileID: 5656873642221802415}
+  - component: {fileID: 2726645003699279889}
   - component: {fileID: 3356322521505149897}
   - component: {fileID: 3724872719061583636}
   - component: {fileID: 6633683337589362060}
@@ -382,6 +383,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2726645003699279889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3356322521418067153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47ea0c626c718c743ae297eb77c6d22d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 0
+  checkLap: 0
+  timePlayer: 0
+  lapsMax: 0
+  completedLaps: 0
 --- !u!114 &3356322521505149897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,6 +414,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   photonView: {fileID: 3724872719061583636}
   statusPlayer: 0
+  idCar: 0
+  posCarPitStop: {fileID: 0}
   forceFinal: {x: 0, y: 0, z: 0}
   wheelsCar:
   - {fileID: 678209754935919659}

@@ -18,6 +18,8 @@ public class PlayerCar : MonoBehaviour
 {
     public PhotonView photonView;
 
+    private CarManager car;
+
     WheelManager[] wheelGuide;
 
     public StatusCar statusPlayer;
@@ -48,10 +50,6 @@ public class PlayerCar : MonoBehaviour
 
     public float somPitch;
 
-    private int laps;
-    private float[] TimeLaps;
-    //private int posLabel = 20;
-
     public float fuelCar;
     public float damagedCar;
 
@@ -64,14 +62,11 @@ public class PlayerCar : MonoBehaviour
 
     public AnimationCurve curveWheel;
 
-    private bool pitStop;
-
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        //rb.centerOfMass = massCenter.position;
-        audioCar.clip = somCar;
-        pitStop = false;
+        car = GetComponent<CarManager>();
+        audioCar.clip = somCar;        
 
         wheelGuide = new WheelManager[wheelsCar.Length];
         fuelCar = 100;
@@ -95,23 +90,11 @@ public class PlayerCar : MonoBehaviour
         StatusDamagedCar();
     }
 
-    public void AddLaps()
-    {
-        /*for (int i = 0; i < GameManager.Instance.lapsMax; i++)
-        {
-            GUI.Label(new Rect(40, posLabel, 128, 32), laps + ": " +  "Timer: " + GameManager.Instance.ReturnTime().ToString());
-            posLabel += 20;
-        }*/
-
-        laps++;
-        Debug.Log("Volta atual: " + laps);
-    }
-
     private void FixedUpdate()
     {
         if (statusPlayer != StatusCar.PitStop) DriveCar();
         if (statusPlayer == StatusCar.PitStop || statusPlayer == StatusCar.Broken) SlowDownCar();
-        if (statusPlayer == StatusCar.LockedCar) StopCar();
+        if (statusPlayer == StatusCar.LockedCar || statusPlayer == StatusCar.FinishedRace) StopCar();
 
         /*if (veloKMH > 1 && pitStop == false)
         {
@@ -125,8 +108,9 @@ public class PlayerCar : MonoBehaviour
     }
 
     private void DriveCar()
-    {        
-        //guiar o carro        
+    {
+        //guiar o carro
+        //statusPlayer = StatusCar.Drive;
         for (int i = 0; i < wheelsCar.Length; i++)
         {
             wheelsCar[i].steerAngle = driveCar * curveWheel.Evaluate(veloKMH);
@@ -232,7 +216,7 @@ public class PlayerCar : MonoBehaviour
             wheelsCar[i].steerAngle = 0f;
             wheelsCar[i].motorTorque = 0f;
         }
-        StartCoroutine(timePitStop());
+        if(statusPlayer == StatusCar.LockedCar)StartCoroutine(timePitStop());
     }
 
     private void UpdateStatusCar()
@@ -262,16 +246,17 @@ public class PlayerCar : MonoBehaviour
         if(fuelCar == 100 && damagedCar <= 0) statusPlayer = StatusCar.Drive;
         yield return new WaitForSeconds(3);
         if (statusPlayer == StatusCar.LockedCar)
-        {
+        {            
             if (fuelCar < 100)
-            {                
+            {
                 fuelCar += 5;
             }
             if (damagedCar > 0)
-            {                
+            {
                 damagedCar -= 5;
             }
-        }        
+        }
+        //StopCoroutine(timePitStop());        
     }
 
     private void PitStopCar()
@@ -286,27 +271,25 @@ public class PlayerCar : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("PitStopEntrance"))
-        {
-            pitStop = true;
+        {            
             statusPlayer = StatusCar.PitStop;
         }        
         if (other.gameObject.CompareTag("PitStop"))
         {
             idPs = other.GetComponentInChildren<PitStop>().idPitStop;
-            Debug.Log("idPs: " + idPs);
+            //Debug.Log("idPs: " + idPs);
             PitStopCar();            
         }
         if (other.gameObject.CompareTag("Checkpoint"))
         {
-            fuelCar -= 10;
+            if(fuelCar >=0)fuelCar -= 10;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("PitStopExit"))
-        {
-            pitStop = false;
+        {            
             statusPlayer = StatusCar.Drive;
         }
     }
@@ -333,7 +316,7 @@ public class PlayerCar : MonoBehaviour
         GUI.Label(new Rect(20, 100, 128, 32), "Fuel: " + fuelCar);
         GUI.Label(new Rect(20, 120, 128, 32), "Damaged: " + damagedCar);
         GUI.Label(new Rect(20, 140, 128, 32), "StatusCar: " + statusPlayer);
-        GUI.Label(new Rect(20, 160, 128, 32), "Timer: " + GameManager.Instance.ReturnTime().ToString()); 
+        GUI.Label(new Rect(20, 160, 128, 32), "Timer: " + car.ReturnTime().ToString()); 
        
     }
 
