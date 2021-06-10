@@ -10,9 +10,8 @@ public class GameManager : MonoBehaviour
     public int lapsMax;
 
     public Camera mainCamera, cameraOne, cameraTwo;
-
-    public GameObject[] playerCar;
-    private PlayerCar player;
+    
+    public PlayerCar[] player;
     //public Transform[] carPositions;   
 
 
@@ -23,7 +22,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        player = GetComponent<PlayerCar>();
+        //player = GetComponent<PlayerCar>();
         lapsMax = 2;  
     }    
 
@@ -47,9 +46,9 @@ public class GameManager : MonoBehaviour
 
     public void PositionCarRace()
     {
-        for (int i = 0; i < playerCar.Length; i++)
+        for (int i = 0; i < player.Length; i++)
         {
-            Debug.Log("Position: " + i+1 + " Car number: " + player.idCar);
+            Debug.Log("Position: " + i+1 + " Car number: " + player[i].idCar);
         }
     }
 

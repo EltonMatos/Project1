@@ -620,7 +620,7 @@ WheelCollider:
     m_ExtremumValue: 1.6
     m_AsymptoteSlip: 0.35
     m_AsymptoteValue: 1.1
-    m_Stiffness: 3
+    m_Stiffness: 5
   m_Enabled: 1
 --- !u!114 &5512050490628426297
 MonoBehaviour:
@@ -747,7 +747,7 @@ WheelCollider:
     m_ExtremumValue: 1.6
     m_AsymptoteSlip: 0.35
     m_AsymptoteValue: 1.1
-    m_Stiffness: 3
+    m_Stiffness: 5
   m_Enabled: 1
 --- !u!114 &1510285769891848514
 MonoBehaviour:
@@ -874,7 +874,7 @@ WheelCollider:
     m_ExtremumValue: 1.6
     m_AsymptoteSlip: 0.35
     m_AsymptoteValue: 1.1
-    m_Stiffness: 3
+    m_Stiffness: 5
   m_Enabled: 1
 --- !u!114 &7397417700908537582
 MonoBehaviour:
@@ -1001,7 +1001,7 @@ WheelCollider:
     m_ExtremumValue: 1.6
     m_AsymptoteSlip: 0.35
     m_AsymptoteValue: 1.1
-    m_Stiffness: 3
+    m_Stiffness: 5
   m_Enabled: 1
 --- !u!114 &166139745939099209
 MonoBehaviour:

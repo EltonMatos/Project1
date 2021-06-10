@@ -87,7 +87,11 @@ public class PlayerCar : MonoBehaviour
         }
 
         UpdateStatusCar();
-        StatusDamagedCar();
+        if (statusPlayer != StatusCar.LockedCar)
+        {
+            StatusFuelCar();
+            StatusDamagedCar();
+        }
     }
 
     private void FixedUpdate()
@@ -109,8 +113,7 @@ public class PlayerCar : MonoBehaviour
 
     private void DriveCar()
     {
-        //guiar o carro
-        //statusPlayer = StatusCar.Drive;
+        //guiar o carro        
         for (int i = 0; i < wheelsCar.Length; i++)
         {
             wheelsCar[i].steerAngle = driveCar * curveWheel.Evaluate(veloKMH);
@@ -137,7 +140,7 @@ public class PlayerCar : MonoBehaviour
         }
 
         //velocidade em RPM
-        veloKMH = rb.velocity.magnitude * 3.6f;
+        veloKMH = rb.velocity.magnitude  * 2.5f; //3.6f
         rpm = veloKMH * raceChenges[changeCurrent] * 15f;
 
         if (rpm > maxRPM)
@@ -165,7 +168,7 @@ public class PlayerCar : MonoBehaviour
             acceleration = 0;
         }
 
-        forceFinal = transform.forward * (maxTorque / (changeCurrent + 1) + maxTorque / 1.25f) * acceleration;
+        forceFinal = transform.forward * (maxTorque / (changeCurrent + 1) + maxTorque / 1f) * acceleration;
         rb.AddForce(forceFinal);
 
         //add som na aceleração do carro
@@ -183,24 +186,32 @@ public class PlayerCar : MonoBehaviour
 
     private void SlowDownCar()
     {
+        if(veloKMH > 45f && fuelCar <= 0)
+        {
+            rb.AddForce(-transform.forward * forceStop);
+        }
+        if (veloKMH > 30f && damagedCar >= 30)
+        {
+            rb.AddForce(-transform.forward * forceStop);
+        }
         if (statusPlayer != StatusCar.LockedCar)
         {
             for (int i = 0; i < wheelsCar.Length; i++)
             {
                 wheelsCar[i].steerAngle = driveCar * curveWheel.Evaluate(veloKMH);
-                wheelsCar[i].motorTorque = 1f;
+                wheelsCar[i].motorTorque = 0.3f;
             }
-            veloKMH = 30f;
-            rpm = 2000;
+            veloKMH = rb.velocity.magnitude * 2.5f;
+            rpm = veloKMH * raceChenges[changeCurrent] * 15f;
 
-            if (acceleration < -0.2f)
+            if (acceleration < -0.8f)
             {
                 rb.AddForce(-transform.forward * forceStop);
-                rb.AddTorque((transform.up * instabilityHang * veloKMH / 60f) * driveCar);
+                rb.AddTorque((transform.up * instabilityHang * veloKMH / 200f) * driveCar);
                 acceleration = 0;
             }
 
-            forceFinal = transform.forward * (2000 / (changeCurrent + 1) + 2000 / 1.25f) * acceleration;
+            forceFinal = transform.forward * (3000 / (changeCurrent + 1) + 3000 / 10f) * acceleration;            
             rb.AddForce(forceFinal);
 
             audioCar.pitch = rpm / somPitch;
@@ -220,23 +231,23 @@ public class PlayerCar : MonoBehaviour
     }
 
     private void UpdateStatusCar()
-    {
+    {        
         UiManager.Instance.sliderBarValue = fuelCar;
         UiManager.Instance.statusCar.text = statusPlayer.ToString();
     }
 
     private void StatusDamagedCar()
+    {        
+        if(damagedCar >= 30 && statusPlayer != StatusCar.PitStop)
+        {
+            statusPlayer = StatusCar.Broken;
+        }
+    }
+
+    private void StatusFuelCar()
     {
-        if(damagedCar >= 30)
-        {
-
-        }
-        if(damagedCar >= 40)
-        {
-
-        }
-        if(damagedCar >= 60)
-        {
+        if (fuelCar <= 0 && statusPlayer != StatusCar.PitStop)
+        {            
             statusPlayer = StatusCar.Broken;
         }
     }

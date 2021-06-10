@@ -2300,11 +2300,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3356322521505149897, guid: dd994fa10d1961948bb60d8052f9d348,
         type: 3}
-      propertyPath: idCar
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3356322521505149897, guid: dd994fa10d1961948bb60d8052f9d348,
-        type: 3}
       propertyPath: posCarPitStop
       value: 
       objectReference: {fileID: 903983141}
@@ -2315,6 +2310,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd994fa10d1961948bb60d8052f9d348, type: 3}
+--- !u!114 &459162824 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3356322521505149897, guid: dd994fa10d1961948bb60d8052f9d348,
+    type: 3}
+  m_PrefabInstance: {fileID: 459162823}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 512ba6c7aab555145974b1f61d278608, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &469900282
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5453,18 +5460,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa5fd88040ea194e81b80fefb82bd79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 0
-  checkLap: 0
-  checkOldLap: 0
-  timePlayer: 0
   lapsMax: 10
-  completedLaps: 0
   mainCamera: {fileID: 0}
   cameraOne: {fileID: 0}
   cameraTwo: {fileID: 0}
-  playerCar: {fileID: 3356322521418067153, guid: dd994fa10d1961948bb60d8052f9d348,
-    type: 3}
-  carPositions: []
+  player:
+  - {fileID: 459162824}
 --- !u!4 &1141124923
 Transform:
   m_ObjectHideFlags: 0
