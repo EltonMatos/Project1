@@ -58,15 +58,21 @@ public class CarManager : MonoBehaviour
         if (completedLaps > GameManager.Instance.lapsMax)
         {
             print("Corrida terminou");
-            player.statusPlayer = StatusCar.FinishedRace;
+            StartCoroutine(FinishedRacer());
         }
+    }
+
+    IEnumerator FinishedRacer()
+    {
+        yield return new WaitForSeconds(2);
+        player.statusPlayer = StatusCar.FinishedRace;
     }
 
     void ListTimes()
     {
         for(int i = 0; i < listTimeLaps.Count; i++)
         {
-            Debug.Log("Lap: " + completedLaps + "Time: " + listTimeLaps[i].ToString());
+            Debug.Log("Lap: " + completedLaps + " Time: " + listTimeLaps[i].ToString());
         }
     }
 }

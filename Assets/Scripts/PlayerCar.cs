@@ -96,19 +96,14 @@ public class PlayerCar : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (statusPlayer != StatusCar.PitStop) DriveCar();
+        if (statusPlayer == StatusCar.Drive || statusPlayer == StatusCar.Stop) DriveCar();
         if (statusPlayer == StatusCar.PitStop || statusPlayer == StatusCar.Broken) SlowDownCar();
         if (statusPlayer == StatusCar.LockedCar || statusPlayer == StatusCar.FinishedRace) StopCar();
-
-        /*if (veloKMH > 1 && pitStop == false)
-        {
-            statusPlayer = StatusCar.Drive;
-        }
-        if (veloKMH <= 1 && statusPlayer != StatusCar.Broken)
+        
+        if (veloKMH <= 1 && statusPlayer != StatusCar.Broken && statusPlayer != StatusCar.LockedCar)
         {
             statusPlayer = StatusCar.Stop;
-        }*/
-
+        }
     }
 
     private void DriveCar()
@@ -138,6 +133,8 @@ public class PlayerCar : MonoBehaviour
                 }
             }*/
         }
+
+        statusPlayer = StatusCar.Drive;
 
         //velocidade em RPM
         veloKMH = rb.velocity.magnitude  * 2.5f; //3.6f
@@ -185,33 +182,30 @@ public class PlayerCar : MonoBehaviour
     }
 
     private void SlowDownCar()
-    {
-        if(veloKMH > 45f && fuelCar <= 0)
+    {        
+        if (veloKMH > 40f)
         {
             rb.AddForce(-transform.forward * forceStop);
-        }
-        if (veloKMH > 30f && damagedCar >= 30)
-        {
-            rb.AddForce(-transform.forward * forceStop);
+            //acceleration = 1;
         }
         if (statusPlayer != StatusCar.LockedCar)
-        {
+        {            
             for (int i = 0; i < wheelsCar.Length; i++)
             {
                 wheelsCar[i].steerAngle = driveCar * curveWheel.Evaluate(veloKMH);
-                wheelsCar[i].motorTorque = 0.3f;
+                wheelsCar[i].motorTorque = 1f;
             }
             veloKMH = rb.velocity.magnitude * 2.5f;
             rpm = veloKMH * raceChenges[changeCurrent] * 15f;
 
-            if (acceleration < -0.8f)
+            if (acceleration < -0.2f)
             {
                 rb.AddForce(-transform.forward * forceStop);
-                rb.AddTorque((transform.up * instabilityHang * veloKMH / 200f) * driveCar);
+                rb.AddTorque((transform.up * instabilityHang * veloKMH / 60f) * driveCar);
                 acceleration = 0;
             }
 
-            forceFinal = transform.forward * (3000 / (changeCurrent + 1) + 3000 / 10f) * acceleration;            
+            forceFinal = transform.forward * (maxTorque / (changeCurrent + 1) + maxTorque / 1f) * acceleration;            
             rb.AddForce(forceFinal);
 
             audioCar.pitch = rpm / somPitch;
@@ -228,6 +222,7 @@ public class PlayerCar : MonoBehaviour
             wheelsCar[i].motorTorque = 0f;
         }
         if(statusPlayer == StatusCar.LockedCar)StartCoroutine(timePitStop());
+        audioCar.volume = 0;
     }
 
     private void UpdateStatusCar()
@@ -254,7 +249,8 @@ public class PlayerCar : MonoBehaviour
 
     IEnumerator timePitStop()
     {
-        if(fuelCar == 100 && damagedCar <= 0) statusPlayer = StatusCar.Drive;
+        audioCar.volume = 0;
+        if (fuelCar == 100 && damagedCar <= 0 && statusPlayer != StatusCar.FinishedRace) statusPlayer = StatusCar.Drive;
         yield return new WaitForSeconds(3);
         if (statusPlayer == StatusCar.LockedCar)
         {            
@@ -265,9 +261,9 @@ public class PlayerCar : MonoBehaviour
             if (damagedCar > 0)
             {
                 damagedCar -= 5;
-            }
+            }            
         }
-        //StopCoroutine(timePitStop());        
+        audioCar.volume = 1;                
     }
 
     private void PitStopCar()
@@ -287,8 +283,7 @@ public class PlayerCar : MonoBehaviour
         }        
         if (other.gameObject.CompareTag("PitStop"))
         {
-            idPs = other.GetComponentInChildren<PitStop>().idPitStop;
-            //Debug.Log("idPs: " + idPs);
+            idPs = other.GetComponentInChildren<PitStop>().idPitStop;            
             PitStopCar();            
         }
         if (other.gameObject.CompareTag("Checkpoint"))
