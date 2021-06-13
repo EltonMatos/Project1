@@ -13,9 +13,10 @@ namespace Network
         private void OnEnable()
         {
             var pos = GameSetup.Instance.gridPositions;
-            if (pv.IsMine)
+            int playerRoomId = PhotonRoom.Instance.GetId(PhotonNetwork.LocalPlayer);
+            if (pv.IsMine && playerRoomId < 999)
             {
-                PhotonNetwork.Instantiate("Player", pos[0].position, pos[0].rotation);
+                PhotonNetwork.Instantiate("Player", pos[playerRoomId].position, pos[playerRoomId].rotation);
             }
         }
     }

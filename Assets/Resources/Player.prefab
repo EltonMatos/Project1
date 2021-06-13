@@ -415,7 +415,6 @@ MonoBehaviour:
   photonView: {fileID: 3724872719061583636}
   statusPlayer: 0
   idCar: 0
-  posCarPitStop: {fileID: 0}
   forceFinal: {x: 0, y: 0, z: 0}
   wheelsCar:
   - {fileID: 678209754935919659}

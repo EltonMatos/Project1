@@ -4,7 +4,6 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Menu.Screens
 {
@@ -23,8 +22,7 @@ namespace Menu.Screens
         {
             GameConnection.Instance.OnPhotonPlayerJoinedRoom += OnPhotonPlayerJoinedRoom;
             GameConnection.Instance.OnPhotonMasterClientSwitched += OnPhotonMasterClientSwitched;
-            // SceneManager.sceneLoaded += OnSceneLoaded;
-            roomNameText.text = PhotonNetwork.CurrentRoom.Name;
+            roomNameText.text = "Room: " + PhotonNetwork.CurrentRoom.Name;
             
             foreach (Player player in PhotonNetwork.PlayerList)
             {
@@ -53,22 +51,20 @@ namespace Menu.Screens
         
         public void StartGame()
         {
-            //TODO pick track
             PhotonNetwork.LoadLevel(_raceScene);
+        }
+
+        public void ChangeColor()
+        {
+            //get list of available colors
+            //run RPC to update every player
         }
 
         private void OnPhotonPlayerJoinedRoom(Player newPlayer)
         {
+            PhotonRoom.Instance.AddPlayer(newPlayer);
             Instantiate(playerListItemPrefab, playerListContent).GetComponent<PlayerListItem>().Setup(newPlayer);
         }
         
-        // private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
-        // {
-        //     if (scene.name == _raceScene)
-        //     {
-        //         var transform1 = transform;
-        //         PhotonNetwork.Instantiate("PhotonNetworkPlayerPrefab", transform1.position, transform1.rotation);
-        //     }
-        // }
     }
 }

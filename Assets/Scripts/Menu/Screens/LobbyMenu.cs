@@ -12,7 +12,7 @@ namespace Menu.Screens
 
         private void OnEnable()
         {
-            nicknameText.text = PhotonNetwork.NickName;
+            nicknameText.text = "Your nickname is: " + PhotonNetwork.NickName;
         }
 
         public void CreateOrJoinRoom(TMP_InputField roomInput)

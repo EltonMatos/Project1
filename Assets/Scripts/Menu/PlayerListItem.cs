@@ -1,6 +1,7 @@
 ﻿using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using UnityEngine;
 
 namespace Menu
 {
@@ -13,6 +14,7 @@ namespace Menu
         {
             _player = player;
             text.text = player.NickName;
+            text.color = Color.HSVToRGB(Random.Range(0f, 1f), 1f, 1f);
         }
 
         public override void OnPlayerLeftRoom(Player otherPlayer)

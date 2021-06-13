@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Network;
 using Photon.Pun;
 using UnityEngine;
 
@@ -25,8 +26,6 @@ public class PlayerCar : MonoBehaviour
     public StatusCar statusPlayer;
 
     public int idCar;
-    private int idPs;
-    public Transform posCarPitStop;
 
     private float acceleration = 0f;
     private float driveCar = 0f;
@@ -75,6 +74,12 @@ public class PlayerCar : MonoBehaviour
         for (int i = 0; i < wheelsCar.Length; i++)
         {
             wheelGuide[i] = wheelsCar[i].GetComponent<WheelManager>();
+        }
+        
+        int playerRoomId = PhotonRoom.Instance.GetId(PhotonNetwork.LocalPlayer);
+        if (playerRoomId < 999)
+        {
+            idCar = playerRoomId;
         }
     }
 
@@ -266,11 +271,11 @@ public class PlayerCar : MonoBehaviour
         audioCar.volume = 1;                
     }
 
-    private void PitStopCar()
+    private void PitStopCar(PitStop pitStop)
     {       
-        if (idCar == idPs && statusPlayer == StatusCar.PitStop)
+        if (idCar == pitStop.idPitStop && statusPlayer == StatusCar.PitStop)
         {
-            transform.position = posCarPitStop.position;
+            transform.position = pitStop.gameObject.transform.position;
             statusPlayer = StatusCar.LockedCar;
         }
     }
@@ -283,8 +288,8 @@ public class PlayerCar : MonoBehaviour
         }        
         if (other.gameObject.CompareTag("PitStop"))
         {
-            idPs = other.GetComponentInChildren<PitStop>().idPitStop;            
-            PitStopCar();            
+            PitStop pitStop = other.GetComponentInChildren<PitStop>();         
+            PitStopCar(pitStop);            
         }
         if (other.gameObject.CompareTag("Checkpoint"))
         {
