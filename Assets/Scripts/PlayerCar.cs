@@ -76,11 +76,11 @@ public class PlayerCar : MonoBehaviour
             wheelGuide[i] = wheelsCar[i].GetComponent<WheelManager>();
         }
         
-        int playerRoomId = PhotonRoom.Instance.GetId(PhotonNetwork.LocalPlayer);
+        /*int playerRoomId = PhotonRoom.Instance.GetId(PhotonNetwork.LocalPlayer);
         if (playerRoomId < 999)
         {
             idCar = playerRoomId;
-        }
+        }*/
     }
 
     private void Update()
@@ -190,7 +190,7 @@ public class PlayerCar : MonoBehaviour
     {        
         if (veloKMH > 40f)
         {
-            rb.AddForce(-transform.forward * forceStop);
+            rb.AddForce(-transform.forward * 10000);
             //acceleration = 1;
         }
         if (statusPlayer != StatusCar.LockedCar)
