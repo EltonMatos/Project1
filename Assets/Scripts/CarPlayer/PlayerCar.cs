@@ -51,6 +51,8 @@ public class PlayerCar : MonoBehaviour
 
     public float fuelCar;
     public float damagedCar;
+    public float turbo;
+    private bool pressTurbo = false;
 
     public AudioClip somCar;
     public AudioClip somKid;
@@ -70,17 +72,18 @@ public class PlayerCar : MonoBehaviour
         wheelGuide = new WheelManager[wheelsCar.Length];
         fuelCar = 100;
         damagedCar = 0;
+        turbo = 100;
 
         for (int i = 0; i < wheelsCar.Length; i++)
         {
             wheelGuide[i] = wheelsCar[i].GetComponent<WheelManager>();
         }
         
-        /*int playerRoomId = PhotonRoom.Instance.GetId(PhotonNetwork.LocalPlayer);
+        int playerRoomId = PhotonRoom.Instance.GetId(PhotonNetwork.LocalPlayer);
         if (playerRoomId < 999)
         {
             idCar = playerRoomId;
-        }*/
+        }
     }
 
     private void Update()
@@ -88,14 +91,27 @@ public class PlayerCar : MonoBehaviour
         if (photonView.IsMine)
         {
             driveCar = Input.GetAxis("Horizontal");
-            acceleration = Input.GetAxis("Vertical");
-        }
+            acceleration = Input.GetAxis("Vertical");            
 
-        UpdateStatusCar();
-        if (statusPlayer != StatusCar.LockedCar)
-        {
-            StatusFuelCar();
-            StatusDamagedCar();
+            if (Input.GetKeyDown(KeyCode.Space) && turbo > 0)
+            {
+                pressTurbo = true;
+                TurboCar();
+            }
+            else if (Input.GetKeyUp(KeyCode.Space))
+            {
+                pressTurbo = false;
+                TurboCar();
+            }
+
+            
+            UpdateStatusCar();
+
+            if (statusPlayer != StatusCar.LockedCar)
+            {
+                StatusFuelCar();
+                StatusDamagedCar();
+            }
         }
     }
 
@@ -142,7 +158,7 @@ public class PlayerCar : MonoBehaviour
         statusPlayer = StatusCar.Drive;
 
         //velocidade em RPM
-        veloKMH = rb.velocity.magnitude  * 2.5f; //3.6f
+        veloKMH = rb.velocity.magnitude  * 2.5f;
         rpm = veloKMH * raceChenges[changeCurrent] * 15f;
 
         if (rpm > maxRPM)
@@ -217,6 +233,22 @@ public class PlayerCar : MonoBehaviour
         }
     }
 
+    private void TurboCar()
+    {
+        while (pressTurbo)
+        {
+            if (turbo <= 1) pressTurbo = false;
+            turbo -= 1;
+            rb.AddForce(transform.forward * 5000);
+        }
+
+        if(pressTurbo == false)
+        {
+            rb.AddForce(-transform.forward * 5000);
+        }
+        
+    }
+
     private void StopCar()
     {
         rb.velocity = Vector3.zero;
@@ -226,7 +258,7 @@ public class PlayerCar : MonoBehaviour
             wheelsCar[i].steerAngle = 0f;
             wheelsCar[i].motorTorque = 0f;
         }
-        if(statusPlayer == StatusCar.LockedCar)StartCoroutine(timePitStop());
+        if(statusPlayer == StatusCar.LockedCar)StartCoroutine(TimePitStop());
         audioCar.volume = 0;
     }
 
@@ -252,7 +284,7 @@ public class PlayerCar : MonoBehaviour
         }
     }
 
-    IEnumerator timePitStop()
+    IEnumerator TimePitStop()
     {
         audioCar.volume = 0;
         if (fuelCar == 100 && damagedCar <= 0 && statusPlayer != StatusCar.FinishedRace) statusPlayer = StatusCar.Drive;
@@ -326,8 +358,9 @@ public class PlayerCar : MonoBehaviour
 
         GUI.Label(new Rect(20, 100, 128, 32), "Fuel: " + fuelCar);
         GUI.Label(new Rect(20, 120, 128, 32), "Damaged: " + damagedCar);
-        GUI.Label(new Rect(20, 140, 128, 32), "StatusCar: " + statusPlayer);
-        GUI.Label(new Rect(20, 160, 128, 32), "Timer: " + car.ReturnTime().ToString()); 
+        GUI.Label(new Rect(20, 140, 128, 32), "Turbo: " + turbo);
+        GUI.Label(new Rect(20, 160, 128, 32), "StatusCar: " + statusPlayer);
+        GUI.Label(new Rect(20, 180, 128, 32), "Timer: " + car.ReturnTime().ToString()); 
        
     }
 
