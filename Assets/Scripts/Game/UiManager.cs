@@ -12,6 +12,9 @@ public class UiManager : MonoBehaviour
 
     public Text statusCar;
 
+    public Image[] imgTurbo;
+    public int qntTurbo;
+
     private void Awake()
     {
         Instance = this;
@@ -21,6 +24,7 @@ public class UiManager : MonoBehaviour
     {
         fuelBar.minValue = 0;
         fuelBar.value = fuelBar.minValue;
+        qntTurbo = 0;
     }
 
     private void Update()
@@ -32,15 +36,13 @@ public class UiManager : MonoBehaviour
     //get fuel in the correct way
     private void FuelControl()
     {
-        fuelBar.value = sliderBarValue;
-        if (fuelBar.value <= 0)
-        {
-            //PlayerCar.Instance.statusPlayer = StatusCar.Broken;
-        }
+        fuelBar.value = sliderBarValue;        
     }
 
-    private void StatusCar()
-    {
-
+    public void StatusTurboCar()
+    {        
+        if (qntTurbo == 3) return;
+        imgTurbo[qntTurbo].enabled = false;
+        qntTurbo += 1;        
     }
 }

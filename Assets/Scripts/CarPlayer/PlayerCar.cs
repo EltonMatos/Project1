@@ -51,8 +51,8 @@ public class PlayerCar : MonoBehaviour
 
     public float fuelCar;
     public float damagedCar;
-    public float turbo;
-    private bool pressTurbo = false;
+    public float turbo;   
+    
 
     public AudioClip somCar;
     public AudioClip somKid;
@@ -72,18 +72,18 @@ public class PlayerCar : MonoBehaviour
         wheelGuide = new WheelManager[wheelsCar.Length];
         fuelCar = 100;
         damagedCar = 0;
-        turbo = 100;
+        turbo = 3;
 
         for (int i = 0; i < wheelsCar.Length; i++)
         {
             wheelGuide[i] = wheelsCar[i].GetComponent<WheelManager>();
         }
         
-        int playerRoomId = PhotonRoom.Instance.GetId(PhotonNetwork.LocalPlayer);
+        /*int playerRoomId = PhotonRoom.Instance.GetId(PhotonNetwork.LocalPlayer);
         if (playerRoomId < 999)
         {
             idCar = playerRoomId;
-        }
+        }*/
     }
 
     private void Update()
@@ -95,15 +95,11 @@ public class PlayerCar : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space) && turbo > 0)
             {
-                pressTurbo = true;
-                TurboCar();
-            }
-            else if (Input.GetKeyUp(KeyCode.Space))
-            {
-                pressTurbo = false;
-                TurboCar();
-            }
-
+                turbo--;
+                maxTorque = 20000;
+                StartCoroutine(TurboCar());
+                UiManager.Instance.StatusTurboCar();
+            }           
             
             UpdateStatusCar();
 
@@ -233,20 +229,10 @@ public class PlayerCar : MonoBehaviour
         }
     }
 
-    private void TurboCar()
+    IEnumerator TurboCar()
     {
-        while (pressTurbo)
-        {
-            if (turbo <= 1) pressTurbo = false;
-            turbo -= 1;
-            rb.AddForce(transform.forward * 5000);
-        }
-
-        if(pressTurbo == false)
-        {
-            rb.AddForce(-transform.forward * 5000);
-        }
-        
+        yield return new WaitForSeconds(1);
+        maxTorque = 7000;
     }
 
     private void StopCar()
@@ -298,7 +284,11 @@ public class PlayerCar : MonoBehaviour
             if (damagedCar > 0)
             {
                 damagedCar -= 5;
-            }            
+            }
+            if (turbo < 3)
+            {
+                turbo = 3;
+            }
         }
         audioCar.volume = 1;                
     }
