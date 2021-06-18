@@ -11,6 +11,8 @@ public class UiManager : MonoBehaviour
     public float sliderBarValue;
 
     public Text statusCar;
+    public Text TimerStartRace;
+    public Text FinishedRace;
 
     public Image[] imgTurbo;
     public int qntTurbo;
@@ -21,7 +23,7 @@ public class UiManager : MonoBehaviour
     }
 
     private void Start()
-    {
+    {        
         fuelBar.minValue = 0;
         fuelBar.value = fuelBar.minValue;
         qntTurbo = 0;
@@ -31,6 +33,7 @@ public class UiManager : MonoBehaviour
     {
         //TODO removing call to fuel control until it is implemented correctly
         FuelControl();
+        if(GameManager.Instance.race == StatusRace.PreparingGame) StatusStartRace();        
     }
 
     //get fuel in the correct way
@@ -44,5 +47,10 @@ public class UiManager : MonoBehaviour
         if (qntTurbo == 3) return;
         imgTurbo[qntTurbo].enabled = false;
         qntTurbo += 1;        
+    }
+
+    public void StatusStartRace()
+    {
+        TimerStartRace.text = GameManager.Instance.timerRace.ToString();
     }
 }

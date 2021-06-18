@@ -25,12 +25,12 @@ public class CarManager : MonoBehaviour
 
     private void Update()
     {
-        UpdateStopwatch();
+        UpdateRacerTimer();
         ListTimes();
         FinishRace();
     }
 
-    private void UpdateStopwatch()
+    private void UpdateRacerTimer()
     {
         if (_isRunning && checkLap)
         {
@@ -57,7 +57,7 @@ public class CarManager : MonoBehaviour
         }
         if (completedLaps > GameManager.Instance.lapsMax)
         {
-            print("Corrida terminou");
+            GameManager.Instance.race = StatusRace.FinishRace;
             StartCoroutine(FinishedRacer());
         }
     }
