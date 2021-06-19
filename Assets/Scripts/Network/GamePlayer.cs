@@ -2,12 +2,12 @@
 
 namespace Network
 {
-    public struct PhotonPlayer
+    public struct GamePlayer
     {
         public int ID { get; }
         public Player Player  { get; }
         
-        public PhotonPlayer(int id, Player player)
+        public GamePlayer(int id, Player player)
         {
             ID = id;
             Player = player;

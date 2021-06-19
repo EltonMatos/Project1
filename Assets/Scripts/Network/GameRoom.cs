@@ -7,11 +7,11 @@ using UnityEngine.SceneManagement;
 
 namespace Network
 {
-    public class PhotonRoom : MonoBehaviour
+    public class GameRoom : MonoBehaviour
     {
-        public static PhotonRoom Instance;
+        public static GameRoom Instance;
         
-        public List<PhotonPlayer> players =  new List<PhotonPlayer>();
+        public List<GamePlayer> players =  new List<GamePlayer>();
         
         private void Awake()
         {
@@ -35,8 +35,8 @@ namespace Network
 
         public void AddPlayer(Player newPlayer)
         {
-            PhotonPlayer newPhotonPlayer = new PhotonPlayer(players.Count, newPlayer);
-            players.Add(newPhotonPlayer);
+            GamePlayer newGamePlayer = new GamePlayer(players.Count, newPlayer);
+            players.Add(newGamePlayer);
         }
         
         public void RemovePlayer(Player newPlayer)
@@ -48,7 +48,7 @@ namespace Network
         {
             //initialized with non existent ID
             int id = 999;
-            foreach (PhotonPlayer photonPlayer in players)
+            foreach (GamePlayer photonPlayer in players)
             {
                 if (photonPlayer.Player.UserId == localPlayer.UserId)
                 {

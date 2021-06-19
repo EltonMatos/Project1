@@ -62,7 +62,7 @@ namespace Menu.Screens
 
         private void OnPhotonPlayerJoinedRoom(Player newPlayer)
         {
-            PhotonRoom.Instance.AddPlayer(newPlayer);
+            GameRoom.Instance.AddPlayer(newPlayer);
             Instantiate(playerListItemPrefab, playerListContent).GetComponent<PlayerListItem>().Setup(newPlayer);
         }
         

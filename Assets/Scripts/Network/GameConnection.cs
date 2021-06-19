@@ -14,6 +14,7 @@ namespace Network
         public ErrorInfo PhotonErrorInfo;
 
         public Action<Player> OnPhotonPlayerJoinedRoom;
+        public Action<Player> OnPhotonPlayerLeftRoom;
         public Action OnPhotonMasterClientSwitched;
 
         private void Awake()
@@ -66,7 +67,13 @@ namespace Network
 
         public override void OnPlayerEnteredRoom(Player newPlayer)
         {
+            print(newPlayer.ToString());
             OnPhotonPlayerJoinedRoom?.Invoke(newPlayer);
+        }
+
+        public override void OnPlayerLeftRoom(Player otherPlayer)
+        {
+            OnPhotonPlayerLeftRoom?.Invoke(otherPlayer);
         }
 
         public override void OnLeftRoom()
