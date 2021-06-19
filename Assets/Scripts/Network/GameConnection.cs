@@ -67,7 +67,7 @@ namespace Network
 
         public override void OnPlayerEnteredRoom(Player newPlayer)
         {
-            print(newPlayer.ToString());
+            print("new player joined the room " + newPlayer);
             OnPhotonPlayerJoinedRoom?.Invoke(newPlayer);
         }
 

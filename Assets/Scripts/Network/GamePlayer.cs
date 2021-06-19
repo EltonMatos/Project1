@@ -1,16 +1,19 @@
-﻿using Photon.Realtime;
+﻿using CarPlayer;
+using Photon.Realtime;
 
 namespace Network
 {
     public struct GamePlayer
     {
         public int ID { get; }
-        public Player Player  { get; }
+        public int ActorNumber  { get; }
+        public CarColors Color { get; }
         
-        public GamePlayer(int id, Player player)
+        public GamePlayer(int id, int actorNumber, CarColors color)
         {
             ID = id;
-            Player = player;
+            ActorNumber = actorNumber;
+            Color = color;
         }
     }
 }

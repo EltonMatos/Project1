@@ -17,6 +17,7 @@ namespace Menu.Screens
 
         public void CreateOrJoinRoom(TMP_InputField roomInput)
         {
+            GameRoom.Instance.ResetRoom();
             GameConnection.Instance.CreateOrJoinRoom(roomInput.text);
         }
     }

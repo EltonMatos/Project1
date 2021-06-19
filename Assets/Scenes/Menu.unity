@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -609,7 +609,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -63.2}
+  m_AnchoredPosition: {x: 0, y: -63.19995}
   m_SizeDelta: {x: 518.9072, y: 73.58243}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &260868830
@@ -913,8 +913,9 @@ GameObject:
   m_Component:
   - component: {fileID: 479023300}
   - component: {fileID: 479023299}
+  - component: {fileID: 479023301}
   m_Layer: 0
-  m_Name: PhotonRoom
+  m_Name: GameRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -929,9 +930,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 479023298}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4193f24bb14a4dca8dcb1095c09e6d21, type: 3}
+  m_Script: {fileID: 11500000, guid: dfcbfdf870f1ecb40af9d8945ff0ca4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PhotonView: {fileID: 479023301}
 --- !u!4 &479023300
 Transform:
   m_ObjectHideFlags: 0
@@ -946,6 +948,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &479023301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479023298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 2
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &554656626
 GameObject:
   m_ObjectHideFlags: 0
@@ -1910,7 +1934,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -63.2}
+  m_AnchoredPosition: {x: 0, y: -63.19995}
   m_SizeDelta: {x: 518.9072, y: 73.58243}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1103235650
@@ -2850,7 +2874,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -63.2}
+  m_AnchoredPosition: {x: 0, y: -63.19995}
   m_SizeDelta: {x: 518.9072, y: 73.58243}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1305907665
@@ -4123,7 +4147,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -63.2}
+  m_AnchoredPosition: {x: 0, y: -63.19995}
   m_SizeDelta: {x: 2480, y: 73.58243}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2109181243
