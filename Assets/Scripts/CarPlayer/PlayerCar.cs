@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using CarPlayer;
 using Network;
 using Photon.Pun;
 using UnityEngine;
@@ -79,10 +80,26 @@ public class PlayerCar : MonoBehaviour
             wheelGuide[i] = wheelsCar[i].GetComponent<WheelManager>();
         }
 
-        int playerRoomId = GameRoom.Instance.GetId(PhotonNetwork.LocalPlayer);
-        if (playerRoomId < 999)
+
+        SetupNetworkBasedValues();
+    }
+
+    private void SetupNetworkBasedValues()
+    {
+        if (photonView.IsMine)
         {
-            idCar = playerRoomId;
+            //setup id
+            int playerRoomId = GameRoom.Instance.GetId(PhotonNetwork.LocalPlayer);
+            if (playerRoomId < 999)
+            {
+                idCar = playerRoomId;
+            }
+
+            //setup color
+            CarColors color = GameRoom.Instance.GetColor(PhotonNetwork.LocalPlayer);
+            var mesh = CarColorManager.Instance.GetMesh(color);
+            print($"mesh for player {PhotonNetwork.LocalPlayer.ActorNumber} {mesh.name} {color}");
+            GetComponent<MeshFilter>().mesh = mesh;
         }
     }
 

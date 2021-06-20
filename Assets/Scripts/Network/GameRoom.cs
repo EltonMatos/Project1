@@ -136,6 +136,20 @@ namespace Network
 
             return id;
         }
+        
+        public CarColors GetColor(Player localPlayer)
+        {
+            CarColors color = CarColors.None;
+            foreach (GamePlayer photonPlayer in _players)
+            {
+                if (photonPlayer.ActorNumber == localPlayer.ActorNumber)
+                {
+                    color = photonPlayer.Color;
+                }
+            }
+
+            return color;
+        }
 
         public void ChangeCurrentPlayerColor()
         {

@@ -6,9 +6,9 @@
         None,
         Orange,
         Green,
-        Turquoise,
+        Black,
         Blue,
         Purple,
-        Pink
+        Red
     }
 }
