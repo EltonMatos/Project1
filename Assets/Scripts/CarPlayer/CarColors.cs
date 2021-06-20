@@ -4,9 +4,11 @@
     {
         //TODO need to fix the color naming to the actual color in the hsv
         None,
-        Red,
+        Orange,
         Green,
+        Turquoise,
         Blue,
-        Yellow
+        Purple,
+        Pink
     }
 }

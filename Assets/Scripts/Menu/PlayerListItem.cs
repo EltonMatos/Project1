@@ -1,7 +1,4 @@
-﻿using System;
-using CarPlayer;
-using Network;
-using Photon.Pun;
+﻿using Network;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine;
@@ -34,7 +31,7 @@ namespace Menu
         {
             if (actorNumber == _player.ActorNumber)
             {
-                float col = (float) color / 10;
+                float col = (float) color / 7;
                 text.color = Color.HSVToRGB(col, 1f, 1f);
             }
         }

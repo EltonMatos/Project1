@@ -85,7 +85,7 @@ namespace Network
             int id = 0;
             for (int i = current; i < Enum.GetNames(typeof(CarColors)).Length + current; i++)
             {
-                int colorToCheck = i > Enum.GetNames(typeof(CarColors)).Length
+                int colorToCheck = i >= Enum.GetNames(typeof(CarColors)).Length
                     ? i - Enum.GetNames(typeof(CarColors)).Length
                     : i;
                 if (colorToCheck == (int) CarColors.None) continue;
