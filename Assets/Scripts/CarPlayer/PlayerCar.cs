@@ -86,21 +86,18 @@ public class PlayerCar : MonoBehaviour
 
     private void SetupNetworkBasedValues()
     {
-        if (photonView.IsMine)
+        //setup id
+        int playerRoomId = GameRoom.Instance.GetId(photonView.Owner);
+        if (playerRoomId < 999)
         {
-            //setup id
-            int playerRoomId = GameRoom.Instance.GetId(PhotonNetwork.LocalPlayer);
-            if (playerRoomId < 999)
-            {
-                idCar = playerRoomId;
-            }
-
-            //setup color
-            CarColors color = GameRoom.Instance.GetColor(PhotonNetwork.LocalPlayer);
-            var mesh = CarColorManager.Instance.GetMesh(color);
-            print($"mesh for player {PhotonNetwork.LocalPlayer.ActorNumber} {mesh.name} {color}");
-            GetComponent<MeshFilter>().mesh = mesh;
+            idCar = playerRoomId;
         }
+
+        //setup color
+        CarColors color = GameRoom.Instance.GetColor(photonView.Owner);
+        var mesh = CarColorManager.Instance.GetMesh(color);
+        print($"mesh for player {PhotonNetwork.LocalPlayer.ActorNumber} {mesh.name} {color}");
+        GetComponent<MeshFilter>().mesh = mesh;
     }
 
     private void Update()
