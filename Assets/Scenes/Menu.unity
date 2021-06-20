@@ -933,7 +933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfcbfdf870f1ecb40af9d8945ff0ca4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PhotonView: {fileID: 479023301}
+  photonView: {fileID: 479023301}
 --- !u!4 &479023300
 Transform:
   m_ObjectHideFlags: 0
