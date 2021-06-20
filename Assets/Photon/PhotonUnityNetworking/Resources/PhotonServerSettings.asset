@@ -40,6 +40,8 @@ MonoBehaviour:
   - RespawnSpaceship
   - NewPlayer
   - RemovePlayer
+  - RequestColorChange
+  - ChangeColorForActor
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

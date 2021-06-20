@@ -2,6 +2,7 @@
 {
     public enum CarColors
     {
+        //TODO need to fix the color naming to the actual color in the hsv
         None,
         Red,
         Green,

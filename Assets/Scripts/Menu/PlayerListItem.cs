@@ -32,11 +32,9 @@ namespace Menu
 
         private void ColorChanged(int actorNumber, int color)
         {
-            print("request of color change " + actorNumber + color + " actual player " + _player);
             if (actorNumber == _player.ActorNumber)
             {
                 float col = (float) color / 10;
-                print("Changing color for player: " + actorNumber + col);
                 text.color = Color.HSVToRGB(col, 1f, 1f);
             }
         }

@@ -57,8 +57,7 @@ namespace Menu.Screens
 
         public void ChangeColor()
         {
-            //get list of available colors
-            //run RPC to update every player
+            GameRoom.Instance.ChangeCurrentPlayerColor();
         }
 
         private void OnPhotonPlayerJoinedRoom(Player newPlayer)
