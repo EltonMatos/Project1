@@ -16,13 +16,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public StatusRace race;
+    public StatusRace race;    
 
     public int lapsMax;
 
-    //public Camera mainCamera, cameraOne, cameraTwo;  
-
-    private bool _isRunning = true;
+    public Camera mainCamera, cameraOne, cameraTwo;      
 
     public float timer = 3;    
     public float timerRace;   
@@ -42,7 +40,9 @@ public class GameManager : MonoBehaviour
     {
         if(race == StatusRace.PreparingGame)
         {
-            StartCoroutine(PreparingGame());
+            //StartCoroutine(PreparingGame());
+            UiManager.Instance.timerStartRaceText.enabled = true;
+            StartRacerTimer();
         } 
         if(race == StatusRace.FinishRace)
         {
@@ -51,13 +51,12 @@ public class GameManager : MonoBehaviour
     }
 
     private void StartRacerTimer()
-    {
-        UiManager.Instance.TimerStartRace.enabled = false;
+    {        
         timer -= Time.deltaTime;
         timerRace = Mathf.Round(timer);
         if(timerRace == 0)
         {
-            UiManager.Instance.TimerStartRace.text = "GO";                        
+            UiManager.Instance.timerStartRaceText.text = "GO";            
             StartCoroutine(GoRace());
             return;
         }        
@@ -65,17 +64,16 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GoRace()
     {        
-        yield return new WaitForSeconds(0.3f);
-        UiManager.Instance.TimerStartRace.text = "";
-        race = StatusRace.StartRace;
-        
+        yield return new WaitForSeconds(1);
+        UiManager.Instance.timerStartRaceText.enabled = false;        
+        race = StatusRace.StartRace;        
     }
 
     IEnumerator PreparingGame()
     {        
-        yield return new WaitForSeconds(1);
-        UiManager.Instance.TimerStartRace.enabled = true;
-        StartRacerTimer();
+        yield return new WaitForSeconds(1);        
+        UiManager.Instance.timerStartRaceText.enabled = true;        
+        StartRacerTimer();        
     }
 
     public void TypeCamera()

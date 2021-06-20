@@ -51,8 +51,8 @@ public class PlayerCar : MonoBehaviour
 
     public float fuelCar;
     public float damagedCar;
-    public float turbo;
 
+    public float turbo;
 
     public AudioClip somCar;
     public AudioClip somKid;
@@ -361,15 +361,15 @@ public class PlayerCar : MonoBehaviour
 
     private void OnGUI()
     {
-        GUI.Label(new Rect(20, 20, 128, 32), rpm + "RPM");
-        GUI.Label(new Rect(20, 40, 128, 32), (changeCurrent + 1).ToString());
-        GUI.Label(new Rect(20, 60, 128, 32), veloKMH + "KMH");
-        GUI.Label(new Rect(20, 80, 128, 32), forceFinal.ToString());
+        if (photonView.IsMine)
+        {
+            GUI.Label(new Rect(20, 20, 128, 32), rpm + "RPM");
+            GUI.Label(new Rect(20, 40, 128, 32), (changeCurrent + 1).ToString());
+            GUI.Label(new Rect(20, 60, 128, 32), veloKMH + "KMH");
 
-        GUI.Label(new Rect(20, 100, 128, 32), "Fuel: " + fuelCar);
-        GUI.Label(new Rect(20, 120, 128, 32), "Damaged: " + damagedCar);
-        GUI.Label(new Rect(20, 140, 128, 32), "Turbo: " + turbo);
-        GUI.Label(new Rect(20, 160, 128, 32), "StatusCar: " + statusPlayer);
-        GUI.Label(new Rect(20, 180, 128, 32), "Timer: " + car.ReturnTime());
+            GUI.Label(new Rect(20, 100, 128, 32), "Damaged: " + damagedCar);
+            GUI.Label(new Rect(20, 120, 128, 32), "StatusCar: " + statusPlayer);
+            GUI.Label(new Rect(20, 140, 128, 32), "Timer: " + car.ReturnTime());
+        }
     }
 }

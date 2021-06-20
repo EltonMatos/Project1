@@ -395,11 +395,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47ea0c626c718c743ae297eb77c6d22d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  photonView: {fileID: 3724872719061583636}
   timer: 0
   checkLap: 0
   timePlayer: 0
   lapsMax: 0
   completedLaps: 0
+  positionCar: 0
 --- !u!114 &3356322521505149897
 MonoBehaviour:
   m_ObjectHideFlags: 0

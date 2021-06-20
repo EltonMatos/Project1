@@ -18,15 +18,15 @@ public class Meta : MonoBehaviour
         
         foreach (Checkpoint ch in checkpoints)
         {
-            if (!ch.ReadyCar())
+            if (!ch.CheckedCar(car, car.completedLaps))
             {
                 Debug.Log("Volta invalidade");
                 ResetCheckpoints(car);                
                 return;
             }
         }
-        car.AddLaps(car.completedLaps);
         car.completedLaps++;
+        //car.AddLaps(car.completedLaps);
         ResetCheckpoints(car);
         //GameManager.Instance.PositionCarRace();
     }
@@ -34,9 +34,9 @@ public class Meta : MonoBehaviour
     void ResetCheckpoints(CarManager car)
     {
         car.timer = 0;        
-        foreach (Checkpoint check in checkpoints)
+        /*foreach (Checkpoint check in checkpoints)
         {
             check.car = null;
-        }
+        }*/
     }
 }

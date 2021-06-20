@@ -11,8 +11,10 @@ public class UiManager : MonoBehaviour
     public float sliderBarValue;
 
     public Text statusCar;
-    public Text TimerStartRace;
-    public Text FinishedRace;
+    public Text timerStartRaceText;
+    //public Text finishedRaceText;
+    public Text timerLapCarText;
+    public Text positionCarText;
 
     public Image[] imgTurbo;
     public int qntTurbo;
@@ -27,6 +29,7 @@ public class UiManager : MonoBehaviour
         fuelBar.minValue = 0;
         fuelBar.value = fuelBar.minValue;
         qntTurbo = 0;
+        //timerLapCarText.text = "Lap 1 - 0.000 \nLap 2 - 0.000 \nLap 3 - 0.000";
     }
 
     private void Update()
@@ -51,6 +54,11 @@ public class UiManager : MonoBehaviour
 
     public void StatusStartRace()
     {
-        TimerStartRace.text = GameManager.Instance.timerRace.ToString();
+        timerStartRaceText.text = GameManager.Instance.timerRace.ToString();
+    }
+
+    public void ShowTimeLapCar()
+    {
+        //TimerLapCar.text = 
     }
 }

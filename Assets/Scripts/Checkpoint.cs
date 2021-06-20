@@ -4,24 +4,81 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    public GameObject car = null;    
+    //public GameObject car = null;
 
-    private void OnTriggerEnter(Collider other)
+    public List<Laps> lapRace;
+
+    private void Start()
     {
-        if (other.transform.root.GetComponent<PlayerCar>())
+        lapRace = new List<Laps>();
+        for(int i = 0; i < GameManager.Instance.lapsMax; i++)
         {
-            car = other.transform.root.gameObject;
-            //TODO removing this to have it implemented correctly
-            //PlayerCar.Instance.fuelCar -= 10;            
+            lapRace.Add(new Laps());
         }
     }
 
-    public bool ReadyCar()
+    private void OnTriggerEnter(Collider other)
+    {
+        /*if (other.transform.root.GetComponent<PlayerCar>())
+        {
+            car = other.transform.root.gameObject;                        
+        }*/
+        CarManager c = other.transform.root.GetComponent<CarManager>();
+
+        RegisterCar(c, c.completedLaps);
+
+        c.positionCar = ReturnPosCar(c, c.completedLaps);
+
+    }
+
+    public bool CheckedCar(CarManager car, int vol)
+    {
+        for (int i = 0; i < lapRace[vol].car.Count; i++)
+        {
+            if (lapRace[vol].car[i] == car)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public bool RegisterCar(CarManager car, int vol)
+    {        
+        lapRace[vol].car.Add(car);
+        return true;
+    }
+
+    public int ReturnPosCar(CarManager car, int vol)
+    {
+        for(int i = 0; i < lapRace[vol].car.Count; i++)
+        {
+            if(lapRace[vol].car[i] == car)
+            {
+                return i + 1;
+            }
+        }
+
+        return -1;
+    }
+
+    /*public bool ReadyCar()
     {
         if (car != null)
         {
             return true;
         }
         return false;
+    }*/
+
+    public class Laps
+    {
+        public List<CarManager> car;
+
+        public Laps()
+        {
+            car = new List<CarManager>();
+        }
     }
 }
