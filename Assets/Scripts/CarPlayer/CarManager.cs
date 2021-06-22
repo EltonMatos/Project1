@@ -27,7 +27,8 @@ public class CarManager : MonoBehaviour
         player = GetComponent<PlayerCar>();
         listTimeLaps = new List<string>();
         lapsMax = GameManager.Instance.lapsMax;
-        positionCar = 0;                
+        positionCar = 0;
+        
     }
 
     private void Update()
