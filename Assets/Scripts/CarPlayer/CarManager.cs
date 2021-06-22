@@ -18,7 +18,7 @@ public class CarManager : MonoBehaviour
     private List<string> listTimeLaps;
 
     public int lapsMax;
-    public int completedLaps;
+    public int completedLaps = 0;
 
     public int positionCar;
 
@@ -27,7 +27,7 @@ public class CarManager : MonoBehaviour
         player = GetComponent<PlayerCar>();
         listTimeLaps = new List<string>();
         lapsMax = GameManager.Instance.lapsMax;
-        positionCar = 0;
+        positionCar = 0;                
     }
 
     private void Update()

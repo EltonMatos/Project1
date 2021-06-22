@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
-{
-    //public GameObject car = null;
+{    
+    public static Checkpoint Instance;
 
     public List<Laps> lapRace;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -18,11 +23,7 @@ public class Checkpoint : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {
-        /*if (other.transform.root.GetComponent<PlayerCar>())
-        {
-            car = other.transform.root.gameObject;                        
-        }*/
+    {        
         CarManager c = other.transform.root.GetComponent<CarManager>();
 
         RegisterCar(c, c.completedLaps);
@@ -70,7 +71,7 @@ public class Checkpoint : MonoBehaviour
             return true;
         }
         return false;
-    }*/
+    }*/    
 
     public class Laps
     {

@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        lapsMax = 2;  
+        lapsMax = 2;        
     }    
 
     private void Update()
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
         if(race == StatusRace.FinishRace)
         {
             //UiManager.Instance.TimerStartRace.text = "Fished Race";
-        }
+        }        
     }
 
     private void StartRacerTimer()

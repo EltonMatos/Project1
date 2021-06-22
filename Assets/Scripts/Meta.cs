@@ -20,15 +20,16 @@ public class Meta : MonoBehaviour
         {
             if (!ch.CheckedCar(car, car.completedLaps))
             {
+                //Checkpoint.Instance.RegisterCar(car, car.completedLaps);
+                //car.positionCar = Checkpoint.Instance.ReturnPosCar(car, car.completedLaps);
                 Debug.Log("Volta invalidade");
                 ResetCheckpoints(car);                
                 return;
             }
         }
-        car.completedLaps++;
-        //car.AddLaps(car.completedLaps);
+        car.completedLaps++;        
         ResetCheckpoints(car);
-        //GameManager.Instance.PositionCarRace();
+        
     }
 
     void ResetCheckpoints(CarManager car)
