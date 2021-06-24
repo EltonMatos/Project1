@@ -37,18 +37,19 @@ public class PositionCar : MonoBehaviour
     {
         CarManager c = other.transform.root.GetComponent<CarManager>();
         c.idCarPosCurrent = idPosCurrent;
-        Debug.Log("idCar: " + c.idCarPosCurrent + " idCarPosPrevius: " + c.idCarPosPrevius);
+        
         if (c.idCarPosCurrent < c.idCarPosPrevius && idPosCurrent != 1)
         {
-            UiManager.Instance.wrongWayShow = true;
+            c.wrongWay = true;
             c.idCarPosPrevius = c.idCarPosCurrent;
         }
         else
         {
-            UiManager.Instance.wrongWayShow = false;
+            c.wrongWay = false;
             c.idCarPosPrevius = c.idCarPosCurrent;
             RegisterCar(c, c.completedLaps);
             c.positionCar = ReturnPosCar(c, c.completedLaps);
+
         }        
     }
 

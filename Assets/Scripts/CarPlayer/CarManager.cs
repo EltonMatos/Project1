@@ -24,12 +24,15 @@ public class CarManager : MonoBehaviour
     public int idCarPosCurrent = 0;
     public int idCarPosPrevius = 0;
 
+    public bool wrongWay;
+
     private void Start()
     {
         player = GetComponent<PlayerCar>();
         listTimeLaps = new List<string>();
         lapsMax = GameManager.Instance.lapsMax;
         positionCar = 0;
+        wrongWay = false;
         StartListTime();
     }
 
@@ -44,7 +47,7 @@ public class CarManager : MonoBehaviour
             UiManager.Instance.timerLap2CarText.text = listTimeLaps[1].ToString();
             UiManager.Instance.timerLap3CarText.text = listTimeLaps[2].ToString();*/
 
-            if (UiManager.Instance.wrongWayShow)
+            if (wrongWay)
             {
                 UiManager.Instance.wrongWayText.enabled = true;
             }

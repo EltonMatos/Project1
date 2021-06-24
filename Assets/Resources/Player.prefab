@@ -404,6 +404,7 @@ MonoBehaviour:
   positionCar: 0
   idCarPosCurrent: 0
   idCarPosPrevius: 0
+  wrongWay: 0
 --- !u!114 &3356322521505149897
 MonoBehaviour:
   m_ObjectHideFlags: 0

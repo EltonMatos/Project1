@@ -26,9 +26,9 @@ public class Checkpoint : MonoBehaviour
     {        
         CarManager c = other.transform.root.GetComponent<CarManager>();
 
-        RegisterCar(c, c.completedLaps);
+        //RegisterCar(c, c.completedLaps);
 
-        c.positionCar = ReturnPosCar(c, c.completedLaps);
+        //c.positionCar = ReturnPosCar(c, c.completedLaps);
     }
 
     public bool CheckedCar(CarManager car, int vol)
