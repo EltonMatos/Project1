@@ -22,7 +22,7 @@ public class CarManager : MonoBehaviour
 
     public int positionCar;
     public int idCarPosCurrent = 0;
-    public int idCarPosPrevius;
+    public int idCarPosPrevius = 0;
 
     private void Start()
     {
@@ -43,6 +43,12 @@ public class CarManager : MonoBehaviour
             /*UiManager.Instance.timerLap1CarText.text = listTimeLaps[0].ToString();
             UiManager.Instance.timerLap2CarText.text = listTimeLaps[1].ToString();
             UiManager.Instance.timerLap3CarText.text = listTimeLaps[2].ToString();*/
+
+            if (UiManager.Instance.wrongWayShow)
+            {
+                UiManager.Instance.wrongWayText.enabled = true;
+            }
+            else UiManager.Instance.wrongWayText.enabled = false;
         }        
     }
 

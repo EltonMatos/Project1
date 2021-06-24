@@ -6,13 +6,16 @@ public class PositionCar : MonoBehaviour
 {
     private CarManager c;
 
+    private CheckCar check;
+
     public List<Laps> lapRace;
 
-    public int idPosCurrent;    
+    public int idPosCurrent;
 
     private void Start()
     {
         lapRace = new List<Laps>();
+        check = new CheckCar();
         for (int i = 0; i < GameManager.Instance.lapsMax; i++)
         {
             lapRace.Add(new Laps());
@@ -33,24 +36,20 @@ public class PositionCar : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         CarManager c = other.transform.root.GetComponent<CarManager>();
-        //c.idCarPosPrevius = idPosCurrent;
         c.idCarPosCurrent = idPosCurrent;
-        
-        if (c.idCarPosCurrent < c.idCarPosPrevius)
+        Debug.Log("idCar: " + c.idCarPosCurrent + " idCarPosPrevius: " + c.idCarPosPrevius);
+        if (c.idCarPosCurrent < c.idCarPosPrevius && idPosCurrent != 1)
         {
-            print("caminho errado");
+            UiManager.Instance.wrongWayShow = true;
+            c.idCarPosPrevius = c.idCarPosCurrent;
         }
-
-        c.idCarPosCurrent = idPosCurrent;
-
-        
-
-        /*if (c.idCarPos < idPos) UiManager.Instance.wrongWay.enabled = true;
-        else UiManager.Instance.wrongWay.enabled = false;*/
-
-        RegisterCar(c, c.completedLaps);
-
-        c.positionCar = ReturnPosCar(c, c.completedLaps);
+        else
+        {
+            UiManager.Instance.wrongWayShow = false;
+            c.idCarPosPrevius = c.idCarPosCurrent;
+            RegisterCar(c, c.completedLaps);
+            c.positionCar = ReturnPosCar(c, c.completedLaps);
+        }        
     }
 
     public bool CheckedCar(CarManager car, int vol)

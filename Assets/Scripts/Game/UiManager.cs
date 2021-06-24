@@ -15,7 +15,9 @@ public class UiManager : MonoBehaviour
     //public Text finishedRaceText;
     public Text timerLap1CarText, timerLap2CarText, timerLap3CarText;    
     public Text positionCarText;
-    public Text wrongWay;
+    public Text wrongWayText;
+
+    public bool wrongWayShow = false;
 
     public Image[] imgTurbo;
     public int qntTurbo;
@@ -30,7 +32,7 @@ public class UiManager : MonoBehaviour
         fuelBar.minValue = 0;
         fuelBar.value = fuelBar.minValue;
         qntTurbo = 0;
-
+        wrongWayText.enabled = false;
         //timerLapCarText.text = "Lap 1 - 0.000 \nLap 2 - 0.000 \nLap 3 - 0.000";
     }
 
@@ -63,4 +65,10 @@ public class UiManager : MonoBehaviour
     {
         //TimerLapCar.text = 
     }
+
+    public void ShowWrongWay()
+    {
+        //wrongWay.enabled = true;
+        wrongWayShow = true;        
+    }    
 }
