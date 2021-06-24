@@ -13,8 +13,9 @@ public class UiManager : MonoBehaviour
     public Text statusCar;
     public Text timerStartRaceText;
     //public Text finishedRaceText;
-    public Text timerLapCarText;
+    public Text timerLap1CarText, timerLap2CarText, timerLap3CarText;    
     public Text positionCarText;
+    public Text wrongWay;
 
     public Image[] imgTurbo;
     public int qntTurbo;
@@ -29,6 +30,7 @@ public class UiManager : MonoBehaviour
         fuelBar.minValue = 0;
         fuelBar.value = fuelBar.minValue;
         qntTurbo = 0;
+
         //timerLapCarText.text = "Lap 1 - 0.000 \nLap 2 - 0.000 \nLap 3 - 0.000";
     }
 

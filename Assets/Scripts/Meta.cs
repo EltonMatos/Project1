@@ -26,10 +26,10 @@ public class Meta : MonoBehaviour
                 ResetCheckpoints(car);                
                 return;
             }
-        }
-        car.completedLaps++;        
-        ResetCheckpoints(car);
-        
+        }        
+        car.completedLaps++;
+        car.AddLaps(car.completedLaps);
+        ResetCheckpoints(car);        
     }
 
     void ResetCheckpoints(CarManager car)

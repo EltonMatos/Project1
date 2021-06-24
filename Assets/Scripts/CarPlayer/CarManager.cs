@@ -12,7 +12,7 @@ public class CarManager : MonoBehaviour
 
     public float timer = 0;
     public bool checkLap;    
-    public string timePlayer;
+    public string timePlayer;    
     private string showTimePlayer;
 
     private List<string> listTimeLaps;
@@ -21,6 +21,8 @@ public class CarManager : MonoBehaviour
     public int completedLaps = 0;
 
     public int positionCar;
+    public int idCarPosCurrent = 0;
+    public int idCarPosPrevius;
 
     private void Start()
     {
@@ -28,18 +30,19 @@ public class CarManager : MonoBehaviour
         listTimeLaps = new List<string>();
         lapsMax = GameManager.Instance.lapsMax;
         positionCar = 0;
-        
+        StartListTime();
     }
 
     private void Update()
     {
-        UpdateRacerTimer();
-        //ListTimes();
+        UpdateRacerTimer();        
         FinishRace();
         if (photonView.IsMine)
         {
             UiManager.Instance.positionCarText.text = positionCar.ToString();
-            UiManager.Instance.timerLapCarText.text = timePlayer.ToString();
+            /*UiManager.Instance.timerLap1CarText.text = listTimeLaps[0].ToString();
+            UiManager.Instance.timerLap2CarText.text = listTimeLaps[1].ToString();
+            UiManager.Instance.timerLap3CarText.text = listTimeLaps[2].ToString();*/
         }        
     }
 
@@ -57,10 +60,24 @@ public class CarManager : MonoBehaviour
         return timePlayer;
     }
 
+    private void StartListTime()
+    {
+        string time = "0.000";
+        listTimeLaps.Add(time);
+        listTimeLaps.Add(time);
+        listTimeLaps.Add(time);
+    }
+
     public void AddLaps(int lap)
     {
+        print("timer " + listTimeLaps[0].ToString());
+
         showTimePlayer = "Lap: " + lap + " - " + timePlayer;
-        listTimeLaps.Add(showTimePlayer);
+        for(int i = 0; i < listTimeLaps.Count; i++)
+        {
+            listTimeLaps[i] = showTimePlayer;
+            print("timer " + listTimeLaps[i].ToString());
+        }
     }
 
     public void FinishRace()
@@ -80,15 +97,5 @@ public class CarManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         player.statusPlayer = StatusCar.FinishedRace;
-    }
-
-    void ListTimes()
-    {       
-
-        for (int i = 0; i < listTimeLaps.Count; i++)
-        {            
-            Debug.Log("Lap: " + completedLaps + " Time: " + listTimeLaps.ToString());
-            UiManager.Instance.timerLapCarText.text = listTimeLaps[i].ToString();
-        }
-    }
+    }    
 }
