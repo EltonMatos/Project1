@@ -352,8 +352,11 @@ MonoBehaviour:
   sliderBarValue: 0
   statusCar: {fileID: 1911975635}
   timerStartRaceText: {fileID: 1482462922}
-  timerLapCarText: {fileID: 574833759}
+  timerLap1CarText: {fileID: 0}
+  timerLap2CarText: {fileID: 0}
+  timerLap3CarText: {fileID: 0}
   positionCarText: {fileID: 1938658116}
+  wrongWayText: {fileID: 0}
   imgTurbo:
   - {fileID: 2143565888}
   - {fileID: 1966612823}
@@ -5819,7 +5822,6 @@ GameObject:
   - component: {fileID: 844595452}
   - component: {fileID: 844595451}
   - component: {fileID: 844595450}
-  - component: {fileID: 844595453}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -5875,18 +5877,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &844595453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 844595449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dcb90241bcf41fdaed3c6cd978980cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &853786174
 PrefabInstance:
   m_ObjectHideFlags: 0

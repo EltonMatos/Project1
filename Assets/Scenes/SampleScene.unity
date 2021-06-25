@@ -9043,7 +9043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9528302, g: 0.06741722, b: 0.06741722, a: 1}
+  m_Color: {r: 0.09701569, g: 0.9529412, b: 0.066666685, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -10241,7 +10241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   race: 0
-  lapsMax: 10
+  lapsMax: 3
   mainCamera: {fileID: 0}
   cameraOne: {fileID: 0}
   cameraTwo: {fileID: 0}
