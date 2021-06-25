@@ -49,7 +49,6 @@ public class PositionCar : MonoBehaviour
             c.idCarPosPrevius = c.idCarPosCurrent;
             RegisterCar(c, c.completedLaps);
             c.positionCar = ReturnPosCar(c, c.completedLaps);
-
         }        
     }
 

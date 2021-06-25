@@ -21,8 +21,7 @@ public class Meta : MonoBehaviour
             if (!ch.CheckedCar(car, car.completedLaps))
             {
                 //Checkpoint.Instance.RegisterCar(car, car.completedLaps);
-                //car.positionCar = Checkpoint.Instance.ReturnPosCar(car, car.completedLaps);
-                Debug.Log("Volta invalidade");
+                //car.positionCar = Checkpoint.Instance.ReturnPosCar(car, car.completedLaps);                
                 ResetCheckpoints(car);                
                 return;
             }
