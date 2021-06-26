@@ -30,7 +30,7 @@ namespace Results
 
         public void GotToRoom()
         {
-            PhotonNetwork.LoadLevel("Menu");
+            PhotonNetwork.LoadLevel("Post Race Menu");
         }
 
         private void GameFinished()

@@ -23,8 +23,15 @@ namespace Network
         private void Awake()
         {
             //TODO check if this will have conflict when returning to menu
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
         private void Start()
@@ -40,6 +47,12 @@ namespace Network
                 var transform1 = transform;
                 PhotonNetwork.Instantiate("PhotonNetworkPlayer", transform1.position, transform1.rotation);
             }
+
+            if (scene.name.Contains("Post Race Menu"))
+            {
+                //if returning from race, go to room
+                print("Loading post race menu scene");
+            }
         }
 
         public void ResetRoom()
@@ -51,13 +64,13 @@ namespace Network
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                int gameId = GetAvailableId();
-                int color = GetNextAvailableColor((int) CarColors.None);
+                int gameId = GetAvailableId(newPlayer.ActorNumber);
+                int color = GetNextAvailableColor((int) CarColors.None, newPlayer.ActorNumber);
                 photonView.RPC("NewPlayer", RpcTarget.AllBufferedViaServer, gameId, newPlayer.ActorNumber, color);
             }
         }
 
-        private int GetAvailableId()
+        private int GetAvailableId(int actorNumber)
         {
             if (_players.Count == 0) return 0;
 
@@ -67,6 +80,11 @@ namespace Network
                 bool idAvailable = true;
                 foreach (GamePlayer player in _players)
                 {
+                    if (player.ActorNumber == actorNumber)
+                    {
+                        return player.ID;
+                    }
+
                     if (player.ID == i)
                     {
                         idAvailable = false;
@@ -84,7 +102,7 @@ namespace Network
             return id;
         }
 
-        private int GetNextAvailableColor(int current)
+        private int GetNextAvailableColor(int current, int actorNumber)
         {
             int id = 0;
             for (int i = current; i < Enum.GetNames(typeof(CarColors)).Length + current; i++)
@@ -97,6 +115,11 @@ namespace Network
                 bool colorAvailable = true;
                 foreach (GamePlayer player in _players)
                 {
+                    if (player.ActorNumber == actorNumber)
+                    {
+                        return (int) player.Color;
+                    }
+                    
                     if (player.Color == (CarColors) colorToCheck)
                     {
                         colorAvailable = false;
@@ -240,8 +263,22 @@ namespace Network
             {
                 if (player.ActorNumber == actorNumber)
                 {
-                    GamePlayer newGamePlayer = new GamePlayer(gameId, actorNumber, (CarColors) carColor);
-                    _players.Add(newGamePlayer);
+                    bool playerExists = false;
+                    for (int i = 0; i < _players.Count;i++)
+                    {
+                        if (_players[i].ActorNumber == actorNumber)
+                        {
+                            playerExists = true;
+                            _players[i].SetColor((CarColors) carColor);
+                            break;
+                        }
+                    }
+                    
+                    if(!playerExists)
+                    {
+                        GamePlayer newGamePlayer = new GamePlayer(gameId, actorNumber, (CarColors) carColor);
+                        _players.Add(newGamePlayer);
+                    }
                     StartCoroutine(InvokeChangeColorEvent(actorNumber, carColor));
                 }
             }
@@ -260,7 +297,7 @@ namespace Network
                 }
             }
 
-            int newColor = GetNextAvailableColor(currentColor);
+            int newColor = GetNextAvailableColor(currentColor, int.MaxValue);
             photonView.RPC("ChangeColorForActor", RpcTarget.AllBufferedViaServer, actorNumber, newColor);
         }
 

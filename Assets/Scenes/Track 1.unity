@@ -1559,6 +1559,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8637009540517021907, guid: d2a61c9e08f895445977f2a5c03c65fa,
         type: 3}
+      propertyPath: Mute
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8637009540517021907, guid: d2a61c9e08f895445977f2a5c03c65fa,
+        type: 3}
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 0}
