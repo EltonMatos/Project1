@@ -2,7 +2,7 @@ using System;
 using Network;
 using UnityEngine;
 
-namespace Results
+namespace ResultsAndMenu
 {
     public class ResultsManager : MonoBehaviour
     {

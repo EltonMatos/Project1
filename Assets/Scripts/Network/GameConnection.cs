@@ -20,7 +20,15 @@ namespace Network
 
         private void Awake()
         {
-            Instance = this;
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
         /* Functional methods */
@@ -69,7 +77,6 @@ namespace Network
 
         public override void OnPlayerEnteredRoom(Player newPlayer)
         {
-            print("new player joined the room " + newPlayer);
             OnPhotonPlayerJoinedRoom?.Invoke(newPlayer);
         }
 
@@ -80,26 +87,38 @@ namespace Network
 
         public override void OnLeftRoom()
         {
-            MenuManager.Instance.OpenMenu("Lobby");
+            if (!SceneManager.GetActiveScene().name.Contains("Track"))
+            {
+                MenuManager.Instance.OpenMenu("Lobby");
+            }
         }
 
         public override void OnDisconnected(DisconnectCause cause)
         {
-            if (SceneManager.GetActiveScene().name == "Post Race Menu")
+            print("Disconnected");
+            if (SceneManager.GetActiveScene().name == "Menu")
             {
-                GameRoom.Instance.DestroySelf();
-                SceneManager.LoadScene("Menu");
+                MenuManager.Instance.OpenMenu("Landing");
             }
             else
             {
-                MenuManager.Instance.OpenMenu("Landing");
+                GameRoom.Instance.DestroySelf();
+                SceneManager.LoadScene("Menu");
             }
         }
 
         public override void OnErrorInfo(ErrorInfo errorInfo)
         {
             PhotonErrorInfo = errorInfo;
-            MenuManager.Instance.OpenMenu("Error");
+            if (SceneManager.GetActiveScene().name == "Menu")
+            {
+                MenuManager.Instance.OpenMenu("Error");
+            }
+            else
+            {
+                GameRoom.Instance.DestroySelf();
+                SceneManager.LoadScene("Menu");
+            }
         }
     }
 }

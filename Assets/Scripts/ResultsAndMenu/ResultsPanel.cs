@@ -4,7 +4,7 @@ using Photon.Pun;
 using TMPro;
 using UnityEngine;
 
-namespace Results
+namespace ResultsAndMenu
 {
     public class ResultsPanel : MonoBehaviour
     {
