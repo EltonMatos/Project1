@@ -88,12 +88,12 @@ public class CarManager : MonoBehaviour
 
     public void FinishRace()
     {
-        if (completedLaps == GameManager.Instance.lapsMax)
+        if (completedLaps == GameManager.Instance.lapsMax - 1)
         {
             print("Last Lap");
         }
 
-        if (completedLaps > GameManager.Instance.lapsMax)
+        if (completedLaps == GameManager.Instance.lapsMax)
         {
             //GameManager.Instance.race = StatusRace.FinishRace;
             StartCoroutine(FinishedRacer());

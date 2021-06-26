@@ -44,10 +44,9 @@ public class Checkpoint : MonoBehaviour
         return false;
     }
 
-    public bool RegisterCar(CarManager car, int vol)
+    private void RegisterCar(CarManager car, int vol)
     {        
         lapRace[vol].car.Add(car);
-        return true;
     }
 
     public int ReturnPosCar(CarManager car, int vol)
