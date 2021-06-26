@@ -39,6 +39,17 @@ namespace Network
             SceneManager.sceneLoaded += OnSceneLoaded;
             GameConnection.Instance.OnPhotonPlayerLeftRoom += RemovePlayer;
         }
+        
+        private void OnDestroy()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            GameConnection.Instance.OnPhotonPlayerLeftRoom -= RemovePlayer;
+        }
+        
+        public void DestroySelf()
+        {
+            Destroy(gameObject);
+        }
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
         {

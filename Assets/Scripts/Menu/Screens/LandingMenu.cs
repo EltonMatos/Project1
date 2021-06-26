@@ -1,5 +1,6 @@
 using Network;
 using TMPro;
+using UnityEngine;
 
 namespace Menu.Screens
 {
@@ -9,6 +10,11 @@ namespace Menu.Screens
         public void ConnectToLobby(TMP_InputField nicknameInput)
         {
             GameConnection.Instance.ConnectToLobby(nicknameInput.text);
+        }
+
+        public void QuitGame()
+        {
+            Application.Quit();
         }
     }
 }

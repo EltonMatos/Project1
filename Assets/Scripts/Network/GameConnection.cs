@@ -4,6 +4,7 @@ using Menu.Screens;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 namespace Network
 {
@@ -26,17 +27,17 @@ namespace Network
         public void ConnectToLobby(string nicknameName)
         {
             if (string.IsNullOrEmpty(nicknameName)) return;
-            
+
             PhotonNetwork.LocalPlayer.NickName = nicknameName;
             PhotonNetwork.ConnectUsingSettings();
             MenuManager.Instance.OpenMenu("Loading");
         }
-        
+
         public void CreateOrJoinRoom(string roomName)
         {
             if (string.IsNullOrEmpty(roomName)) return;
 
-            PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions { MaxPlayers = 4 }, TypedLobby.Default);
+            PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions {MaxPlayers = 4}, TypedLobby.Default);
             MenuManager.Instance.OpenMenu("Loading");
         }
 
@@ -58,10 +59,11 @@ namespace Network
             print("Connected to lobby");
             MenuManager.Instance.OpenMenu("Lobby");
         }
-        
+
         public override void OnJoinedRoom()
         {
-            print("You joined " + PhotonNetwork.CurrentRoom.Name + " room with the username: " + PhotonNetwork.LocalPlayer.NickName);
+            print("You joined " + PhotonNetwork.CurrentRoom.Name + " room with the username: " +
+                  PhotonNetwork.LocalPlayer.NickName);
             MenuManager.Instance.OpenMenu("Room");
         }
 
@@ -79,6 +81,19 @@ namespace Network
         public override void OnLeftRoom()
         {
             MenuManager.Instance.OpenMenu("Lobby");
+        }
+
+        public override void OnDisconnected(DisconnectCause cause)
+        {
+            if (SceneManager.GetActiveScene().name == "Post Race Menu")
+            {
+                GameRoom.Instance.DestroySelf();
+                SceneManager.LoadScene("Menu");
+            }
+            else
+            {
+                MenuManager.Instance.OpenMenu("Landing");
+            }
         }
 
         public override void OnErrorInfo(ErrorInfo errorInfo)

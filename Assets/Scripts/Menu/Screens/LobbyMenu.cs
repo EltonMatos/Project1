@@ -20,5 +20,10 @@ namespace Menu.Screens
             GameRoom.Instance.ResetRoom();
             GameConnection.Instance.CreateOrJoinRoom(roomInput.text);
         }
+
+        public void QuitLobby()
+        {
+            PhotonNetwork.Disconnect();
+        }
     }
 }
