@@ -53,6 +53,9 @@ public class PlayerCar : MonoBehaviour
     public float fuelCar;
     public float damagedCar;
 
+    ParticleSystem smokenParticicle;
+    ParticleSystem.EmissionModule emissionModule;
+
     public float turbo;
 
     public AudioClip somCar;
@@ -68,6 +71,10 @@ public class PlayerCar : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         car = GetComponent<CarManager>();
+        smokenParticicle = GetComponentInChildren<ParticleSystem>();
+        emissionModule = smokenParticicle.emission;
+        emissionModule.enabled = false;
+        
         audioCar.clip = somCar;
 
         wheelGuide = new WheelManager[wheelsCar.Length];
@@ -141,7 +148,7 @@ public class PlayerCar : MonoBehaviour
         }
     }
 
-    private void DriveCar()
+    private void moveCar()
     {
         //guiar o carro        
         for (int i = 0; i < wheelsCar.Length; i++)
@@ -169,11 +176,30 @@ public class PlayerCar : MonoBehaviour
             }
         }
 
-        statusPlayer = StatusCar.Drive;
-
         //velocidade em RPM
-        veloKMH = rb.velocity.magnitude * 2.2f;
+        veloKMH = rb.velocity.magnitude * 2.5f;
         rpm = veloKMH * raceChenges[changeCurrent] * 15f;
+
+        //Força
+        if (acceleration < -0.2f)
+        {
+            rb.AddForce(-transform.forward * forceStop);
+            rb.AddTorque((transform.up * instabilityHang * veloKMH / 60f) * driveCar);
+            acceleration = 0;
+        }
+
+        if (veloKMH <= 120f)
+        {
+            forceFinal = transform.forward * (maxTorque / (changeCurrent + 1) + maxTorque / 1f) * acceleration;
+            rb.AddForce(forceFinal);
+        }
+    }
+
+    private void DriveCar()
+    {
+        moveCar();
+
+        statusPlayer = StatusCar.Drive;
 
         if (rpm > maxRPM)
         {
@@ -192,21 +218,6 @@ public class PlayerCar : MonoBehaviour
                 changeCurrent = 0;
             }
         }
-
-        //Força
-        if (acceleration < -0.8f)
-        {
-            rb.AddForce(-transform.forward * forceStop);
-            rb.AddTorque((transform.up * instabilityHang * veloKMH / 60f) * driveCar);
-            acceleration = 0;
-        }
-
-        if (veloKMH <= 120f)
-        {
-            forceFinal = transform.forward * (maxTorque / (changeCurrent + 1) + maxTorque / 1f) * acceleration;
-            rb.AddForce(forceFinal);
-        }
-
 
         //add som na aceleração do carro
         audioCar.pitch = rpm / somPitch;
@@ -230,24 +241,7 @@ public class PlayerCar : MonoBehaviour
 
         if (statusPlayer != StatusCar.LockedCar)
         {
-            for (int i = 0; i < wheelsCar.Length; i++)
-            {
-                wheelsCar[i].steerAngle = driveCar * curveWheel.Evaluate(veloKMH);
-                wheelsCar[i].motorTorque = 1f;
-            }
-
-            veloKMH = rb.velocity.magnitude * 2.5f;
-            rpm = veloKMH * raceChenges[changeCurrent] * 15f;
-
-            if (acceleration < -0.2f)
-            {
-                rb.AddForce(-transform.forward * forceStop);
-                rb.AddTorque((transform.up * instabilityHang * veloKMH / 60f) * driveCar);
-                acceleration = 0;
-            }
-
-            forceFinal = transform.forward * (maxTorque / (changeCurrent + 1) + maxTorque / 1f) * acceleration;
-            rb.AddForce(forceFinal);
+            moveCar();           
 
             audioCar.pitch = rpm / somPitch;
         }
@@ -281,8 +275,9 @@ public class PlayerCar : MonoBehaviour
 
     private void StatusDamagedCar()
     {
-        if (damagedCar >= 50 && statusPlayer != StatusCar.PitStop)
+        if (damagedCar >= 10 && statusPlayer != StatusCar.PitStop)
         {
+            emissionModule.enabled = true;
             statusPlayer = StatusCar.Broken;
         }
     }
@@ -316,6 +311,7 @@ public class PlayerCar : MonoBehaviour
             {
                 turbo = 3;
             }
+            emissionModule.enabled = false;
         }
 
         audioCar.volume = 1;

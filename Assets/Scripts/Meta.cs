@@ -22,6 +22,7 @@ public class Meta : MonoBehaviour
             {
                 //Checkpoint.Instance.RegisterCar(car, car.completedLaps);
                 //car.positionCar = Checkpoint.Instance.ReturnPosCar(car, car.completedLaps);                
+                Debug.Log("Volta invalidada");
                 ResetCheckpoints(car);                
                 return;
             }
