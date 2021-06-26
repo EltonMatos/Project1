@@ -42,6 +42,8 @@ MonoBehaviour:
   - RemovePlayer
   - RequestColorChange
   - ChangeColorForActor
+  - SetPlayerFinished
+  - UpdateResultsList
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

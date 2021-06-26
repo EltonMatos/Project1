@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        lapsMax = 2;        
+        lapsMax = 0;        
     }    
 
     private void Update()

@@ -27,8 +27,8 @@ public class Meta : MonoBehaviour
             }
         }        
         car.completedLaps++;
-        car.AddLaps(car.completedLaps);
-        ResetCheckpoints(car);        
+        car.AddLaps();
+        ResetCheckpoints(car);
     }
 
     void ResetCheckpoints(CarManager car)

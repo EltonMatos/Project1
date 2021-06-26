@@ -96,7 +96,6 @@ public class PlayerCar : MonoBehaviour
         //setup color
         CarColors color = GameRoom.Instance.GetColor(photonView.Owner);
         var mesh = CarColorManager.Instance.GetMesh(color);
-        print($"mesh for player {PhotonNetwork.LocalPlayer.ActorNumber} {mesh.name} {color}");
         GetComponent<MeshFilter>().mesh = mesh;
     }
 

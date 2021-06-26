@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using CarPlayer;
+using Game;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
@@ -15,7 +16,9 @@ namespace Network
 
         public PhotonView photonView;
         private List<GamePlayer> _players = new List<GamePlayer>();
+        public readonly List<GameResult> Results = new List<GameResult>();
         public Action<int, int> ColorChanged;
+        public Action GameFinished;
 
         private void Awake()
         {
@@ -169,7 +172,59 @@ namespace Network
         {
             photonView.RPC("RequestColorChange", RpcTarget.MasterClient, PhotonNetwork.LocalPlayer.ActorNumber);
         }
+        
+        public void PlayerFinished(Player photonViewOwner)
+        {
+            photonView.RPC("SetPlayerFinished", RpcTarget.MasterClient, photonViewOwner.ActorNumber);
+        }
+        
+        [PunRPC]
+        public void SetPlayerFinished(int actorNumber)
+        {
+            bool playerFound = false;
+            foreach (GameResult gameResult in Results)
+            {
+                if (gameResult.Player.ActorNumber == actorNumber)
+                {
+                    playerFound = true;
+                } 
+            }
 
+            if (!playerFound)
+            {
+                foreach (GamePlayer gamePlayer in _players)
+                {
+                    if (gamePlayer.ActorNumber == actorNumber)
+                    {
+                        GameResult gameResult = new GameResult(gamePlayer, Results.Count + 1);
+                        print($"Adding #{gameResult.Position} {gamePlayer}");
+                        Results.Add(gameResult);
+                        photonView.RPC("UpdateResultsList", RpcTarget.Others, actorNumber, gameResult.Position);
+                        break;
+                    } 
+                }
+            }
+            
+            print(_players.Count + " player : results " + Results.Count);
+            if (_players.Count == Results.Count)
+            {
+                GameFinished?.Invoke();
+            }
+
+        }
+        
+        [PunRPC]
+        public void UpdateResultsList(int actorNumber, int position)
+        {
+            foreach (GamePlayer gamePlayer in _players)
+            {
+                if (gamePlayer.ActorNumber == actorNumber)
+                {
+                    print($"Adding #{position} {gamePlayer}");
+                    Results.Add(new GameResult(gamePlayer, position));
+                } 
+            }
+        }
 
         [PunRPC]
         public void NewPlayer(int gameId, int actorNumber, int carColor)
