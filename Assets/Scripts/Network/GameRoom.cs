@@ -22,6 +22,7 @@ namespace Network
 
         private void Awake()
         {
+            //TODO check if this will have conflict when returning to menu
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
@@ -208,7 +209,7 @@ namespace Network
             print(_players.Count + " player : results " + Results.Count);
             if (_players.Count == Results.Count)
             {
-                GameFinished?.Invoke();
+                photonView.RPC("GameHasFinished", RpcTarget.AllViaServer);
             }
 
         }
@@ -224,6 +225,12 @@ namespace Network
                     Results.Add(new GameResult(gamePlayer, position));
                 } 
             }
+        }
+
+        [PunRPC]
+        public void GameHasFinished()
+        {
+            GameFinished?.Invoke();
         }
 
         [PunRPC]

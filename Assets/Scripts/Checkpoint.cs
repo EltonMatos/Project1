@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {    
+    //TODO not in use, is it needed?
     public static Checkpoint Instance;
 
     public List<Laps> lapRace;
