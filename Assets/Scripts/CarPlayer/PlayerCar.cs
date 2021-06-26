@@ -126,10 +126,14 @@ public class PlayerCar : MonoBehaviour
             if (statusPlayer != StatusCar.LockedCar)
             {
                 StatusFuelCar();
-                StatusDamagedCar();
             }
 
             if (statusPlayer == StatusCar.FinishedRace) audioCar.Stop();
+        }
+        
+        if (statusPlayer != StatusCar.LockedCar)
+        {
+            StatusDamagedCar();
         }
     }
 

@@ -13,6 +13,7 @@ namespace Results
 
         private void OnEnable()
         {
+            //TODO will need to change to pun callback
             GameConnection.Instance.OnPhotonMasterClientSwitched += OnPhotonMasterClientSwitched;
             goToRoomButton.SetActive(PhotonNetwork.IsMasterClient);
         }
