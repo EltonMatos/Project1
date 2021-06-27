@@ -9,17 +9,18 @@ public class UiManager : MonoBehaviour
 
     public Slider fuelBar;
     public float sliderBarValue;
-
-    public Text statusCar;
-    public Text timerStartRaceText;
-    //public Text finishedRaceText;
-    public Text timerLap1CarText, timerLap2CarText, timerLap3CarText;    
-    public Text positionCarText;
-    public Text wrongWayText;
+    public Text statusCar;       
+    //public Text timerLap1CarText, timerLap2CarText, timerLap3CarText;    
+    public Text positionCarText;   
     public Text numLaps;
 
     public Image[] imgTurbo;
     public int qntTurbo;
+
+    public Text timerStartRaceText;
+    public Text wrongWayText;
+    public Text lastLapText;
+    public bool lastaLap;    
 
     private void Awake()
     {
@@ -32,6 +33,8 @@ public class UiManager : MonoBehaviour
         fuelBar.value = fuelBar.minValue;
         qntTurbo = 0;
         wrongWayText.enabled = false;
+        lastLapText.enabled = false;
+        lastaLap = true;
 
         //timerLapCarText.text = "Lap 1 - 0.000 \nLap 2 - 0.000 \nLap 3 - 0.000";
     }

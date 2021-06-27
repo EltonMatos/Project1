@@ -22,7 +22,7 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
+        
         audioS = GetComponent<AudioSource>();
     }
 
@@ -31,8 +31,7 @@ public class AudioManager : MonoBehaviour
         if(CurrentScene.instance.phase != 0 && CurrentScene.instance.phase != 1)
         {
             if (audioM.isPlaying)
-            {
-                print("entrou");
+            {                
                 audioM.Stop();
             }
             if (!audioS.isPlaying)
@@ -43,7 +42,11 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
-            if (!audioS.isPlaying)
+            if (audioS.isPlaying)
+            {
+                audioS.Stop();
+            }
+            if (!audioM.isPlaying)
             {
                 audioM.clip = audioMenu;
                 audioM.Play();

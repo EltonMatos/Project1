@@ -39,8 +39,10 @@ public class CarManager : MonoBehaviour
 
     private void Update()
     {
-        UpdateRacerTimer();
+        if (completedLaps != GameManager.Instance.lapsMax) UpdateRacerTimer();
+
         FinishRace();
+
         if (photonView.IsMine)
         {
             UiManager.Instance.positionCarText.text = positionCar.ToString() + "º";
@@ -87,15 +89,16 @@ public class CarManager : MonoBehaviour
 
     public void FinishRace()
     {
-        if (completedLaps == GameManager.Instance.lapsMax - 1)
+        if (completedLaps == GameManager.Instance.lapsMax - 1 && UiManager.Instance.lastaLap)
         {
-            print("Last Lap");
+            StartCoroutine(LastLapRacer());
         }
 
         if (completedLaps == GameManager.Instance.lapsMax)
         {
-            //GameManager.Instance.race = StatusRace.FinishRace;
             StartCoroutine(FinishedRacer());
+            player.audioCar.Stop();
+            AudioManager.instance.audioS.Stop();
         }
     }
 
@@ -104,5 +107,14 @@ public class CarManager : MonoBehaviour
         GameRoom.Instance.PlayerFinished(photonView.Owner);
         yield return new WaitForSeconds(2);
         player.statusPlayer = StatusCar.FinishedRace;
+    }
+
+    IEnumerator LastLapRacer()
+    {
+        //GameRoom.Instance.PlayerFinished(photonView.Owner);
+        UiManager.Instance.lastLapText.enabled = true;
+        yield return new WaitForSeconds(2);
+        UiManager.Instance.lastLapText.enabled = false;
+        UiManager.Instance.lastaLap = false;
     }
 }

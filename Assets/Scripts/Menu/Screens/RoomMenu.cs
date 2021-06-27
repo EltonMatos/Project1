@@ -15,9 +15,15 @@ namespace Menu.Screens
         public GameObject playerListItemPrefab;
 
         private ListTrack track;
-        
+
         //TODO make this possible to change so user can pick track
-        private readonly string _raceScene = "Track 1";       
+        private string _raceScene;
+
+        private void Start()
+        {
+            track = GetComponentInChildren<ListTrack>();            
+            _raceScene = "Track " + 4;
+        }
 
 
         private void OnEnable()
