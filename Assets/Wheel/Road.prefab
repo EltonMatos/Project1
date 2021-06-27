@@ -108,5 +108,5 @@ WheelCollider:
     m_ExtremumValue: 1.6
     m_AsymptoteSlip: 0.35
     m_AsymptoteValue: 1.1
-    m_Stiffness: 3
+    m_Stiffness: 3.3
   m_Enabled: 1

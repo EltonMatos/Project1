@@ -16,7 +16,8 @@ namespace Menu.Screens
 
         
         //TODO make this possible to change so user can pick track
-        private readonly string _raceScene = "Track 1";
+        private readonly string _raceScene = "Track 4";
+
 
         private void OnEnable()
         {

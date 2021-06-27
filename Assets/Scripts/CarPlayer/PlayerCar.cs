@@ -113,11 +113,8 @@ public class PlayerCar : MonoBehaviour
             driveCar = Input.GetAxis("Horizontal");
             acceleration = Input.GetAxis("Vertical");
 
-            if (Input.GetKeyDown(KeyCode.Space) && turbo > 0 && statusPlayer != StatusCar.Broken)
+            if (turbo > 0 && statusPlayer != StatusCar.Broken)
             {
-                turbo--;
-                maxTorque = 20000;
-                StartCoroutine(TurboCar());
                 UiManager.Instance.StatusTurboCar();
             }
 
@@ -130,7 +127,14 @@ public class PlayerCar : MonoBehaviour
 
             if (statusPlayer == StatusCar.FinishedRace) audioCar.Stop();
         }
-        
+
+        if (Input.GetKeyDown(KeyCode.Space) && turbo > 0 && statusPlayer != StatusCar.Broken)
+        {
+            turbo--;
+            maxTorque = 20000;
+            StartCoroutine(TurboCar());            
+        }
+
         if (statusPlayer != StatusCar.LockedCar)
         {
             StatusDamagedCar();
@@ -185,7 +189,7 @@ public class PlayerCar : MonoBehaviour
         rpm = veloKMH * raceChenges[changeCurrent] * 15f;
 
         //Força
-        if (acceleration < -0.2f)
+        if (acceleration < -0.8f)
         {
             rb.AddForce(-transform.forward * forceStop);
             rb.AddTorque((transform.up * instabilityHang * veloKMH / 60f) * driveCar);
@@ -194,7 +198,7 @@ public class PlayerCar : MonoBehaviour
 
         if (veloKMH <= 120f)
         {
-            forceFinal = transform.forward * (maxTorque / (changeCurrent + 1) + maxTorque / 1f) * acceleration;
+            forceFinal = transform.forward * (maxTorque / (changeCurrent + 1) + maxTorque / 1f) * (acceleration * 1.2f);
             rb.AddForce(forceFinal);
         }
     }
@@ -279,7 +283,7 @@ public class PlayerCar : MonoBehaviour
 
     private void StatusDamagedCar()
     {
-        if (damagedCar >= 10 && statusPlayer != StatusCar.PitStop)
+        if (damagedCar >= 50 && statusPlayer != StatusCar.PitStop)
         {
             emissionModule.enabled = true;
             statusPlayer = StatusCar.Broken;
@@ -368,7 +372,7 @@ public class PlayerCar : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player"))
         {
-            damagedCar += 3;
+            damagedCar += 2;
         }
     }
 
@@ -380,9 +384,8 @@ public class PlayerCar : MonoBehaviour
             GUI.Label(new Rect(20, 40, 128, 32), (changeCurrent + 1).ToString());
             GUI.Label(new Rect(20, 60, 128, 32), veloKMH + "KMH");
 
-            GUI.Label(new Rect(20, 100, 128, 32), "Damaged: " + damagedCar);
-            GUI.Label(new Rect(20, 120, 128, 32), "StatusCar: " + statusPlayer);
-            GUI.Label(new Rect(20, 140, 128, 32), "Timer: " + car.ReturnTime());
+            GUI.Label(new Rect(20, 80, 128, 32), "Damaged: " + damagedCar);            
+            GUI.Label(new Rect(20, 100, 128, 32), "Timer: " + car.ReturnTime());
         }
     }
 }

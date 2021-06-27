@@ -20,6 +20,7 @@ public class Checkpoint : MonoBehaviour
         for(int i = 0; i < GameManager.Instance.lapsMax; i++)
         {
             lapRace.Add(new Laps());
+
         }
     }
 
