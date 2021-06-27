@@ -22,7 +22,7 @@ namespace Menu.Screens
         private void Start()
         {
             track = GetComponentInChildren<ListTrack>();            
-            _raceScene = "Track " + 4;
+            _raceScene = "Track " + track.idTrack;
         }
 
 

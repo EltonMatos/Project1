@@ -43,6 +43,6 @@ public class ListTrack : MonoBehaviour
 
     public int ReturnIdTrack()
     {
-        return idTrack + aux;
+        return idTrack;
     }
 }
