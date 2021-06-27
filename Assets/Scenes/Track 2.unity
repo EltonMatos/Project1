@@ -357,6 +357,7 @@ MonoBehaviour:
   timerLap3CarText: {fileID: 0}
   positionCarText: {fileID: 1938658116}
   wrongWayText: {fileID: 313724078}
+  numLaps: {fileID: 0}
   imgTurbo:
   - {fileID: 2143565888}
   - {fileID: 1966612823}
@@ -4030,6 +4031,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 546234487}
   m_CullTransparentMesh: 0
+--- !u!1 &552272367
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 552272369}
+  - component: {fileID: 552272368}
+  m_Layer: 0
+  m_Name: CheckPhase
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &552272368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552272367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed05048fcb22cec43b85976e00887dcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phase: -1
+--- !u!4 &552272369
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552272367}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 371.5, y: 209, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &574833757
 GameObject:
   m_ObjectHideFlags: 0
@@ -9355,9 +9400,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   race: 0
   lapsMax: 10
-  mainCamera: {fileID: 0}
-  cameraOne: {fileID: 0}
-  cameraTwo: {fileID: 0}
   timer: 3
   timerRace: 0
 --- !u!4 &1141124923

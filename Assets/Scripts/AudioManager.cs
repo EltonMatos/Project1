@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
 
     public AudioClip audioMenu;
+    public AudioSource audioM;
     public AudioSource audioS;
     public AudioClip[] clip;
 
@@ -27,10 +28,26 @@ public class AudioManager : MonoBehaviour
 
     void Update()
     {
-        if (!audioS.isPlaying)
-        {            
-            audioS.clip = GetRandom();
-            audioS.Play();
+        if(CurrentScene.instance.phase != 0 && CurrentScene.instance.phase != 1)
+        {
+            if (audioM.isPlaying)
+            {
+                print("entrou");
+                audioM.Stop();
+            }
+            if (!audioS.isPlaying)
+            {                
+                audioS.clip = GetRandom();
+                audioS.Play();
+            }                       
+        }
+        else
+        {
+            if (!audioS.isPlaying)
+            {
+                audioM.clip = audioMenu;
+                audioM.Play();
+            }
         }
     }
 

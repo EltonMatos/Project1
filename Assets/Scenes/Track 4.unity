@@ -9221,9 +9221,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   race: 0
   lapsMax: 3
-  mainCamera: {fileID: 0}
-  cameraOne: {fileID: 0}
-  cameraTwo: {fileID: 0}
   timer: 3
   timerRace: 0
 --- !u!4 &594209074
@@ -29730,6 +29727,50 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.9335403, y: 2.296681, z: 0.4826815}
   m_Center: {x: 3.458767, y: 0.5806122, z: -0.23348628}
+--- !u!1 &1848326007
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1848326009}
+  - component: {fileID: 1848326008}
+  m_Layer: 0
+  m_Name: CheckPhase
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1848326008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848326007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed05048fcb22cec43b85976e00887dcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phase: -1
+--- !u!4 &1848326009
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848326007}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 371.5, y: 209, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1851111107 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 194136, guid: d2d7501a567469e46912edad4f8b6b91,
@@ -31843,6 +31884,7 @@ MonoBehaviour:
   timerLap3CarText: {fileID: 0}
   positionCarText: {fileID: 486242447}
   wrongWayText: {fileID: 2007949751}
+  numLaps: {fileID: 0}
   imgTurbo:
   - {fileID: 1599869443}
   - {fileID: 1015137067}

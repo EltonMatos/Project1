@@ -168,6 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &17485691
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -419,6 +420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &62540400
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -706,6 +708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 4
+  posStart: {fileID: 0}
 --- !u!65 &108075368
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -907,6 +910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &113162572
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1389,6 +1393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &159041455
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2301,6 +2306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &225385617
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2619,9 +2625,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   race: 0
   lapsMax: 3
-  mainCamera: {fileID: 0}
-  cameraOne: {fileID: 0}
-  cameraTwo: {fileID: 0}
   timer: 3
   timerRace: 0
 --- !u!4 &275409979
@@ -2856,6 +2859,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &307239362
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3692,6 +3696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &358007878
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4116,6 +4121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &402119815
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4397,6 +4403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &422303442
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4868,6 +4875,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &471954680
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5502,6 +5510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &531057079
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6584,6 +6593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 6
+  posStart: {fileID: 0}
 --- !u!65 &725588579
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7904,6 +7914,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &840460498
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10257,6 +10268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &1137092210
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10955,6 +10967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &1257878184
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11156,6 +11169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &1284634737
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11586,6 +11600,7 @@ MonoBehaviour:
   timerLap3CarText: {fileID: 0}
   positionCarText: {fileID: 493754385}
   wrongWayText: {fileID: 33237066}
+  numLaps: {fileID: 0}
   imgTurbo:
   - {fileID: 318034766}
   - {fileID: 1360302269}
@@ -11730,6 +11745,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &1345376539
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12148,6 +12164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &1395602076
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12353,6 +12370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &1396803311
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12840,6 +12858,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &1459575802
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13119,6 +13138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &1480672759
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14524,6 +14544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &1668289082
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14819,6 +14840,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 7
+  posStart: {fileID: 0}
 --- !u!65 &1711751652
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14926,6 +14948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &1725515807
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15033,6 +15056,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 1
+  posStart: {fileID: 0}
 --- !u!65 &1756439977
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15234,6 +15258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &1790244065
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16176,6 +16201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &1893537051
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16283,6 +16309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &1895719253
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16664,6 +16691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 5
+  posStart: {fileID: 0}
 --- !u!65 &1935461153
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16807,6 +16835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 2
+  posStart: {fileID: 0}
 --- !u!65 &1957222187
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16914,6 +16943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &1978926377
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17115,6 +17145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &2005298417
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17316,6 +17347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 3
+  posStart: {fileID: 0}
 --- !u!65 &2021256790
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17423,6 +17455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idPosCurrent: 8
+  posStart: {fileID: 0}
 --- !u!65 &2024597881
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17824,6 +17857,50 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 20.000013, y: 5.9905355e-15, z: 20.027645}
   m_Center: {x: 0, y: -4.3947119e-16, z: 10.013807}
+--- !u!1 &2070161197
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2070161199}
+  - component: {fileID: 2070161198}
+  m_Layer: 0
+  m_Name: CheckPhase
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2070161198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2070161197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed05048fcb22cec43b85976e00887dcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phase: -1
+--- !u!4 &2070161199
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2070161197}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 371.5, y: 209, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2070513467
 PrefabInstance:
   m_ObjectHideFlags: 0

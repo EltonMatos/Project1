@@ -15,7 +15,8 @@ public class UiManager : MonoBehaviour
     //public Text finishedRaceText;
     public Text timerLap1CarText, timerLap2CarText, timerLap3CarText;    
     public Text positionCarText;
-    public Text wrongWayText;    
+    public Text wrongWayText;
+    public Text numLaps;
 
     public Image[] imgTurbo;
     public int qntTurbo;
@@ -38,8 +39,7 @@ public class UiManager : MonoBehaviour
     private void Update()
     {
         //TODO removing call to fuel control until it is implemented correctly
-        FuelControl();
-        if(GameManager.Instance.race == StatusRace.PreparingGame) StatusStartRace();        
+        FuelControl();            
     }
 
     //get fuel in the correct way
@@ -53,15 +53,5 @@ public class UiManager : MonoBehaviour
         if (qntTurbo == 3) return;
         imgTurbo[qntTurbo].enabled = false;
         qntTurbo += 1;        
-    }
-
-    public void StatusStartRace()
-    {
-        timerStartRaceText.text = GameManager.Instance.timerRace.ToString();
-    }
-
-    public void ShowTimeLapCar()
-    {
-        //TimerLapCar.text = 
-    }     
+    }    
 }

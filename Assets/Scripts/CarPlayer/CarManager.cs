@@ -18,7 +18,7 @@ public class CarManager : MonoBehaviour
 
     private List<string> listTimeLaps;
 
-    public int lapsMax;
+    //public float lapsMax;
     public int completedLaps = 0;
 
     public int positionCar;
@@ -31,7 +31,7 @@ public class CarManager : MonoBehaviour
     {
         player = GetComponent<PlayerCar>();
         listTimeLaps = new List<string>();
-        lapsMax = GameManager.Instance.lapsMax;
+        //lapsMax = GameManager.Instance.lapsMax;
         positionCar = 0;
         wrongWay = false;
         StartListTime();
@@ -43,11 +43,10 @@ public class CarManager : MonoBehaviour
         FinishRace();
         if (photonView.IsMine)
         {
-            UiManager.Instance.positionCarText.text = positionCar.ToString();
+            UiManager.Instance.positionCarText.text = positionCar.ToString() + "º";
             /*UiManager.Instance.timerLap1CarText.text = listTimeLaps[0].ToString();
             UiManager.Instance.timerLap2CarText.text = listTimeLaps[1].ToString();
             UiManager.Instance.timerLap3CarText.text = listTimeLaps[2].ToString();*/
-
             UiManager.Instance.wrongWayText.enabled = wrongWay;
         }
     }

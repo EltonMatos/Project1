@@ -6,6 +6,7 @@ using UnityEngine;
 
 public enum StatusRace
 {
+    LobbyRoom,
     PreparingGame,
     PauseRace,
     FinishRace,
@@ -18,46 +19,49 @@ public class GameManager : MonoBehaviour
 
     public StatusRace race;    
 
-    public int lapsMax;
+    public float lapsMax;         
 
-    public Camera mainCamera, cameraOne, cameraTwo;      
-
-    public float timer = 3;    
-    public float timerRace;   
+    public float timer;    
+    public float timerRace;
 
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Start()
     {
-        lapsMax = 3;        
+        timer = 3;
+        lapsMax = 0;        
     }    
 
     private void Update()
     {
-        if(race == StatusRace.PreparingGame)
+        if(race == StatusRace.PreparingGame && CurrentScene.instance.phase != 0)
         {
-            //StartCoroutine(PreparingGame());
             UiManager.Instance.timerStartRaceText.enabled = true;
             StartRacerTimer();
-        } 
-        if(race == StatusRace.FinishRace)
-        {
-            //UiManager.Instance.TimerStartRace.text = "Fished Race";
-        }        
+        }              
     }
 
     private void StartRacerTimer()
     {        
         timer -= Time.deltaTime;
         timerRace = Mathf.Round(timer);
-        if(timerRace == 0)
+        UiManager.Instance.timerStartRaceText.text = timerRace.ToString();
+        if (timerRace == 0)
         {
             UiManager.Instance.timerStartRaceText.text = "GO";            
-            StartCoroutine(GoRace());
+            StartCoroutine(GoRace());            
             return;
         }        
     }
@@ -65,7 +69,8 @@ public class GameManager : MonoBehaviour
     IEnumerator GoRace()
     {        
         yield return new WaitForSeconds(1);
-        UiManager.Instance.timerStartRaceText.enabled = false;        
+        UiManager.Instance.timerStartRaceText.enabled = false;
+        timer = 3;
         race = StatusRace.StartRace;        
     }
 
@@ -74,14 +79,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1);        
         UiManager.Instance.timerStartRaceText.enabled = true;        
         StartRacerTimer();        
-    }
-
-    public void TypeCamera()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            //Camera.main = cameraTwo;
-        }
     }
 }
  

@@ -400,7 +400,6 @@ MonoBehaviour:
   timer: 0
   checkLap: 0
   timePlayer: 0
-  lapsMax: 0
   completedLaps: 0
   positionCar: 0
   idCarPosCurrent: 0

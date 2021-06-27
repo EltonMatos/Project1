@@ -113,8 +113,11 @@ public class PlayerCar : MonoBehaviour
             driveCar = Input.GetAxis("Horizontal");
             acceleration = Input.GetAxis("Vertical");
 
-            if (turbo > 0 && statusPlayer != StatusCar.Broken)
+            if (Input.GetKeyDown(KeyCode.Space) && turbo > 0 && statusPlayer != StatusCar.Broken)
             {
+                turbo--;
+                maxTorque = 20000;
+                StartCoroutine(TurboCar());
                 UiManager.Instance.StatusTurboCar();
             }
 
@@ -126,13 +129,6 @@ public class PlayerCar : MonoBehaviour
             }
 
             if (statusPlayer == StatusCar.FinishedRace) audioCar.Stop();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space) && turbo > 0 && statusPlayer != StatusCar.Broken)
-        {
-            turbo--;
-            maxTorque = 20000;
-            StartCoroutine(TurboCar());            
         }
 
         if (statusPlayer != StatusCar.LockedCar)
@@ -279,6 +275,7 @@ public class PlayerCar : MonoBehaviour
     {
         UiManager.Instance.sliderBarValue = fuelCar;
         UiManager.Instance.statusCar.text = statusPlayer.ToString();
+        UiManager.Instance.numLaps.text = car.completedLaps + " / " + GameManager.Instance.lapsMax.ToString();
     }
 
     private void StatusDamagedCar()

@@ -14,9 +14,10 @@ namespace Menu.Screens
         public Transform playerListContent;
         public GameObject playerListItemPrefab;
 
+        private ListTrack track;
         
         //TODO make this possible to change so user can pick track
-        private readonly string _raceScene = "Track 4";
+        private readonly string _raceScene = "Track 1";       
 
 
         private void OnEnable()
@@ -52,7 +53,7 @@ namespace Menu.Screens
         }
         
         public void StartGame()
-        {
+        {            
             PhotonNetwork.LoadLevel(_raceScene);
         }
 
