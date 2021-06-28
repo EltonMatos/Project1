@@ -14,8 +14,6 @@ public class PositionCar : MonoBehaviour
     private Transform checkPositionPrevius;
     private Transform positionCar;
 
-    public GameObject posStart;
-
     private float _distance;
 
     private PositionCar car;
@@ -25,7 +23,7 @@ public class PositionCar : MonoBehaviour
         car = GetComponentInParent<PositionCar>();
         positionCar = GetComponent<Transform>();
         checkPositionPrevius = GetComponent<Transform>();
-        checkPositionPrevius.position = posStart.transform.position;               
+        //checkPositionPrevius.position = posStart.transform.position;               
 
         lapRace = new List<Laps>();
         
@@ -40,17 +38,20 @@ public class PositionCar : MonoBehaviour
         CarManager c = other.transform.root.GetComponent<CarManager>();
 
         // wrong way
-        positionCar.position = c.transform.position;
-        _distance = Vector3.Distance(positionCar.position, checkPositionPrevius.position);
+
+        /*_distance = Vector3.Distance(positionCar.position, checkPositionPrevius.position);
         c.wrongWay = false;
-        checkPositionPrevius.position = positionCar.position;
+        checkPositionPrevius.position = positionCar.position;*/
 
         //register position
         //RegisterCar(c, c.completedLaps);
         //c.positionCar = ReturnPosCar(c, c.completedLaps);
 
+        //positionCar.position = c.transform.position;
 
-        /*if (c.idCarPosCurrent < c.idCarPosPrevius && idPosCurrent != 1)
+        c.idCarPosCurrent = idPosCurrent;
+
+        if (c.idCarPosCurrent < c.idCarPosPrevius && idPosCurrent != 1)
         {
             c.wrongWay = true;
             c.idCarPosPrevius = c.idCarPosCurrent;
@@ -59,10 +60,10 @@ public class PositionCar : MonoBehaviour
         {
             c.wrongWay = false;
             c.idCarPosPrevius = c.idCarPosCurrent;
-            RegisterCar(c, c.completedLaps);
+            //RegisterCar(c, c.completedLaps);
 
-            c.positionCar = ReturnPosCar(c, c.completedLaps);
-        }*/
+            //c.positionCar = ReturnPosCar(c, c.completedLaps);
+        }
     }
 
     public bool CheckedCar(CarManager car, int vol)
