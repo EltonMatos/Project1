@@ -11,7 +11,7 @@ namespace Network
     {
         public static GameConnection Instance;
 
-        [HideInInspector] public ErrorInfo PhotonErrorInfo;
+        public ErrorInfo PhotonErrorInfo;
 
         [HideInInspector] public DisconnectCause disconnectionCause;
         [HideInInspector] public bool disconnectWarningRead = true;
