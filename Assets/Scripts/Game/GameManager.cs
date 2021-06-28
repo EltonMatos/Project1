@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public enum StatusRace
@@ -17,11 +19,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public StatusRace race;    
+    public StatusRace race;
 
-    public float lapsMax;         
+    public float lapsMax;
 
-    public float timer;    
+    public float timer;
     public float timerRace;
 
 
@@ -40,45 +42,50 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        timer = 3;
-        lapsMax = 0;        
-    }    
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        lapsMax = 0;
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name.Contains("Track"))
+        {
+            timer = 3;
+            race = StatusRace.PreparingGame;
+        }
+    }
 
     private void Update()
     {
-        if(race == StatusRace.PreparingGame && CurrentScene.instance.phase != 0)
+        if (race == StatusRace.PreparingGame && SceneManager.GetActiveScene().name.Contains("Track"))
         {
             UiManager.Instance.timerStartRaceText.enabled = true;
             StartRacerTimer();
-        }              
+        }
     }
 
     private void StartRacerTimer()
-    {        
+    {
         timer -= Time.deltaTime;
         timerRace = Mathf.Round(timer);
         UiManager.Instance.timerStartRaceText.text = timerRace.ToString();
         if (timerRace == 0)
         {
-            UiManager.Instance.timerStartRaceText.text = "GO";            
-            StartCoroutine(GoRace());            
-            return;
-        }        
+            UiManager.Instance.timerStartRaceText.text = "GO";
+            StartCoroutine(GoRace());
+        }
     }
 
     IEnumerator GoRace()
-    {        
+    {
         yield return new WaitForSeconds(1);
         UiManager.Instance.timerStartRaceText.enabled = false;
         timer = 3;
-        race = StatusRace.StartRace;        
-    }
-
-    IEnumerator PreparingGame()
-    {        
-        yield return new WaitForSeconds(1);        
-        UiManager.Instance.timerStartRaceText.enabled = true;        
-        StartRacerTimer();        
+        race = StatusRace.StartRace;
     }
 }
- 

@@ -16,7 +16,7 @@ namespace Network
 
         public PhotonView photonView;
         private List<GamePlayer> _players = new List<GamePlayer>();
-        public readonly List<GameResult> Results = new List<GameResult>();
+        public List<GameResult> Results = new List<GameResult>();
         public Action<int, int> ColorChanged;
         public Action GameFinished;
 
@@ -61,14 +61,14 @@ namespace Network
 
             if (scene.name.Contains("Post Race Menu"))
             {
-                //if returning from race, go to room
-                print("Loading post race menu scene");
+                Results = new List<GameResult>();
             }
         }
 
         public void ResetRoom()
         {
             _players = new List<GamePlayer>();
+            Results = new List<GameResult>();
         }
 
         public void AddPlayer(Player newPlayer)

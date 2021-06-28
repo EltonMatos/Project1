@@ -30,8 +30,4 @@ public class UIManager_Menu : MonoBehaviour
         
     }
 
-    public void StartGame()
-    {        
-        GameManager.Instance.race = StatusRace.PreparingGame;
-    }
 }
