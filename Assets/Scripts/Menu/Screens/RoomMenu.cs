@@ -4,6 +4,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Menu.Screens
 {
@@ -14,15 +15,16 @@ namespace Menu.Screens
         public Transform playerListContent;
         public GameObject playerListItemPrefab;
 
-        private ListTrack track;
+        public Sprite[] imagemSp;        
 
-        //TODO make this possible to change so user can pick track
-        private string _raceScene;
+        public Image trackCurrent;
+
+        private int _idTrack;        
 
         private void Start()
         {
-            track = GetComponentInChildren<ListTrack>();            
-            _raceScene = "Track " + track.idTrack;
+            _idTrack = 0;
+            trackCurrent.sprite = imagemSp[_idTrack];
         }
 
 
@@ -60,7 +62,7 @@ namespace Menu.Screens
         
         public void StartGame()
         {            
-            PhotonNetwork.LoadLevel(_raceScene);
+            PhotonNetwork.LoadLevel("Track " + _idTrack);
         }
 
         public void ChangeColor()
@@ -73,6 +75,24 @@ namespace Menu.Screens
             GameRoom.Instance.AddPlayer(newPlayer);
             Instantiate(playerListItemPrefab, playerListContent).GetComponent<PlayerListItem>().Setup(newPlayer);
         }
-        
+
+        public void NextTrack()
+        {
+            if (_idTrack < imagemSp.Length - 1)
+            {
+                _idTrack += 1;
+                trackCurrent.sprite = imagemSp[_idTrack];                                
+            }
+        }
+
+        public void PreviusTrack()
+        {
+            if (_idTrack > 0)
+            {
+                _idTrack -= 1;
+                trackCurrent.sprite = imagemSp[_idTrack];                                
+            }
+        }
+
     }
 }

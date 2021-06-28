@@ -27,6 +27,7 @@ public class ListTrack : MonoBehaviour
             trackCurrent.sprite = imagemSp[aux];
             idTrack = aux + 1;
             print("track number: " + idTrack);
+
         }
     }
 
