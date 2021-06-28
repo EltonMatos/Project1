@@ -1435,7 +1435,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 184654576}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -61}
+  m_LocalPosition: {x: 0, y: 0, z: -90}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1821367887}
@@ -1443,7 +1443,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11.2, y: 125}
+  m_AnchoredPosition: {x: -2, y: 82}
   m_SizeDelta: {x: 279.05994, y: 222.02849}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &184654578
@@ -1481,9 +1481,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: a16cb07eacf67834e9ed145c298c3b9a, type: 3}
     m_FontSize: 157
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 171
@@ -11302,7 +11302,7 @@ MonoBehaviour:
   - {fileID: 544751745}
   - {fileID: 697809435}
   qntTurbo: 0
-  timerStartRaceText: {fileID: 1802325624}
+  timerStartRaceText: {fileID: 184654579}
   wrongWayText: {fileID: 1970714301}
   lastLapText: {fileID: 2051386397}
   lastaLap: 0
