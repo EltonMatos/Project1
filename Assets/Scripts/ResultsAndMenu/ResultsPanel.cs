@@ -1,6 +1,7 @@
 using System;
 using Network;
 using Photon.Pun;
+using Photon.Realtime;
 using TMPro;
 using UnityEngine;
 
@@ -13,7 +14,6 @@ namespace ResultsAndMenu
 
         private void OnEnable()
         {
-            //TODO will need to change to pun callback
             GameConnection.Instance.OnPhotonMasterClientSwitched += OnPhotonMasterClientSwitched;
             goToRoomButton.SetActive(PhotonNetwork.IsMasterClient);
         }
@@ -28,7 +28,7 @@ namespace ResultsAndMenu
             goToRoomButton.SetActive(PhotonNetwork.IsMasterClient);
         }
 
-        public void GotToRoom()
+        public void GoToRoom()
         {
             PhotonNetwork.LoadLevel("Post Race Menu");
         }
@@ -39,7 +39,13 @@ namespace ResultsAndMenu
             resultsText.text = "";
             foreach (var gameResult in GameRoom.Instance.Results)
             {
-                resultsText.text += $"#{gameResult.Position} {gameResult.Player} \n";
+                foreach (Player player in PhotonNetwork.PlayerList)
+                {
+                    if (player.ActorNumber == gameResult.Player.ActorNumber)
+                    {
+                        resultsText.text += $"#{gameResult.Position} - {gameResult.Player.Color} - {player.NickName} \n\n";
+                    }
+                }
             }
         }
 
