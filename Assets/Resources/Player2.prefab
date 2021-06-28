@@ -1013,7 +1013,6 @@ MonoBehaviour:
   timer: 0
   checkLap: 0
   timePlayer: 
-  lapsMax: 0
   completedLaps: 0
   positionCar: 0
   idCarPosCurrent: 0

@@ -286,8 +286,8 @@ RectTransform:
   m_Father: {fileID: 1654397591}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMin: {x: 0.22222222, y: 0}
+  m_AnchorMax: {x: 0.22222222, y: 1}
   m_AnchoredPosition: {x: -10, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -818,8 +818,12 @@ MonoBehaviour:
   playerListContent: {fileID: 742046610}
   playerListItemPrefab: {fileID: 3298395464313128926, guid: c1588dcf095b14c53bccf60e5b95dbc8,
     type: 3}
-  imagemSp: []
-  trackCurrent: {fileID: 0}
+  imagemSp:
+  - {fileID: 21300000, guid: e28277f850e95944e88d1a88a1fe91b2, type: 3}
+  - {fileID: 21300000, guid: bb4816b0c5f7b9649b8bfb14bab0b796, type: 3}
+  - {fileID: 21300000, guid: 7e2d912c79fd53c4399f8496be4b2ae1, type: 3}
+  - {fileID: 21300000, guid: 8d7f83c7c8121c142aa7946f7c32224e, type: 3}
+  trackCurrent: {fileID: 1191492095}
 --- !u!224 &299526591
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3588,9 +3592,9 @@ MonoBehaviour:
   m_FillRect: {fileID: 1967830360}
   m_HandleRect: {fileID: 94028717}
   m_Direction: 0
-  m_MinValue: 3
+  m_MinValue: 1
   m_MaxValue: 10
-  m_WholeNumbers: 0
+  m_WholeNumbers: 1
   m_Value: 3
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5431,7 +5435,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0.22222222, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

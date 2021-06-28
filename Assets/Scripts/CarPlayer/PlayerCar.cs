@@ -32,14 +32,14 @@ public class PlayerCar : MonoBehaviour
     private float driveCar = 0f;
 
     public Vector3 forceFinal;
-    public WheelCollider[] wheelsCar;
+    public WheelCollider[] frontWheelsCar;
 
     private Rigidbody rb;
 
     private float veloKMH, rpm;
     public float instabilityHang;
 
-    public float[] raceChenges;
+    public float[] raceChanges;
     private int changeCurrent = 0;
 
     public float maxRPM;
@@ -77,14 +77,14 @@ public class PlayerCar : MonoBehaviour
         
         audioCar.clip = somCar;
 
-        wheelGuide = new WheelManager[wheelsCar.Length];
+        wheelGuide = new WheelManager[frontWheelsCar.Length];
         fuelCar = 100;
         damagedCar = 0;
         turbo = 3;
 
-        for (int i = 0; i < wheelsCar.Length; i++)
+        for (int i = 0; i < frontWheelsCar.Length; i++)
         {
-            wheelGuide[i] = wheelsCar[i].GetComponent<WheelManager>();
+            wheelGuide[i] = frontWheelsCar[i].GetComponent<WheelManager>();
         }
 
 
@@ -152,13 +152,14 @@ public class PlayerCar : MonoBehaviour
         }
     }
 
-    private void moveCar()
+    private void MoveCar()
     {
         //guiar o carro        
-        for (int i = 0; i < wheelsCar.Length; i++)
+        for (int i = 0; i < frontWheelsCar.Length; i++)
         {
-            wheelsCar[i].steerAngle = driveCar * curveWheel.Evaluate(veloKMH);
-            wheelsCar[i].motorTorque = 1f;
+            //TODO add call to steer visually the wheel
+            frontWheelsCar[i].steerAngle = driveCar * curveWheel.Evaluate(veloKMH);
+            frontWheelsCar[i].motorTorque = 1f;
 
             //carro sai da estrada
             if (wheelGuide[i].wheelCurrent != 0)
@@ -182,7 +183,7 @@ public class PlayerCar : MonoBehaviour
 
         //velocidade em RPM
         veloKMH = rb.velocity.magnitude * 2.5f;
-        rpm = veloKMH * raceChenges[changeCurrent] * 15f;
+        rpm = veloKMH * raceChanges[changeCurrent] * 15f;
 
         //Força
         if (acceleration < -0.8f)
@@ -201,14 +202,14 @@ public class PlayerCar : MonoBehaviour
 
     private void DriveCar()
     {
-        moveCar();
+        MoveCar();
 
         statusPlayer = StatusCar.Drive;
 
         if (rpm > maxRPM)
         {
             changeCurrent++;
-            if (changeCurrent == raceChenges.Length)
+            if (changeCurrent == raceChanges.Length)
             {
                 changeCurrent--;
             }
@@ -245,7 +246,7 @@ public class PlayerCar : MonoBehaviour
 
         if (statusPlayer != StatusCar.LockedCar)
         {
-            moveCar();           
+            MoveCar();           
 
             audioCar.pitch = rpm / somPitch;
         }
@@ -261,10 +262,10 @@ public class PlayerCar : MonoBehaviour
     {
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        for (int i = 0; i < wheelsCar.Length; i++)
+        for (int i = 0; i < frontWheelsCar.Length; i++)
         {
-            wheelsCar[i].steerAngle = 0f;
-            wheelsCar[i].motorTorque = 0f;
+            frontWheelsCar[i].steerAngle = 0f;
+            frontWheelsCar[i].motorTorque = 0f;
         }
 
         if (statusPlayer == StatusCar.LockedCar) StartCoroutine(TimePitStop());

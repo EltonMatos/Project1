@@ -421,11 +421,11 @@ MonoBehaviour:
   statusPlayer: 0
   idCar: 0
   forceFinal: {x: 0, y: 0, z: 0}
-  wheelsCar:
+  frontWheelsCar:
   - {fileID: 678209754935919659}
   - {fileID: 3356322520633415411}
   instabilityHang: 5000
-  raceChenges:
+  raceChanges:
   - 8.7
   - 6.5
   - 5.2
