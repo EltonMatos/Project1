@@ -1,9 +1,8 @@
 ﻿using System;
 using Menu;
-using Menu.Screens;
 using Photon.Pun;
 using Photon.Realtime;
-using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Network
@@ -12,7 +11,10 @@ namespace Network
     {
         public static GameConnection Instance;
 
-        public ErrorInfo PhotonErrorInfo;
+        [HideInInspector] public ErrorInfo PhotonErrorInfo;
+
+        [HideInInspector] public DisconnectCause disconnectionCause;
+        [HideInInspector] public bool disconnectWarningRead = true;
 
         public Action<Player> OnPhotonPlayerJoinedRoom;
         public Action<Player> OnPhotonPlayerLeftRoom;
@@ -52,7 +54,6 @@ namespace Network
         /* Callback methods */
         public override void OnConnectedToMaster()
         {
-            print("Connected to master");
             PhotonNetwork.AutomaticallySyncScene = true;
             PhotonNetwork.JoinLobby();
         }
@@ -64,14 +65,11 @@ namespace Network
 
         public override void OnJoinedLobby()
         {
-            print("Connected to lobby");
             MenuManager.Instance.OpenMenu("Lobby");
         }
 
         public override void OnJoinedRoom()
         {
-            print("You joined " + PhotonNetwork.CurrentRoom.Name + " room with the username: " +
-                  PhotonNetwork.LocalPlayer.NickName);
             MenuManager.Instance.OpenMenu("Room");
         }
 
@@ -95,7 +93,9 @@ namespace Network
 
         public override void OnDisconnected(DisconnectCause cause)
         {
-            print("Disconnected");
+            print($"Disconnected {cause}");
+            disconnectionCause = cause;
+            disconnectWarningRead = false;
             if (SceneManager.GetActiveScene().name == "Menu")
             {
                 MenuManager.Instance.OpenMenu("Landing");

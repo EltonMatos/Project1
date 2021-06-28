@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -814,16 +814,12 @@ MonoBehaviour:
   isOpen: 0
   roomNameText: {fileID: 1305907665}
   startGameButton: {fileID: 1783647204}
+  trackCustomizationPanel: {fileID: 1220946372}
   playerListContent: {fileID: 742046610}
   playerListItemPrefab: {fileID: 3298395464313128926, guid: c1588dcf095b14c53bccf60e5b95dbc8,
     type: 3}
-  imagemSp:
-  - {fileID: 21300000, guid: e28277f850e95944e88d1a88a1fe91b2, type: 3}
-  - {fileID: 21300000, guid: bb4816b0c5f7b9649b8bfb14bab0b796, type: 3}
-  - {fileID: 21300000, guid: 7e2d912c79fd53c4399f8496be4b2ae1, type: 3}
-  - {fileID: 21300000, guid: 8d7f83c7c8121c142aa7946f7c32224e, type: 3}
-  trackCurrent: {fileID: 1191492095}
-  idTrack: 0
+  imagemSp: []
+  trackCurrent: {fileID: 0}
 --- !u!224 &299526591
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5923,6 +5919,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: badd128618e4243b495af2a83fc2e665, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disconnectionCause: 0
+  disconnectWarningRead: 1
 --- !u!4 &2098481519
 Transform:
   m_ObjectHideFlags: 0

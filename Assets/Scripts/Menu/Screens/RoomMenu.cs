@@ -12,6 +12,7 @@ namespace Menu.Screens
     {
         public TMP_Text roomNameText;
         public GameObject startGameButton;
+        public GameObject trackCustomizationPanel;
         public Transform playerListContent;
         public GameObject playerListItemPrefab;
 
@@ -41,6 +42,7 @@ namespace Menu.Screens
             }
             
             startGameButton.SetActive(PhotonNetwork.IsMasterClient);
+            trackCustomizationPanel.SetActive(PhotonNetwork.IsMasterClient);
         }
 
 
@@ -53,6 +55,7 @@ namespace Menu.Screens
         private void OnPhotonMasterClientSwitched()
         {
             startGameButton.SetActive(PhotonNetwork.IsMasterClient);
+            trackCustomizationPanel.SetActive(PhotonNetwork.IsMasterClient);
         }
 
         public void LeaveRoom()
