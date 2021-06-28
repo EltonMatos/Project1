@@ -34,10 +34,6 @@ public class Meta : MonoBehaviour
 
     void ResetCheckpoints(CarManager car)
     {
-        car.timer = 0;        
-        /*foreach (Checkpoint check in checkpoints)
-        {
-            check.car = null;
-        }*/
+        car.timer = 0;
     }
 }

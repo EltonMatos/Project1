@@ -63,15 +63,6 @@ public class Checkpoint : MonoBehaviour
         return -1;
     }
 
-    /*public bool ReadyCar()
-    {
-        if (car != null)
-        {
-            return true;
-        }
-        return false;
-    }*/    
-
     public class Laps
     {
         public List<CarManager> car;

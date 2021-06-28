@@ -59,8 +59,7 @@ public class PlayerCar : MonoBehaviour
     public float turbo;
 
     public AudioClip somCar;
-    public AudioClip somKid;
-    public AudioClip somKidGrass;
+    public AudioClip somKid;    
 
     public AudioSource audioCar;
     public AudioSource audioSkid;
@@ -165,11 +164,11 @@ public class PlayerCar : MonoBehaviour
             if (wheelGuide[i].wheelCurrent != 0)
             {
                 rb.AddTorque((transform.up * (instabilityHang / 2f) * veloKMH / 45f) * driveCar);
-                if (audioSkid.clip != somKidGrass)
+                /*if (audioSkid.clip != somKidGrass)
                 {
                     audioSkid.clip = somKidGrass;
                     audioSkid.Play();
-                }
+                }*/
             }
             else
             {
@@ -247,7 +246,6 @@ public class PlayerCar : MonoBehaviour
         if (statusPlayer != StatusCar.LockedCar)
         {
             MoveCar();           
-
             audioCar.pitch = rpm / somPitch;
         }
     }
@@ -281,7 +279,7 @@ public class PlayerCar : MonoBehaviour
 
     private void StatusDamagedCar()
     {
-        if (damagedCar >= 50 && statusPlayer != StatusCar.PitStop)
+        if (damagedCar >= 40 && statusPlayer != StatusCar.PitStop)
         {
             emissionModule.enabled = true;
             statusPlayer = StatusCar.Broken;

@@ -12,7 +12,7 @@ public class UIManager_Menu : MonoBehaviour
 
     private void Start()
     {
-        lapsBar.minValue = 1f;        
+        lapsBar.minValue = 3f;        
         lapsBar.value = lapsBar.minValue;        
     }
 
@@ -26,8 +26,7 @@ public class UIManager_Menu : MonoBehaviour
     {
         sliderBarValue = Mathf.RoundToInt(lapsBar.value);
         numLaps.text = sliderBarValue.ToString();
-        GameManager.Instance.lapsMax = sliderBarValue;  
-        
+        GameManager.Instance.lapsMax = sliderBarValue; 
     }
 
 }

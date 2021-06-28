@@ -14,11 +14,10 @@ public class CarManager : MonoBehaviour
     public float timer = 0;
     public bool checkLap;
     public string timePlayer;
-    private string showTimePlayer;
+    private string _showTimePlayer;
 
-    private List<string> listTimeLaps;
+    private List<string> _listTimeLaps;
 
-    //public float lapsMax;
     public int completedLaps = 0;
 
     public int positionCar;
@@ -30,8 +29,7 @@ public class CarManager : MonoBehaviour
     private void Start()
     {
         player = GetComponent<PlayerCar>();
-        listTimeLaps = new List<string>();
-        //lapsMax = GameManager.Instance.lapsMax;
+        _listTimeLaps = new List<string>();        
         positionCar = 0;
         wrongWay = false;
         StartListTime();
@@ -70,20 +68,20 @@ public class CarManager : MonoBehaviour
     private void StartListTime()
     {
         string time = "0.000";
-        listTimeLaps.Add(time);
-        listTimeLaps.Add(time);
-        listTimeLaps.Add(time);
+        _listTimeLaps.Add(time);
+        _listTimeLaps.Add(time);
+        _listTimeLaps.Add(time);
     }
 
     public void AddLaps()
     {
-        print("timer " + listTimeLaps[0]);
+        print("timer " + _listTimeLaps[0]);
 
-        showTimePlayer = "Lap: " + completedLaps + " - " + timePlayer;
-        for (int i = 0; i < listTimeLaps.Count; i++)
+        _showTimePlayer = "Lap: " + completedLaps + " - " + timePlayer;
+        for (int i = 0; i < _listTimeLaps.Count; i++)
         {
-            listTimeLaps[i] = showTimePlayer;
-            print("timer " + listTimeLaps[i]);
+            _listTimeLaps[i] = _showTimePlayer;
+            print("timer " + _listTimeLaps[i]);
         }
     }
 
@@ -110,8 +108,7 @@ public class CarManager : MonoBehaviour
     }
 
     IEnumerator LastLapRacer()
-    {
-        //GameRoom.Instance.PlayerFinished(photonView.Owner);
+    {        
         UiManager.Instance.lastLapText.enabled = true;
         yield return new WaitForSeconds(2);
         UiManager.Instance.lastLapText.enabled = false;
