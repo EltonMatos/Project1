@@ -35,7 +35,6 @@ namespace ResultsAndMenu
 
         private void GameFinished()
         {
-            print("game finished, testing");
             resultsText.text = "";
             foreach (var gameResult in GameRoom.Instance.Results)
             {
@@ -43,7 +42,9 @@ namespace ResultsAndMenu
                 {
                     if (player.ActorNumber == gameResult.Player.ActorNumber)
                     {
-                        resultsText.text += $"#{gameResult.Position} - {gameResult.Player.Color} - {player.NickName} \n\n";
+                        resultsText.text +=
+                            $"#{gameResult.Position} - {gameResult.Player.Color} - {player.NickName} - " +
+                            $"PB: Lap {gameResult.Player.BestLap} {gameResult.Player.BestTime}\n\n";
                     }
                 }
             }

@@ -22,7 +22,7 @@ namespace Network
 
         private void Awake()
         {
-            //TODO check if this will have conflict when returning to menu
+            //TODO have this working properly creating the Photon View so menus can be unified
             if (Instance == null)
             {
                 Instance = this;
@@ -39,13 +39,13 @@ namespace Network
             SceneManager.sceneLoaded += OnSceneLoaded;
             GameConnection.Instance.OnPhotonPlayerLeftRoom += RemovePlayer;
         }
-        
+
         private void OnDestroy()
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
             GameConnection.Instance.OnPhotonPlayerLeftRoom -= RemovePlayer;
         }
-        
+
         public void DestroySelf()
         {
             Destroy(gameObject);
@@ -59,9 +59,10 @@ namespace Network
                 PhotonNetwork.Instantiate("PhotonNetworkPlayer", transform1.position, transform1.rotation);
             }
 
-            if (scene.name.Contains("Post Race Menu"))
+            if (scene.name.Contains("Menu"))
             {
-                Results = new List<GameResult>();
+                print("reseting game results");
+                Results.Clear();
             }
         }
 
@@ -130,7 +131,7 @@ namespace Network
                     {
                         return (int) player.Color;
                     }
-                    
+
                     if (player.Color == (CarColors) colorToCheck)
                     {
                         colorAvailable = false;
@@ -174,7 +175,7 @@ namespace Network
 
             return id;
         }
-        
+
         public CarColors GetColor(Player localPlayer)
         {
             CarColors color = CarColors.None;
@@ -188,7 +189,7 @@ namespace Network
 
             return color;
         }
-        
+
         public CarColors GetColorByLocalGameId(int id)
         {
             CarColors color = CarColors.None;
@@ -207,12 +208,50 @@ namespace Network
         {
             photonView.RPC("RequestColorChange", RpcTarget.MasterClient, PhotonNetwork.LocalPlayer.ActorNumber);
         }
-        
+
+        public void AddLapTime(string time, int lap)
+        {
+            photonView.RPC("AddPersonalLapTime", RpcTarget.MasterClient, PhotonNetwork.LocalPlayer.ActorNumber, time,
+                lap);
+        }
+
         public void PlayerFinished(Player photonViewOwner)
         {
             photonView.RPC("SetPlayerFinished", RpcTarget.MasterClient, photonViewOwner.ActorNumber);
         }
-        
+
+        [PunRPC]
+        public void AddPersonalLapTime(int actorNumber, string time, int lapNum)
+        {
+            foreach (GamePlayer gamePlayer in _players)
+            {
+                if (gamePlayer.ActorNumber == actorNumber)
+                {
+                    bool newBest = gamePlayer.TryInsertTimeAndLap(time, lapNum);
+                    if (newBest)
+                    {
+                        photonView.RPC("UpdateBestPersonalForPlayer", RpcTarget.AllViaServer, actorNumber, time,
+                            lapNum);
+                    }
+                }
+            }
+
+            print(_players.Count + " player : results " + Results.Count);
+        }
+
+        [PunRPC]
+        public void UpdateBestPersonalForPlayer(int actorNumber, string time, int lapNum)
+        {
+            for (int i = 0; i < _players.Count; i++)
+            {
+                if (_players[i].ActorNumber == actorNumber)
+                {
+                    _players[i] = new GamePlayer(_players[i].ID, _players[i].ActorNumber, _players[i].Color, time,
+                        lapNum);
+                }
+            }
+        }
+
         [PunRPC]
         public void SetPlayerFinished(int actorNumber)
         {
@@ -222,7 +261,7 @@ namespace Network
                 if (gameResult.Player.ActorNumber == actorNumber)
                 {
                     playerFound = true;
-                } 
+                }
             }
 
             if (!playerFound)
@@ -231,23 +270,14 @@ namespace Network
                 {
                     if (gamePlayer.ActorNumber == actorNumber)
                     {
-                        GameResult gameResult = new GameResult(gamePlayer, Results.Count + 1);
-                        print($"Adding #{gameResult.Position} {gamePlayer}");
-                        Results.Add(gameResult);
-                        photonView.RPC("UpdateResultsList", RpcTarget.Others, actorNumber, gameResult.Position);
+                        StartCoroutine(CheckIfLapDataIsLoadAndAddResult(actorNumber, gamePlayer, Results.Count + 1,
+                            true));
                         break;
-                    } 
+                    }
                 }
             }
-            
-            print(_players.Count + " player : results " + Results.Count);
-            if (_players.Count == Results.Count)
-            {
-                photonView.RPC("GameHasFinished", RpcTarget.AllViaServer);
-            }
-
         }
-        
+
         [PunRPC]
         public void UpdateResultsList(int actorNumber, int position)
         {
@@ -256,15 +286,19 @@ namespace Network
                 if (gamePlayer.ActorNumber == actorNumber)
                 {
                     print($"Adding #{position} {gamePlayer}");
-                    Results.Add(new GameResult(gamePlayer, position));
-                } 
+                    //Results.Add(new GameResult(gamePlayer, position));
+                    StartCoroutine(CheckIfLapDataIsLoadAndAddResult(actorNumber, gamePlayer, position));
+                }
             }
         }
 
         [PunRPC]
         public void GameHasFinished()
         {
-            GameFinished?.Invoke();
+            print("game has finished received rpc");
+            //GameFinished?.Invoke();
+
+            StartCoroutine(CheckIfLapDataIsLoadAndFinishGame());
         }
 
         [PunRPC]
@@ -275,7 +309,7 @@ namespace Network
                 if (player.ActorNumber == actorNumber)
                 {
                     bool playerExists = false;
-                    for (int i = 0; i < _players.Count;i++)
+                    for (int i = 0; i < _players.Count; i++)
                     {
                         if (_players[i].ActorNumber == actorNumber)
                         {
@@ -284,12 +318,13 @@ namespace Network
                             break;
                         }
                     }
-                    
-                    if(!playerExists)
+
+                    if (!playerExists)
                     {
                         GamePlayer newGamePlayer = new GamePlayer(gameId, actorNumber, (CarColors) carColor);
                         _players.Add(newGamePlayer);
                     }
+
                     StartCoroutine(InvokeChangeColorEvent(actorNumber, carColor));
                 }
             }
@@ -329,6 +364,79 @@ namespace Network
         {
             yield return new WaitForSeconds(0.5f);
             ColorChanged?.Invoke(actorNumber, carColor);
+        }
+
+        private IEnumerator CheckIfLapDataIsLoadAndAddResult(int actorNumber, GamePlayer gamePlayer, int position,
+            bool master = false, int called = 0)
+        {
+            bool dataLoaded = GamePlayerResultDataCheck();
+
+            yield return new WaitForSeconds(0.1f);
+            if (dataLoaded)
+            {
+                bool resultForPlayerExists = false;
+                foreach (GameResult player in Results)
+                {
+                    if (player.Player.ActorNumber == actorNumber)
+                    {
+                        resultForPlayerExists = true;
+                    }
+                }
+
+                if (!resultForPlayerExists)
+                {
+                    GameResult gameResult = new GameResult(gamePlayer, position);
+                    Results.Add(gameResult);
+                    if (master)
+                    {
+                        photonView.RPC("UpdateResultsList", RpcTarget.Others, actorNumber, position);
+                        if (_players.Count == Results.Count)
+                        {
+                            photonView.RPC("GameHasFinished", RpcTarget.AllViaServer);
+                        }
+                    }
+                }
+            }
+            else if (called < 100)
+            {
+                StartCoroutine(CheckIfLapDataIsLoadAndAddResult(actorNumber, gamePlayer, position, master, called + 1));
+            }
+            else
+            {
+                print("failed to load result, should call the disconnect and failure method");
+            }
+        }
+
+        private IEnumerator CheckIfLapDataIsLoadAndFinishGame(int called = 0)
+        {
+            bool dataLoaded = GamePlayerResultDataCheck();
+
+            yield return new WaitForSeconds(0.1f);
+            if (dataLoaded)
+            {
+                GameFinished?.Invoke();
+            }
+            else if (called < 100)
+            {
+                StartCoroutine(CheckIfLapDataIsLoadAndFinishGame(called + 1));
+            }
+            else
+            {
+                print("failed to load result, should call the disconnect and failure method");
+            }
+        }
+
+        private bool GamePlayerResultDataCheck()
+        {
+            foreach (GamePlayer player in _players)
+            {
+                if (player.BestLap > 100)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

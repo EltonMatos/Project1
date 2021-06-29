@@ -20,10 +20,9 @@ public class Meta : MonoBehaviour
         {
             if (!ch.CheckedCar(car, car.completedLaps))
             {
+                //Time should not be reset
                 //Checkpoint.Instance.RegisterCar(car, car.completedLaps);
                 //car.positionCar = Checkpoint.Instance.ReturnPosCar(car, car.completedLaps);                
-                Debug.Log("Volta invalidada");
-                ResetCheckpoints(car);                
                 return;
             }
         }        
@@ -32,7 +31,7 @@ public class Meta : MonoBehaviour
         ResetCheckpoints(car);
     }
 
-    void ResetCheckpoints(CarManager car)
+    private void ResetCheckpoints(CarManager car)
     {
         car.timer = 0;
     }

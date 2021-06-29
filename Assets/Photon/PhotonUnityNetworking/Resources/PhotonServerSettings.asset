@@ -45,6 +45,8 @@ MonoBehaviour:
   - SetPlayerFinished
   - UpdateResultsList
   - GameHasFinished
+  - AddPersonalLapTime
+  - UpdateBestPersonalForPlayer
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

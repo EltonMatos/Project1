@@ -7,32 +7,31 @@ using Photon.Pun;
 public class CarManager : MonoBehaviour
 {
     public PhotonView photonView;
-    private PlayerCar player;
+    private PlayerCar _player;
 
     private bool _isRunning = true;
 
-    public float timer = 0;
+    public float timer;
     public bool checkLap;
     public string timePlayer;
     private string _showTimePlayer;
 
     private List<string> _listTimeLaps;
 
-    public int completedLaps = 0;
+    public int completedLaps;
 
     public int positionCar;
-    public int idCarPosCurrent = 0;
-    public int idCarPosPrevius = 0;
+    public int idCarPosCurrent;
+    public int idCarPosPrevius;
 
     public bool wrongWay;
 
     private void Start()
     {
-        player = GetComponent<PlayerCar>();
+        _player = GetComponent<PlayerCar>();
         _listTimeLaps = new List<string>();        
         positionCar = 0;
         wrongWay = false;
-        StartListTime();
     }
 
     private void Update()
@@ -43,10 +42,7 @@ public class CarManager : MonoBehaviour
 
         if (photonView.IsMine)
         {
-            UiManager.Instance.positionCarText.text = positionCar.ToString() + "º";
-            /*UiManager.Instance.timerLap1CarText.text = listTimeLaps[0].ToString();
-            UiManager.Instance.timerLap2CarText.text = listTimeLaps[1].ToString();
-            UiManager.Instance.timerLap3CarText.text = listTimeLaps[2].ToString();*/
+            UiManager.Instance.positionCarText.text = positionCar + "º";
             UiManager.Instance.wrongWayText.enabled = wrongWay;
         }
     }
@@ -65,24 +61,12 @@ public class CarManager : MonoBehaviour
         return timePlayer;
     }
 
-    private void StartListTime()
-    {
-        string time = "0.000";
-        _listTimeLaps.Add(time);
-        _listTimeLaps.Add(time);
-        _listTimeLaps.Add(time);
-    }
-
     public void AddLaps()
     {
-        print("timer " + _listTimeLaps[0]);
+        string time = "Lap: " + completedLaps + " - " + timePlayer;
+        _listTimeLaps.Add(time);
 
-        _showTimePlayer = "Lap: " + completedLaps + " - " + timePlayer;
-        for (int i = 0; i < _listTimeLaps.Count; i++)
-        {
-            _listTimeLaps[i] = _showTimePlayer;
-            print("timer " + _listTimeLaps[i]);
-        }
+        GameRoom.Instance.AddLapTime(timePlayer, completedLaps);
     }
 
     public void FinishRace()
@@ -95,7 +79,7 @@ public class CarManager : MonoBehaviour
         if (completedLaps == GameManager.Instance.lapsMax)
         {
             StartCoroutine(FinishedRacer());
-            player.audioCar.Stop();
+            _player.audioCar.Stop();
             AudioManager.instance.audioS.Stop();
         }
     }
@@ -104,7 +88,7 @@ public class CarManager : MonoBehaviour
     {
         GameRoom.Instance.PlayerFinished(photonView.Owner);
         yield return new WaitForSeconds(2);
-        player.statusPlayer = StatusCar.FinishedRace;
+        _player.statusPlayer = StatusCar.FinishedRace;
     }
 
     IEnumerator LastLapRacer()
