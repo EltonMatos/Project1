@@ -7,10 +7,10 @@ namespace Game
         public GamePlayer Player { get; private set; }
         public int Position { get; set; }
 
-        public GameResult(GamePlayer player, int position)
+        public GameResult(GamePlayer player)
         {
             Player = player;
-            Position = position;
+            Position = 0;
         }
 
     }

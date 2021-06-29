@@ -66,7 +66,10 @@ public class CarManager : MonoBehaviour
         string time = "Lap: " + completedLaps + " - " + timePlayer;
         _listTimeLaps.Add(time);
 
-        GameRoom.Instance.AddLapTime(timePlayer, completedLaps);
+        if (photonView.IsMine)
+        {
+            GameRoom.Instance.AddLapTime(timePlayer, completedLaps);
+        }
     }
 
     public void FinishRace()
@@ -86,7 +89,10 @@ public class CarManager : MonoBehaviour
 
     IEnumerator FinishedRacer()
     {
-        GameRoom.Instance.PlayerFinished(photonView.Owner);
+        if (photonView.IsMine)
+        {
+            GameRoom.Instance.PlayerFinished(photonView.Owner);
+        }
         yield return new WaitForSeconds(2);
         _player.statusPlayer = StatusCar.FinishedRace;
     }

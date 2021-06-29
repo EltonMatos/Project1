@@ -235,8 +235,6 @@ namespace Network
                     }
                 }
             }
-
-            print(_players.Count + " player : results " + Results.Count);
         }
 
         [PunRPC]
@@ -385,7 +383,7 @@ namespace Network
 
                 if (!resultForPlayerExists)
                 {
-                    GameResult gameResult = new GameResult(gamePlayer, position);
+                    GameResult gameResult = new GameResult(gamePlayer);
                     Results.Add(gameResult);
                     if (master)
                     {

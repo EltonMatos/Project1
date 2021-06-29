@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Game;
 using Network;
 using Photon.Pun;
 using Photon.Realtime;
@@ -35,16 +37,17 @@ namespace ResultsAndMenu
 
         private void GameFinished()
         {
+            List<GameResult> resultsHelpers = GameRoom.Instance.Results;
             resultsText.text = "";
-            foreach (var gameResult in GameRoom.Instance.Results)
+            for (int i = 0; i < resultsHelpers.Count; i++)
             {
                 foreach (Player player in PhotonNetwork.PlayerList)
                 {
-                    if (player.ActorNumber == gameResult.Player.ActorNumber)
+                    if (player.ActorNumber == resultsHelpers[i].Player.ActorNumber)
                     {
                         resultsText.text +=
-                            $"#{gameResult.Position} - {gameResult.Player.Color} - {player.NickName} - " +
-                            $"PB: Lap {gameResult.Player.BestLap} {gameResult.Player.BestTime}\n\n";
+                            $"#{i + 1} - {resultsHelpers[i].Player.Color} - {player.NickName} - " +
+                            $"PB: Lap {resultsHelpers[i].Player.BestLap} {resultsHelpers[i].Player.BestTime}\n\n";
                     }
                 }
             }
