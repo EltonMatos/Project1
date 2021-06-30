@@ -313,8 +313,8 @@ public class PlayerCar : MonoBehaviour
             if (damagedCar > 0)
             {
                 damagedCar -= 5;
-            }
-            
+            }            
+
             emissionModuleSmoken.enabled = false;
         }
 
