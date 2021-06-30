@@ -71,8 +71,8 @@ namespace Network
 
         public void ResetRoom()
         {
-            _players = new List<GamePlayer>();
-            Results = new List<GameResult>();
+            _players.Clear();
+            Results.Clear();
         }
 
         public void AddPlayer(Player newPlayer)

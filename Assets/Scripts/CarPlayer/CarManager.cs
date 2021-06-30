@@ -134,7 +134,7 @@ public class CarManager : MonoBehaviour
 
     public void FinishRace()
     {
-        if (completedLaps == GameManager.Instance.lapsMax - 1 && UiManager.Instance.lastaLap)
+        if (completedLaps == GameManager.Instance.lapsMax - 1 && UiManager.Instance.lastLap)
         {
             StartCoroutine(LastLapRacer());
         }
@@ -161,6 +161,7 @@ public class CarManager : MonoBehaviour
         }
         yield return new WaitForSeconds(2);
         _player.statusPlayer = StatusCar.FinishedRace;
+        Destroy(gameObject);
     }
 
     IEnumerator LastLapRacer()
@@ -168,6 +169,6 @@ public class CarManager : MonoBehaviour
         UiManager.Instance.lastLapText.enabled = true;
         yield return new WaitForSeconds(2);
         UiManager.Instance.lastLapText.enabled = false;
-        UiManager.Instance.lastaLap = false;
+        UiManager.Instance.lastLap = false;
     }
 }

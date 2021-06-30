@@ -20,7 +20,7 @@ public class UiManager : MonoBehaviour
     public Text timerStartRaceText;
     public Text wrongWayText;
     public Text lastLapText;
-    public bool lastaLap;    
+    public bool lastLap;    
 
     private void Awake()
     {
@@ -34,7 +34,7 @@ public class UiManager : MonoBehaviour
         qntTurbo = 0;
         wrongWayText.enabled = false;
         lastLapText.enabled = false;
-        lastaLap = true;
+        lastLap = true;
 
         //timerLapCarText.text = "Lap 1 - 0.000 \nLap 2 - 0.000 \nLap 3 - 0.000";
     }
