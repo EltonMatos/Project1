@@ -8,9 +8,7 @@ using UnityEngine.SceneManagement;
 
 public enum StatusRace
 {
-    LobbyRoom,
-    PreparingGame,
-    PauseRace,
+    PreparingGame,    
     FinishRace,
     StartRace
 }

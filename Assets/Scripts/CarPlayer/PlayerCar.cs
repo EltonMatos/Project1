@@ -53,8 +53,12 @@ public class PlayerCar : MonoBehaviour
     public float fuelCar;
     public float damagedCar;
 
-    ParticleSystem smokenParticicle;
-    ParticleSystem.EmissionModule emissionModule;
+    
+    public ParticleSystem smokenParticicle;
+    ParticleSystem.EmissionModule emissionModuleSmoken;
+
+    public ParticleSystem fireParticicle;
+    ParticleSystem.EmissionModule emissionModuleFire;
 
     public float turbo;
 
@@ -70,10 +74,13 @@ public class PlayerCar : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         car = GetComponent<CarManager>();
-        smokenParticicle = GetComponentInChildren<ParticleSystem>();
-        emissionModule = smokenParticicle.emission;
-        emissionModule.enabled = false;
         
+        emissionModuleSmoken = smokenParticicle.emission;
+        emissionModuleSmoken.enabled = false;
+        
+        emissionModuleFire = fireParticicle.emission;
+        emissionModuleFire.enabled = false;
+
         audioCar.clip = somCar;
 
         wheelGuide = new WheelManager[frontWheelsCar.Length];
@@ -85,7 +92,6 @@ public class PlayerCar : MonoBehaviour
         {
             wheelGuide[i] = frontWheelsCar[i].GetComponent<WheelManager>();
         }
-
 
         SetupNetworkBasedValues();
     }
@@ -114,6 +120,8 @@ public class PlayerCar : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space) && turbo > 0 && statusPlayer != StatusCar.Broken)
             {
+                emissionModuleFire.enabled = true;
+
                 turbo--;
                 maxTorque = 20000;
                 StartCoroutine(TurboCar());
@@ -163,12 +171,7 @@ public class PlayerCar : MonoBehaviour
             //carro sai da estrada
             if (wheelGuide[i].wheelCurrent != 0)
             {
-                rb.AddTorque((transform.up * (instabilityHang / 2f) * veloKMH / 45f) * driveCar);
-                /*if (audioSkid.clip != somKidGrass)
-                {
-                    audioSkid.clip = somKidGrass;
-                    audioSkid.Play();
-                }*/
+                rb.AddTorque((transform.up * (instabilityHang / 2f) * veloKMH / 45f) * driveCar);                
             }
             else
             {
@@ -254,6 +257,7 @@ public class PlayerCar : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         maxTorque = 7000;
+        emissionModuleFire.enabled = false;
     }
 
     private void StopCar()
@@ -281,7 +285,7 @@ public class PlayerCar : MonoBehaviour
     {
         if (damagedCar >= 40 && statusPlayer != StatusCar.PitStop)
         {
-            emissionModule.enabled = true;
+            emissionModuleSmoken.enabled = true;
             statusPlayer = StatusCar.Broken;
         }
     }
@@ -310,12 +314,8 @@ public class PlayerCar : MonoBehaviour
             {
                 damagedCar -= 5;
             }
-
-            if (turbo < 3)
-            {
-                turbo = 3;
-            }
-            emissionModule.enabled = false;
+            
+            emissionModuleSmoken.enabled = false;
         }
 
         audioCar.volume = 1;
@@ -372,7 +372,7 @@ public class PlayerCar : MonoBehaviour
         }
     }
 
-    private void OnGUI()
+    /*private void OnGUI()
     {
         if (photonView.IsMine)
         {
@@ -383,5 +383,5 @@ public class PlayerCar : MonoBehaviour
             GUI.Label(new Rect(20, 80, 128, 32), "Damaged: " + damagedCar);            
             GUI.Label(new Rect(20, 100, 128, 32), "Timer: " + car.ReturnTime());
         }
-    }
+    }*/
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11669,7 +11669,7 @@ PrefabInstance:
     - target: {fileID: 8637009540517021869, guid: d2a61c9e08f895445977f2a5c03c65fa,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8637009540517021869, guid: d2a61c9e08f895445977f2a5c03c65fa,
         type: 3}
@@ -13661,7 +13661,7 @@ PrefabInstance:
     - target: {fileID: 5548128122702067729, guid: c882ea4bfc1364056b9827113550836b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5548128122702067729, guid: c882ea4bfc1364056b9827113550836b,
         type: 3}
@@ -30570,50 +30570,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1847308168}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1848326007
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1848326009}
-  - component: {fileID: 1848326008}
-  m_Layer: 0
-  m_Name: CheckPhase
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1848326008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1848326007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed05048fcb22cec43b85976e00887dcf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  phase: -1
---- !u!4 &1848326009
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1848326007}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 371.5, y: 209, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1851111107 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 194136, guid: d2d7501a567469e46912edad4f8b6b91,
@@ -33159,7 +33115,7 @@ MonoBehaviour:
   timerStartRaceText: {fileID: 730757157}
   wrongWayText: {fileID: 1833981468}
   lastLapText: {fileID: 1695447712}
-  lastaLap: 0
+  lastLap: 0
 --- !u!4 &1975364268
 Transform:
   m_ObjectHideFlags: 0

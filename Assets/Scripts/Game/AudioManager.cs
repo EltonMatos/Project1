@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class AudioManager : MonoBehaviour
 
     void Update()
     {
-        if(CurrentScene.instance.phase != 0 && CurrentScene.instance.phase != 1)
+        if(SceneManager.GetActiveScene().name.Contains("Track"))
         {
             if (audioM.isPlaying)
             {                

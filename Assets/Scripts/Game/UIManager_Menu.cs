@@ -14,7 +14,7 @@ public class UIManager_Menu : MonoBehaviour
 
     private void Start()
     {
-        lapsBar.minValue = 1f;
+        lapsBar.minValue = 2f;
         lapsBar.value = lapsBar.minValue;
     }
 
