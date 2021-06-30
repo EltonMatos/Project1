@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
+using Game;
 using Network;
 using UnityEngine;
 using Photon.Pun;
@@ -20,6 +21,7 @@ public class CarManager : MonoBehaviour
     private string _showTimePlayer;
 
     private List<float> _listTimeLaps = new List<float>();
+    private List<CheckpointController> _checkpointControllers = new List<CheckpointController>();
 
     public int completedLaps;
 
@@ -29,9 +31,12 @@ public class CarManager : MonoBehaviour
 
     public bool wrongWay;
 
+    private bool _checkpointsLoaded = false;
+    
     private void OnEnable()
     {
         _listTimeLaps.Clear();
+        InitiateCheckpointsController();
     }
 
     private void Start()
@@ -55,12 +60,49 @@ public class CarManager : MonoBehaviour
         }
     }
 
+    private void InitiateCheckpointsController()
+    {
+        _checkpointControllers.Clear();
+
+        foreach (Checkpoint checkpoint in FindObjectsOfType<Checkpoint>())
+        {
+            _checkpointControllers.Add(new CheckpointController(checkpoint));
+        }
+
+        _checkpointsLoaded = true;
+    }
+
+    private bool ValidLap()
+    {
+        if (!_checkpointsLoaded) return false;
+        
+        foreach (CheckpointController controller in _checkpointControllers)
+        {
+            if (!controller.Passed) return false;
+        }
+
+        _checkpointsLoaded = false;
+        return true;
+    }
+
     private void UpdateRacerTimer()
     {
         if (_isRunning && checkLap)
         {
             timer += Time.deltaTime;
             timePlayer = timer.ToString("F4");
+        }
+    }
+
+    public void AddCheckpoint(Checkpoint checkpoint)
+    {
+        for (int i = 0; i < _checkpointControllers.Count; i++)
+        {
+            if (_checkpointControllers[i].Checkpoint == checkpoint)
+            {
+                print("checkpoint passed");
+                _checkpointControllers[i] = new CheckpointController(checkpoint, true);
+            }
         }
     }
 
@@ -71,12 +113,20 @@ public class CarManager : MonoBehaviour
 
     public void AddLaps()
     {
-        _listTimeLaps.Add(timer);
-
-        if (photonView.IsMine)
+        checkLap = true;
+        if (ValidLap())
         {
-            GameRoom.Instance.AddLapTime(timePlayer, completedLaps);
+            completedLaps++;
+            _listTimeLaps.Add(timer);
+            if (photonView.IsMine)
+            {
+                GameRoom.Instance.AddLapTime(timePlayer, completedLaps);
+            }
+
+            timer = 0;
+            InitiateCheckpointsController();
         }
+        
     }
 
     public void FinishRace()

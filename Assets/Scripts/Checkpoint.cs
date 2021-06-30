@@ -3,16 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
-{    
-    //TODO not in use, is it needed?
-    public static Checkpoint Instance;
-
+{
     public List<Laps> lapRace;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     private void Start()
     {
@@ -28,6 +20,7 @@ public class Checkpoint : MonoBehaviour
         CarManager c = other.transform.root.GetComponent<CarManager>();
 
         RegisterCar(c, c.completedLaps);
+        c.AddCheckpoint(this);
         c.positionCar = ReturnPosCar(c, c.completedLaps);
     }
 

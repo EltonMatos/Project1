@@ -43,7 +43,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        lapsMax = 0;
     }
 
     private void OnDestroy()

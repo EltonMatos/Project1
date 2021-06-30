@@ -11252,6 +11252,11 @@ MonoBehaviour:
   lapsMax: 3
   timer: 3
   timerRace: 0
+  Checkpoints:
+  - {fileID: 137970864}
+  - {fileID: 1442096283}
+  - {fileID: 1950220700}
+  - {fileID: 1478008081}
 --- !u!4 &1141124923
 Transform:
   m_ObjectHideFlags: 0
