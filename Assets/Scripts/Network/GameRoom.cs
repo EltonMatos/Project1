@@ -223,6 +223,11 @@ namespace Network
             photonView.RPC("SetPlayerFinished", RpcTarget.MasterClient, photonViewOwner.ActorNumber, totalTime);
         }
 
+        public void UpdateNumberOfLaps(float num)
+        {
+            photonView.RPC("UpdateNumLaps", RpcTarget.OthersBuffered, num);
+        }
+        
         [PunRPC]
         public void AddPersonalLapTime(int actorNumber, string time, int lapNum)
         {
@@ -346,6 +351,12 @@ namespace Network
 
             int newColor = GetNextAvailableColor(currentColor, int.MaxValue);
             photonView.RPC("ChangeColorForActor", RpcTarget.AllBufferedViaServer, actorNumber, newColor);
+        }
+        
+        [PunRPC]
+        public void UpdateNumLaps(float num)
+        {
+            GameManager.Instance.lapsMax = num;
         }
 
         [PunRPC]
