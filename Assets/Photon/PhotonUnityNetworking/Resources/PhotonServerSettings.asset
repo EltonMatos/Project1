@@ -48,6 +48,8 @@ MonoBehaviour:
   - AddPersonalLapTime
   - UpdateBestPersonalForPlayer
   - UpdateNumLaps
+  - ToggleSmokeForCar
+  - ToggleBoostForCar
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
