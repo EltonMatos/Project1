@@ -3768,7 +3768,18 @@ MonoBehaviour:
   m_Value: 3
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2075189265}
+        m_MethodName: ValueChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1252891403
 GameObject:
   m_ObjectHideFlags: 0
@@ -6303,9 +6314,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab6eda85da8e624191ea7b3f1875961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PhotonView: {fileID: 2075189267}
   lapsBar: {fileID: 1252452087}
   sliderBarValue: 0
-  PhotonView: {fileID: 2075189267}
   numLaps: {fileID: 1019427896}
 --- !u!4 &2075189266
 Transform:

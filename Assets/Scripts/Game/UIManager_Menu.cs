@@ -14,17 +14,11 @@ public class UIManager_Menu : MonoBehaviour
 
     private void Start()
     {
-        lapsBar.minValue = 1f;        
-        lapsBar.value = lapsBar.minValue;        
+        lapsBar.minValue = 1f;
+        lapsBar.value = lapsBar.minValue;
     }
-
-    private void Update()
-    {
-        LapsControl();
-
-    }
-
-    private void LapsControl()
+    
+    public void ValueChanged()
     {
         sliderBarValue = Mathf.RoundToInt(lapsBar.value);
         numLaps.text = sliderBarValue.ToString();
