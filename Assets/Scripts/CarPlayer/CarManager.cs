@@ -32,9 +32,11 @@ public class CarManager : MonoBehaviour
     public bool wrongWay;
 
     private bool _checkpointsLoaded = false;
+    private bool _raceFinished = false;
     
     private void OnEnable()
     {
+        _raceFinished = false;
         _listTimeLaps.Clear();
         InitiateCheckpointsController();
     }
@@ -45,6 +47,7 @@ public class CarManager : MonoBehaviour
         _listTimeLaps.Clear();        
         positionCar = 0;
         wrongWay = false;
+        _raceFinished = false;
     }
 
     private void Update()
@@ -136,11 +139,12 @@ public class CarManager : MonoBehaviour
             StartCoroutine(LastLapRacer());
         }
 
-        if (completedLaps == GameManager.Instance.lapsMax)
+        if (completedLaps == GameManager.Instance.lapsMax && !_raceFinished)
         {
             StartCoroutine(FinishedRacer());
             _player.audioCar.Stop();
             AudioManager.instance.audioS.Stop();
+            _raceFinished = true;
         }
     }
 

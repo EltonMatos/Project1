@@ -814,6 +814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab6eda85da8e624191ea7b3f1875961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PhotonView: {fileID: 246553371}
   lapsBar: {fileID: 300048916}
   sliderBarValue: 0
   numLaps: {fileID: 744180824}
