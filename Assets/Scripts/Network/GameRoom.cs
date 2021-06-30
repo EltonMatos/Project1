@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Threading;
 using CarPlayer;
 using Game;
 using Photon.Pun;
@@ -27,6 +29,7 @@ namespace Network
             {
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
+                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
             }
             else
             {
@@ -215,9 +218,9 @@ namespace Network
                 lap);
         }
 
-        public void PlayerFinished(Player photonViewOwner)
+        public void PlayerFinished(Player photonViewOwner, float totalTime)
         {
-            photonView.RPC("SetPlayerFinished", RpcTarget.MasterClient, photonViewOwner.ActorNumber);
+            photonView.RPC("SetPlayerFinished", RpcTarget.MasterClient, photonViewOwner.ActorNumber, totalTime);
         }
 
         [PunRPC]
@@ -251,7 +254,7 @@ namespace Network
         }
 
         [PunRPC]
-        public void SetPlayerFinished(int actorNumber)
+        public void SetPlayerFinished(int actorNumber, float time)
         {
             bool playerFound = false;
             foreach (GameResult gameResult in Results)
@@ -268,7 +271,7 @@ namespace Network
                 {
                     if (gamePlayer.ActorNumber == actorNumber)
                     {
-                        StartCoroutine(CheckIfLapDataIsLoadAndAddResult(actorNumber, gamePlayer, Results.Count + 1,
+                        StartCoroutine(CheckIfLapDataIsLoadAndAddResult(actorNumber, gamePlayer, time, Results.Count + 1,
                             true));
                         break;
                     }
@@ -277,7 +280,7 @@ namespace Network
         }
 
         [PunRPC]
-        public void UpdateResultsList(int actorNumber, int position)
+        public void UpdateResultsList(int actorNumber, float time, int position)
         {
             foreach (GamePlayer gamePlayer in _players)
             {
@@ -285,7 +288,7 @@ namespace Network
                 {
                     print($"Adding #{position} {gamePlayer}");
                     //Results.Add(new GameResult(gamePlayer, position));
-                    StartCoroutine(CheckIfLapDataIsLoadAndAddResult(actorNumber, gamePlayer, position));
+                    StartCoroutine(CheckIfLapDataIsLoadAndAddResult(actorNumber, gamePlayer, time, position));
                 }
             }
         }
@@ -364,7 +367,7 @@ namespace Network
             ColorChanged?.Invoke(actorNumber, carColor);
         }
 
-        private IEnumerator CheckIfLapDataIsLoadAndAddResult(int actorNumber, GamePlayer gamePlayer, int position,
+        private IEnumerator CheckIfLapDataIsLoadAndAddResult(int actorNumber, GamePlayer gamePlayer, float time, int position,
             bool master = false, int called = 0)
         {
             bool dataLoaded = GamePlayerResultDataCheck();
@@ -383,11 +386,11 @@ namespace Network
 
                 if (!resultForPlayerExists)
                 {
-                    GameResult gameResult = new GameResult(gamePlayer);
+                    GameResult gameResult = new GameResult(gamePlayer, time);
                     Results.Add(gameResult);
                     if (master)
                     {
-                        photonView.RPC("UpdateResultsList", RpcTarget.Others, actorNumber, position);
+                        photonView.RPC("UpdateResultsList", RpcTarget.Others, actorNumber, time, position);
                         if (_players.Count == Results.Count)
                         {
                             photonView.RPC("GameHasFinished", RpcTarget.AllViaServer);
@@ -397,7 +400,7 @@ namespace Network
             }
             else if (called < 100)
             {
-                StartCoroutine(CheckIfLapDataIsLoadAndAddResult(actorNumber, gamePlayer, position, master, called + 1));
+                StartCoroutine(CheckIfLapDataIsLoadAndAddResult(actorNumber, gamePlayer, time, position, master, called + 1));
             }
             else
             {

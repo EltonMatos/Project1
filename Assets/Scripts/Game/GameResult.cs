@@ -5,12 +5,12 @@ namespace Game
     public struct GameResult
     {
         public GamePlayer Player { get; private set; }
-        public int Position { get; set; }
+        public float TotalTime { get; set; }
 
-        public GameResult(GamePlayer player)
+        public GameResult(GamePlayer player, float totalTime)
         {
             Player = player;
-            Position = 0;
+            TotalTime = totalTime;
         }
 
     }

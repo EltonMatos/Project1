@@ -20,7 +20,6 @@ public class Checkpoint : MonoBehaviour
         for(int i = 0; i < GameManager.Instance.lapsMax; i++)
         {
             lapRace.Add(new Laps());
-
         }
     }
 
@@ -33,10 +32,11 @@ public class Checkpoint : MonoBehaviour
     }
 
     public bool CheckedCar(CarManager car, int vol)
-    {
-        for (int i = 0; i < lapRace[vol].car.Count; i++)
+    { 
+        Laps laps = lapRace[vol];
+        for (int i = 0; i < laps.car.Count; i++)
         {
-            if (lapRace[vol].car[i] == car)
+            if (laps.car[i] == car)
             {
                 return true;
             }

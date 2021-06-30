@@ -1,5 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Threading;
 using Network;
 using UnityEngine;
 using Photon.Pun;
@@ -16,7 +19,7 @@ public class CarManager : MonoBehaviour
     public string timePlayer;
     private string _showTimePlayer;
 
-    private List<string> _listTimeLaps;
+    private List<float> _listTimeLaps = new List<float>();
 
     public int completedLaps;
 
@@ -26,10 +29,15 @@ public class CarManager : MonoBehaviour
 
     public bool wrongWay;
 
+    private void OnEnable()
+    {
+        _listTimeLaps.Clear();
+    }
+
     private void Start()
     {
         _player = GetComponent<PlayerCar>();
-        _listTimeLaps = new List<string>();        
+        _listTimeLaps.Clear();        
         positionCar = 0;
         wrongWay = false;
     }
@@ -63,8 +71,7 @@ public class CarManager : MonoBehaviour
 
     public void AddLaps()
     {
-        string time = "Lap: " + completedLaps + " - " + timePlayer;
-        _listTimeLaps.Add(time);
+        _listTimeLaps.Add(timer);
 
         if (photonView.IsMine)
         {
@@ -91,7 +98,12 @@ public class CarManager : MonoBehaviour
     {
         if (photonView.IsMine)
         {
-            GameRoom.Instance.PlayerFinished(photonView.Owner);
+            float totalTime = 0;
+            foreach (float timeLap in _listTimeLaps)
+            {
+                totalTime += timeLap;
+            }
+            GameRoom.Instance.PlayerFinished(photonView.Owner, totalTime);
         }
         yield return new WaitForSeconds(2);
         _player.statusPlayer = StatusCar.FinishedRace;
