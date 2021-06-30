@@ -64,8 +64,11 @@ namespace Network
 
             if (scene.name.Contains("Menu"))
             {
-                print("reseting game results");
                 Results.Clear();
+                for (int i = 0; i < _players.Count; i++)
+                {
+                    _players[i] = new GamePlayer(_players[i].ID, _players[i].ActorNumber, _players[i].Color);
+                }
             }
         }
 
@@ -227,7 +230,7 @@ namespace Network
         {
             photonView.RPC("UpdateNumLaps", RpcTarget.OthersBuffered, num);
         }
-        
+
         [PunRPC]
         public void AddPersonalLapTime(int actorNumber, string time, int lapNum)
         {
@@ -239,21 +242,26 @@ namespace Network
                     if (newBest)
                     {
                         photonView.RPC("UpdateBestPersonalForPlayer", RpcTarget.AllViaServer, actorNumber, time,
-                            lapNum);
+                            lapNum, gamePlayer.CompletedLaps + 1);
+                    }
+                    else
+                    {
+                        photonView.RPC("UpdateBestPersonalForPlayer", RpcTarget.AllViaServer, actorNumber, time,
+                            lapNum, gamePlayer.CompletedLaps + 1);
                     }
                 }
             }
         }
 
         [PunRPC]
-        public void UpdateBestPersonalForPlayer(int actorNumber, string time, int lapNum)
+        public void UpdateBestPersonalForPlayer(int actorNumber, string time, int lapNum, int completedLaps)
         {
             for (int i = 0; i < _players.Count; i++)
             {
                 if (_players[i].ActorNumber == actorNumber)
                 {
                     _players[i] = new GamePlayer(_players[i].ID, _players[i].ActorNumber, _players[i].Color, time,
-                        lapNum);
+                        lapNum, completedLaps);
                 }
             }
         }
@@ -276,7 +284,8 @@ namespace Network
                 {
                     if (gamePlayer.ActorNumber == actorNumber)
                     {
-                        StartCoroutine(CheckIfLapDataIsLoadAndAddResult(actorNumber, gamePlayer, time, Results.Count + 1,
+                        StartCoroutine(CheckIfLapDataIsLoadAndAddResult(actorNumber, gamePlayer, time,
+                            Results.Count + 1,
                             true));
                         break;
                     }
@@ -301,9 +310,6 @@ namespace Network
         [PunRPC]
         public void GameHasFinished()
         {
-            print("game has finished received rpc");
-            //GameFinished?.Invoke();
-
             StartCoroutine(CheckIfLapDataIsLoadAndFinishGame());
         }
 
@@ -352,7 +358,7 @@ namespace Network
             int newColor = GetNextAvailableColor(currentColor, int.MaxValue);
             photonView.RPC("ChangeColorForActor", RpcTarget.AllBufferedViaServer, actorNumber, newColor);
         }
-        
+
         [PunRPC]
         public void UpdateNumLaps(float num)
         {
@@ -378,10 +384,19 @@ namespace Network
             ColorChanged?.Invoke(actorNumber, carColor);
         }
 
-        private IEnumerator CheckIfLapDataIsLoadAndAddResult(int actorNumber, GamePlayer gamePlayer, float time, int position,
+        private IEnumerator CheckIfLapDataIsLoadAndAddResult(int actorNumber, GamePlayer gamePlayer, float time,
+            int position,
             bool master = false, int called = 0)
         {
             bool dataLoaded = GamePlayerResultDataCheck();
+
+            foreach (GamePlayer player in _players)
+            {
+                if (gamePlayer.ActorNumber == player.ActorNumber && gamePlayer.CompletedLaps != player.CompletedLaps)
+                {
+                    dataLoaded = false;
+                }
+            }
 
             yield return new WaitForSeconds(0.1f);
             if (dataLoaded)
@@ -411,7 +426,14 @@ namespace Network
             }
             else if (called < 100)
             {
-                StartCoroutine(CheckIfLapDataIsLoadAndAddResult(actorNumber, gamePlayer, time, position, master, called + 1));
+                foreach (GamePlayer player in _players)
+                {
+                    if (gamePlayer.ActorNumber == player.ActorNumber)
+                    {
+                        StartCoroutine(CheckIfLapDataIsLoadAndAddResult(actorNumber, player, time, position, master,
+                            called + 1));
+                    }
+                }
             }
             else
             {
@@ -442,7 +464,7 @@ namespace Network
         {
             foreach (GamePlayer player in _players)
             {
-                if (player.BestLap > 100)
+                if (player.CompletedLaps < GameManager.Instance.lapsMax)
                 {
                     return false;
                 }

@@ -11,6 +11,7 @@ namespace Network
         public CarColors Color { get; private set; }
         public float BestTime { get; private set; }
         public int BestLap { get; private set; }
+        public int CompletedLaps { get; private set; }
         
         public GamePlayer(int id, int actorNumber, CarColors color)
         {
@@ -19,16 +20,17 @@ namespace Network
             Color = color;
             BestTime = float.MaxValue;
             BestLap = int.MaxValue;
+            CompletedLaps = 0;
         }
         
-        public GamePlayer(int id, int actorNumber, CarColors color, string time, int lap)
+        public GamePlayer(int id, int actorNumber, CarColors color, string time, int lap, int completedLaps)
         {
-            Debug.Log("creating pb in constructor");
             ID = id;
             ActorNumber = actorNumber;
             Color = color;
             BestTime = float.Parse(time);
             BestLap = lap;
+            CompletedLaps = completedLaps;
         }
 
         public void SetColor(CarColors color)
@@ -41,8 +43,6 @@ namespace Network
             float floatTimeLap = float.Parse(lapTime);
             if (floatTimeLap < BestTime)
             {
-                Debug.Log("adding pb " + lapTime);
-                Debug.Log(lapNum);
                 BestTime = floatTimeLap;
                 BestLap = lapNum;
                 return true;
@@ -53,7 +53,7 @@ namespace Network
 
         public override string ToString()
         {
-            return $"Id {ID} Actor {ActorNumber} Color {(int) Color} {Color}";
+            return $"Id {ID} Actor {ActorNumber} Color {(int) Color} {Color} BL {BestLap} PB {BestTime} CL {CompletedLaps}";
         }
     }
 }
