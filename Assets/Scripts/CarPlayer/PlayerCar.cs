@@ -310,11 +310,7 @@ public class PlayerCar : MonoBehaviour
             {
                 damagedCar -= 5;
             }
-
-            if (turbo < 3)
-            {
-                turbo = 3;
-            }
+            
             emissionModule.enabled = false;
         }
 
