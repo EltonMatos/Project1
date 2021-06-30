@@ -38,7 +38,7 @@ namespace ResultsAndMenu
         private void GameFinished()
         {
             List<GameResult> resultsHelpers = GameRoom.Instance.Results;
-            resultsHelpers = resultsHelpers.OrderByDescending(o => o.TotalTime).ToList();
+            resultsHelpers = resultsHelpers.OrderBy(o => o.TotalTime).ToList();
             resultsText.text = "";
             for (int i = 0; i < resultsHelpers.Count; i++)
             {
@@ -47,7 +47,7 @@ namespace ResultsAndMenu
                     if (player.ActorNumber == resultsHelpers[i].Player.ActorNumber)
                     {
                         resultsText.text +=
-                            $"Total time {resultsHelpers[i].TotalTime} #{i + 1} - {resultsHelpers[i].Player.Color} - {player.NickName} - " +
+                            $"#{i + 1} - {resultsHelpers[i].Player.Color} - {player.NickName} - " +
                             $"PB: Lap {resultsHelpers[i].Player.BestLap} {resultsHelpers[i].Player.BestTime}\n\n";
                     }
                 }
