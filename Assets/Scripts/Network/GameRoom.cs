@@ -424,7 +424,7 @@ namespace Network
                     }
                 }
             }
-            else if (called < 100)
+            else
             {
                 foreach (GamePlayer player in _players)
                 {
@@ -434,10 +434,6 @@ namespace Network
                             called + 1));
                     }
                 }
-            }
-            else
-            {
-                print("failed to load result, should call the disconnect and failure method");
             }
         }
 
@@ -450,13 +446,9 @@ namespace Network
             {
                 GameFinished?.Invoke();
             }
-            else if (called < 100)
-            {
-                StartCoroutine(CheckIfLapDataIsLoadAndFinishGame(called + 1));
-            }
             else
             {
-                print("failed to load result, should call the disconnect and failure method");
+                StartCoroutine(CheckIfLapDataIsLoadAndFinishGame(called + 1));
             }
         }
 

@@ -103,7 +103,6 @@ public class CarManager : MonoBehaviour
         {
             if (_checkpointControllers[i].Checkpoint == checkpoint)
             {
-                print("checkpoint passed");
                 _checkpointControllers[i] = new CheckpointController(checkpoint, true);
             }
         }

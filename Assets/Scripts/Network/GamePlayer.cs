@@ -1,4 +1,4 @@
-﻿using CarPlayer;
+using CarPlayer;
 using Photon.Realtime;
 using UnityEngine;
 
