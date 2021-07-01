@@ -131,17 +131,6 @@ public class PlayerCar : MonoBehaviour
                 UiManager.Instance.StatusTurboCar();
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                vol++;
-                audioCar.volume = vol;
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                vol--;
-                audioCar.volume = vol;
-            }
-
             UpdateStatusCar();
 
             if (statusPlayer != StatusCar.LockedCar)
@@ -169,6 +158,7 @@ public class PlayerCar : MonoBehaviour
             if (veloKMH <= 1 && statusPlayer != StatusCar.Broken && statusPlayer != StatusCar.LockedCar)
             {
                 statusPlayer = StatusCar.Stop;
+
             }
         }
     }
