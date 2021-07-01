@@ -47,7 +47,7 @@ namespace Network
         {
             if (string.IsNullOrEmpty(roomName)) return;
 
-            PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions {MaxPlayers = 4}, TypedLobby.Default);
+            PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions {MaxPlayers = 5}, TypedLobby.Default);
             MenuManager.Instance.OpenMenu("Loading");
         }
 
