@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2913,7 +2913,7 @@ Transform:
   m_LocalScale: {x: 18.674297, y: 2.5824332, z: 1}
   m_Children: []
   m_Father: {fileID: 800085091}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &336922845
 BoxCollider:
@@ -6587,12 +6587,11 @@ Transform:
   - {fileID: 1831188446}
   - {fileID: 184890729}
   - {fileID: 277758489}
+  - {fileID: 1168421578}
   - {fileID: 336922844}
   - {fileID: 1276986112}
-  - {fileID: 921667608}
-  - {fileID: 1216734650}
   - {fileID: 1054912227}
-  - {fileID: 1168421578}
+  - {fileID: 921667608}
   m_Father: {fileID: 656962791}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7799,7 +7798,7 @@ Transform:
   m_LocalScale: {x: 18.674297, y: 2.5824332, z: 1}
   m_Children: []
   m_Father: {fileID: 800085091}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &921667609
 BoxCollider:
@@ -8737,11 +8736,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1054912226}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 42.11, y: -18.359, z: 102}
+  m_LocalPosition: {x: 42.11, y: -18.359, z: 97.1}
   m_LocalScale: {x: 18.674297, y: 2.5824332, z: 1}
   m_Children: []
   m_Father: {fileID: 800085091}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1054912228
 BoxCollider:
@@ -9833,7 +9832,7 @@ GameObject:
   - component: {fileID: 1168421580}
   - component: {fileID: 1168421579}
   m_Layer: 0
-  m_Name: PitStopCar4 (1)
+  m_Name: PitStopCar5
   m_TagString: PitStop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9851,7 +9850,7 @@ Transform:
   m_LocalScale: {x: 4.05589, y: 0.099999994, z: 10.9288}
   m_Children: []
   m_Father: {fileID: 800085091}
-  m_RootOrder: 9
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &1168421579
 MonoBehaviour:
@@ -9927,36 +9926,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1168421577}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1216734649
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1216734650}
-  m_Layer: 0
-  m_Name: PositionCar
-  m_TagString: Untagged
-  m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1216734650
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1216734649}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 55.22, y: -19.05, z: 27.96}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 800085091}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1218806650
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10345,7 +10314,7 @@ Transform:
   m_LocalScale: {x: 18.674297, y: 2.5824332, z: 1}
   m_Children: []
   m_Father: {fileID: 800085091}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &1276986113
 BoxCollider:

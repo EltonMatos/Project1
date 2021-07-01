@@ -68,6 +68,8 @@ public class PlayerCar : MonoBehaviour
     public AudioSource audioCar;
     public AudioSource audioSkid;
 
+    private int vol = 0;
+
     public AnimationCurve curveWheel;
 
     private void Start()
@@ -127,6 +129,17 @@ public class PlayerCar : MonoBehaviour
                 maxTorque = 20000;
                 StartCoroutine(TurboCar());
                 UiManager.Instance.StatusTurboCar();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                vol++;
+                audioCar.volume = vol;
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                vol--;
+                audioCar.volume = vol;
             }
 
             UpdateStatusCar();
@@ -252,15 +265,7 @@ public class PlayerCar : MonoBehaviour
             MoveCar();
             audioCar.pitch = rpm / somPitch;
         }
-    }
-
-    IEnumerator TurboCar()
-    {
-        yield return new WaitForSeconds(1);
-        maxTorque = 7000;
-        emissionModuleFire.enabled = false;
-        photonView.RPC("ToggleBoostForCar", RpcTarget.Others, photonView.Owner.ActorNumber, false);
-    }
+    }    
 
     private void StopCar()
     {
@@ -299,36 +304,12 @@ public class PlayerCar : MonoBehaviour
         {
             statusPlayer = StatusCar.Broken;
         }
-    }
-
-    IEnumerator TimePitStop()
-    {
-        audioCar.volume = 0;
-        if (fuelCar == 100 && damagedCar <= 0 && statusPlayer != StatusCar.FinishedRace) statusPlayer = StatusCar.Drive;
-        yield return new WaitForSeconds(3);
-        if (statusPlayer == StatusCar.LockedCar)
-        {
-            if (fuelCar < 100)
-            {
-                fuelCar += 5;
-            }
-
-            if (damagedCar > 0)
-            {
-                damagedCar -= 5;
-            }
-
-            emissionModuleSmoke.enabled = false;
-            photonView.RPC("ToggleSmokeForCar", RpcTarget.Others, photonView.Owner.ActorNumber, false);
-        }
-
-        audioCar.volume = 1;
-    }
+    }    
 
     private void PitStopCar(PitStop pitStop)
     {
         if (idCar == pitStop.idPitStop && statusPlayer == StatusCar.PitStop)
-        {
+        {            
             var pitStopGameObject = pitStop.gameObject;
             transform.position = pitStopGameObject.transform.position;
             transform.rotation = pitStopGameObject.transform.rotation;
@@ -340,13 +321,13 @@ public class PlayerCar : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PitStopEntrance"))
         {
-            statusPlayer = StatusCar.PitStop;
+            statusPlayer = StatusCar.PitStop;            
         }
 
         if (other.gameObject.CompareTag("PitStop"))
-        {
+        {            
             PitStop pitStop = other.GetComponentInChildren<PitStop>();
-            PitStopCar(pitStop);
+            PitStopCar(pitStop);            
         }
 
         if (other.gameObject.CompareTag("Checkpoint"))
@@ -360,6 +341,7 @@ public class PlayerCar : MonoBehaviour
         if (other.gameObject.CompareTag("PitStopExit"))
         {
             statusPlayer = StatusCar.Drive;
+            
         }
     }
 
@@ -388,6 +370,38 @@ public class PlayerCar : MonoBehaviour
             GUI.Label(new Rect(20, 100, 128, 32), "Timer: " + car.ReturnTime());
         }
     }*/
+
+    IEnumerator TimePitStop()
+    {
+        audioCar.volume = 0;
+        if (fuelCar == 100 && damagedCar <= 0 && statusPlayer != StatusCar.FinishedRace) statusPlayer = StatusCar.Drive;
+        yield return new WaitForSeconds(3);
+        if (statusPlayer == StatusCar.LockedCar)
+        {
+            if (fuelCar < 100)
+            {
+                fuelCar += 5;
+            }
+
+            if (damagedCar > 0)
+            {
+                damagedCar -= 5;
+            }
+
+            emissionModuleSmoke.enabled = false;
+            photonView.RPC("ToggleSmokeForCar", RpcTarget.Others, photonView.Owner.ActorNumber, false);
+        }
+
+        audioCar.volume = 1;
+    }
+
+    IEnumerator TurboCar()
+    {
+        yield return new WaitForSeconds(1);
+        maxTorque = 7000;
+        emissionModuleFire.enabled = false;
+        photonView.RPC("ToggleBoostForCar", RpcTarget.Others, photonView.Owner.ActorNumber, false);
+    }
 
     [PunRPC]
     public void ToggleSmokeForCar(int actorNumber, bool value)
