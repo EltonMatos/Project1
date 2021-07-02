@@ -66,9 +66,7 @@ public class PlayerCar : MonoBehaviour
     public AudioClip somKid;
 
     public AudioSource audioCar;
-    public AudioSource audioSkid;
-
-    private int vol = 0;
+    public AudioSource audioSkid;    
 
     public AnimationCurve curveWheel;
 
@@ -144,6 +142,7 @@ public class PlayerCar : MonoBehaviour
         if (statusPlayer != StatusCar.LockedCar)
         {
             StatusDamagedCar();
+
         }
     }
 
@@ -158,7 +157,6 @@ public class PlayerCar : MonoBehaviour
             if (veloKMH <= 1 && statusPlayer != StatusCar.Broken && statusPlayer != StatusCar.LockedCar)
             {
                 statusPlayer = StatusCar.Stop;
-
             }
         }
     }
@@ -244,7 +242,7 @@ public class PlayerCar : MonoBehaviour
 
     private void SlowDownCar()
     {
-        if (veloKMH > 40f)
+        if (veloKMH > 35f)
         {
             forceFinal = -transform.forward * (10000 / (changeCurrent + 1) + 10000 / 1f) * acceleration;
             rb.AddForce(forceFinal);
@@ -280,7 +278,7 @@ public class PlayerCar : MonoBehaviour
 
     private void StatusDamagedCar()
     {
-        if (photonView.IsMine && damagedCar >= 40 && statusPlayer != StatusCar.PitStop)
+        if (photonView.IsMine && damagedCar >= 60 && statusPlayer != StatusCar.PitStop)
         {
             emissionModuleSmoke.enabled = true;
             statusPlayer = StatusCar.Broken;
@@ -322,7 +320,7 @@ public class PlayerCar : MonoBehaviour
 
         if (other.gameObject.CompareTag("Checkpoint"))
         {
-            if (fuelCar >= 0) fuelCar -= 10;
+            if (fuelCar >= 0) fuelCar -= 11;
         }
     }
 
