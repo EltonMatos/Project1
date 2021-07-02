@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 public enum StatusRace
 {
-    PreparingGame,    
+    PreparingGame,
     FinishRace,
     StartRace
 }
@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     public StatusRace race;
 
-    public float lapsMax;
+    [HideInInspector] public float lapsMax = 2;
 
     public float timer;
     public float timerRace;
