@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
@@ -11,6 +12,8 @@ public class AudioManager : MonoBehaviour
     public AudioSource audioM;
     public AudioSource audioS;
     public AudioClip[] clip;
+
+    private float volumeCar, volumeMusic;
 
     private void Awake()
     {
@@ -25,6 +28,13 @@ public class AudioManager : MonoBehaviour
         }
         
         audioS = GetComponent<AudioSource>();
+    }
+
+    private void Start()
+    {
+        audioS.volume = 0.3f;
+        audioM.volume = 0.3f;
+
     }
 
     void Update()
@@ -58,5 +68,30 @@ public class AudioManager : MonoBehaviour
     AudioClip GetRandom()
     {
         return clip[Random.Range(0, clip.Length)];
+    }
+
+    /*public void VolumeSoundCar(float volume)
+    {
+        volumeCar = volume;
+        GameObject[] vol = GameObject.FindGameObjectsWithTag("Car");
+        for(int i = 0; i < vol.Length; i++)
+        {
+            vol[i].GetComponent<AudioSource>().volume = volumeCar;
+        }
+    }*/
+
+    public void VolumeMusic(float volume)
+    {
+        volumeMusic = volume;
+        GameObject[] vol = GameObject.FindGameObjectsWithTag("Music");
+        for (int i = 0; i < vol.Length; i++)
+        {
+            vol[i].GetComponent<AudioSource>().volume = volumeMusic;
+        }
+    }
+
+    public void VolumeMaster(float volume)
+    {        
+        AudioListener.volume = volume;
     }
 }

@@ -60,7 +60,7 @@ public class PlayerCar : MonoBehaviour
     public ParticleSystem fireParticicle;
     ParticleSystem.EmissionModule emissionModuleFire;
 
-    public float turbo;
+    private float turbo;
 
     public AudioClip somCar;
     public AudioClip somKid;
@@ -362,7 +362,7 @@ public class PlayerCar : MonoBehaviour
     IEnumerator TimePitStop()
     {
         audioCar.volume = 0;
-        if (fuelCar == 100 && damagedCar <= 0 && statusPlayer != StatusCar.FinishedRace) statusPlayer = StatusCar.Drive;
+        if (fuelCar >= 100 && damagedCar <= 0 && statusPlayer != StatusCar.FinishedRace) statusPlayer = StatusCar.Drive;
         yield return new WaitForSeconds(3);
         if (statusPlayer == StatusCar.LockedCar)
         {

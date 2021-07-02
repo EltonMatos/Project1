@@ -11,6 +11,8 @@ TagManager:
   - Wall
   - Checkpoint
   - PitStop
+  - Music
+  - Car
   layers:
   - Default
   - TransparentFX

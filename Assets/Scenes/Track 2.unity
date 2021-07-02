@@ -2140,6 +2140,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2a61c9e08f895445977f2a5c03c65fa, type: 3}
+--- !u!114 &272596431 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8637009540517021906, guid: d2a61c9e08f895445977f2a5c03c65fa,
+    type: 3}
+  m_PrefabInstance: {fileID: 272596430}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ad330e2717680141952e6e53a204acd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &278339460
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13725,10 +13737,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5548128121268546267, guid: c882ea4bfc1364056b9827113550836b,
+    - target: {fileID: 508727719195138914, guid: c882ea4bfc1364056b9827113550836b,
         type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 272596431}
+    - target: {fileID: 1369061270041298224, guid: c882ea4bfc1364056b9827113550836b,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5548128122702067729, guid: c882ea4bfc1364056b9827113550836b,
         type: 3}
@@ -13839,6 +13856,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Result and Menu Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6173636288049276739, guid: c882ea4bfc1364056b9827113550836b,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c882ea4bfc1364056b9827113550836b, type: 3}
