@@ -3978,7 +3978,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d8f31c040a1fd41a55cc78fc1b634b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  posCarPitStop: {fileID: 0}
   idPitStop: 1
 --- !u!65 &288376954
 BoxCollider:
@@ -9374,53 +9373,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 592919926}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &594209072
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 594209074}
-  - component: {fileID: 594209073}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &594209073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 594209072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fa5fd88040ea194e81b80fefb82bd79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  race: 0
-  lapsMax: 3
-  timer: 3
-  timerRace: 0
---- !u!4 &594209074
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 594209072}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.096033, y: 17.477081, z: 86.15357}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &595242491 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 115000, guid: 7bca69cc738dda94a858c5ba3f9639a6,
@@ -10746,7 +10698,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d8f31c040a1fd41a55cc78fc1b634b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  posCarPitStop: {fileID: 0}
   idPitStop: 4
 --- !u!65 &684575445
 BoxCollider:
@@ -13472,7 +13423,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d8f31c040a1fd41a55cc78fc1b634b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  posCarPitStop: {fileID: 0}
   idPitStop: 3
 --- !u!65 &849237435
 BoxCollider:
@@ -23031,6 +22981,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfd08e397abbe184c92bd194c8ef68a9, type: 3}
+--- !u!1001 &1399848624
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8162475959212309336, guid: 1b14fe3e7ee64604f96727f86be2b5a9,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162475959212309336, guid: 1b14fe3e7ee64604f96727f86be2b5a9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 28.096033
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162475959212309336, guid: 1b14fe3e7ee64604f96727f86be2b5a9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 17.477081
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162475959212309336, guid: 1b14fe3e7ee64604f96727f86be2b5a9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 86.15357
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162475959212309336, guid: 1b14fe3e7ee64604f96727f86be2b5a9,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162475959212309336, guid: 1b14fe3e7ee64604f96727f86be2b5a9,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162475959212309336, guid: 1b14fe3e7ee64604f96727f86be2b5a9,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162475959212309336, guid: 1b14fe3e7ee64604f96727f86be2b5a9,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162475959212309336, guid: 1b14fe3e7ee64604f96727f86be2b5a9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162475959212309336, guid: 1b14fe3e7ee64604f96727f86be2b5a9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162475959212309336, guid: 1b14fe3e7ee64604f96727f86be2b5a9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162475959212309338, guid: 1b14fe3e7ee64604f96727f86be2b5a9,
+        type: 3}
+      propertyPath: m_Name
+      value: GameManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1b14fe3e7ee64604f96727f86be2b5a9, type: 3}
 --- !u!1 &1400879635 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 178530, guid: 2c49b604f6c52444fb6417276b0aa98f,
@@ -28975,7 +28994,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d8f31c040a1fd41a55cc78fc1b634b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  posCarPitStop: {fileID: 0}
   idPitStop: 2
 --- !u!65 &1766994811
 BoxCollider:
@@ -33591,7 +33609,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d8f31c040a1fd41a55cc78fc1b634b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  posCarPitStop: {fileID: 0}
   idPitStop: 0
 --- !u!65 &1992310737
 BoxCollider:
