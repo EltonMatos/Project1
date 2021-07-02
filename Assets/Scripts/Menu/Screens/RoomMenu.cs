@@ -37,7 +37,6 @@ namespace Menu.Screens
             
             foreach (Player player in PhotonNetwork.PlayerList)
             {
-                print("Starting the menu player found " + player);
                 OnPhotonPlayerJoinedRoom(player);
             }
             

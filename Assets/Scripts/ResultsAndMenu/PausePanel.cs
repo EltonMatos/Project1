@@ -56,7 +56,6 @@ namespace ResultsAndMenu
 
         public void QuitRace()
         {
-            print("Quitting race");
             PhotonNetwork.Disconnect();
         }
     }

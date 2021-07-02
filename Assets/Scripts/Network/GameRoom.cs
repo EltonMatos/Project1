@@ -300,8 +300,6 @@ namespace Network
             {
                 if (gamePlayer.ActorNumber == actorNumber)
                 {
-                    print($"Adding #{position} {gamePlayer}");
-                    //Results.Add(new GameResult(gamePlayer, position));
                     StartCoroutine(CheckIfLapDataIsLoadAndAddResult(actorNumber, gamePlayer, time, position));
                 }
             }

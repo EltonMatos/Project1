@@ -93,7 +93,6 @@ namespace Network
 
         public override void OnDisconnected(DisconnectCause cause)
         {
-            print($"Disconnected {cause}");
             disconnectionCause = cause;
             disconnectWarningRead = false;
             if (SceneManager.GetActiveScene().name == "Menu")

@@ -44,7 +44,6 @@ namespace Menu
 
         private void OnPhotonPlayerLeftRoom(Player otherPlayer)
         {
-            print("Player has left room " + otherPlayer + " current player " + _player);
             if (_player.Equals(otherPlayer))
             {
                 Destroy(gameObject);
