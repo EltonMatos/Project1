@@ -320,7 +320,7 @@ public class PlayerCar : MonoBehaviour
 
         if (other.gameObject.CompareTag("Checkpoint"))
         {
-            if (fuelCar >= 0) fuelCar -= 11;
+            if (fuelCar >= 0) fuelCar -= 10;
         }
     }
 
