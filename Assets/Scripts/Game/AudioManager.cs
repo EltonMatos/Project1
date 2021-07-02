@@ -15,6 +15,8 @@ public class AudioManager : MonoBehaviour
 
     private float volumeCar, volumeMusic;
 
+    private float vol = 0.1f;
+
     private void Awake()
     {
         if (instance == null)
@@ -32,14 +34,28 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        audioS.volume = 0.3f;
-        audioM.volume = 0.3f;
+        audioS.volume = 0.2f;
+        audioM.volume = 0.2f;
 
     }
 
     void Update()
     {
-        if(SceneManager.GetActiveScene().name.Contains("Track"))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {            
+            vol = vol - 0.1f;
+            if (vol < 0) vol = 0;
+            audioM.volume = vol;
+         
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {            
+            vol = vol + 0.1f;
+            if (vol > 1) vol = 1;
+            audioM.volume = vol;            
+        }
+
+        if (SceneManager.GetActiveScene().name.Contains("Track"))
         {
             if (audioM.isPlaying)
             {                
@@ -70,7 +86,7 @@ public class AudioManager : MonoBehaviour
         return clip[Random.Range(0, clip.Length)];
     }
 
-    /*public void VolumeSoundCar(float volume)
+    public void VolumeSoundCar(float volume)
     {
         volumeCar = volume;
         GameObject[] vol = GameObject.FindGameObjectsWithTag("Car");
@@ -78,7 +94,7 @@ public class AudioManager : MonoBehaviour
         {
             vol[i].GetComponent<AudioSource>().volume = volumeCar;
         }
-    }*/
+    }
 
     public void VolumeMusic(float volume)
     {
